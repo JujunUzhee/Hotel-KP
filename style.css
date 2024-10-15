@@ -1,0 +1,150 @@
+/* Gambar default */
+.gambar {
+  width: 100%;
+  height: 15rem;
+  background-color: rgb(187, 187, 187);
+}
+
+/* Typography */
+.tulisan {
+  font-size: 14pt;
+  color: #333;
+}
+
+.up {
+  margin-top: 5px;
+}
+
+/* Slider gambar - responsif dan elegan */
+.gambar-slider-1, .gambar-slider-2, .gambar-slider-3 {
+  width: 100vw;
+  height: 100vh; /* Atur tinggi agar sesuai dengan layar */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(50%);
+}
+
+.gambar-slider-1 {
+  background-image: url('img/satu.png');
+}
+
+.gambar-slider-2 {
+  background-image: url('img/dua.png');
+}
+
+.gambar-slider-3 {
+  background-image: url('img/tiga.png');
+}
+
+/* Styling untuk map dengan margin dan shadow */
+.map {
+  display: block;
+  margin: auto;
+  width: 90vw;
+  height: 20rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+}
+
+/* Gambar untuk kamar */
+.gambar-kamar {
+  border-radius: 0.5rem;
+  height: 15rem;
+  display: block;
+  margin: auto;
+}
+
+/* Heading */
+h1, h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Lead paragraph */
+.lead {
+  font-size: 16px;
+  text-align: justify;
+  color: #555;
+}
+
+/* Shadow dan tampilan elegan untuk card informasi */
+.col-lg-9 {
+  border-radius: 1rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  background-color: #fff;
+}
+
+/* Quote icon styling */
+.fa-quote-left {
+  color: #bbb;
+  margin-bottom: 1rem;
+}
+
+/* Heading style */
+h4 {
+  color: #007bff; /* Warna biru untuk heading */
+}
+
+/* Margin dan spasi antar elemen */
+h5 {
+  margin-top: 1.5rem;
+}
+
+p {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.text-muted {
+  color: #888;
+}
+
+/* Icon links */
+.icon-link {
+  color: #333;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.icon-link:hover {
+  color: #007bff;
+  transform: translateY(-5px);
+}
+
+/* Media query untuk ponsel kecil (di bawah 480px) */
+@media only screen and (max-width: 480px) {
+  .gambar-slider-1, .gambar-slider-2, .gambar-slider-3 {
+    height: 35vh;
+  }
+
+  h1, h2 {
+    font-size: 1.2rem;
+  }
+
+  .lead {
+    font-size: 14px;
+  }
+}
+
+/* Media query untuk layar sedang (min-width: 768px) */
+@media only screen and (min-width: 768px) {
+  .gambar-slider-1, .gambar-slider-2, .gambar-slider-3 {
+    height: 50vh;
+  }
+
+  h1, h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Media query untuk layar besar (min-width: 1200px) */
+@media only screen and (min-width: 1200px) {
+  .gambar-slider-1, .gambar-slider-2, .gambar-slider-3 {
+    height: 60vh;
+  }
+
+  h1, h2 {
+    font-size: 2rem;
+  }
+}
