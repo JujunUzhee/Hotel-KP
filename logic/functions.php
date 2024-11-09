@@ -1,6 +1,6 @@
 <?php
 ini_set('date.timezone', 'Asia/Jakarta');
-$koneksi = mysqli_connect("localhost", "root", "", "aplikasi-hotel",3307);
+$koneksi = mysqli_connect("localhost", "root", "", "aplikasi-hotel",3306);
 
 
 // ========================================= LOGIC ===============================================================================================================  

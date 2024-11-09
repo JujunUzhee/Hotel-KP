@@ -16,7 +16,9 @@
 }
 
 /* Slider gambar - responsif dan elegan */
-.gambar-slider-1, .gambar-slider-2, .gambar-slider-3 {
+.gambar-slider-1,
+.gambar-slider-2,
+.gambar-slider-3 {
   width: 100vw;
   height: 100vh; /* Atur tinggi agar sesuai dengan layar */
   background-repeat: no-repeat;
@@ -26,15 +28,15 @@
 }
 
 .gambar-slider-1 {
-  background-image: url('img/satu.png');
+  background-image: url("img/satu.png");
 }
 
 .gambar-slider-2 {
-  background-image: url('img/dua.png');
+  background-image: url("img/dua.png");
 }
 
 .gambar-slider-3 {
-  background-image: url('img/tiga.png');
+  background-image: url("img/tiga.png");
 }
 
 /* Styling untuk map dengan margin dan shadow */
@@ -56,7 +58,8 @@
 }
 
 /* Heading */
-h1, h2 {
+h1,
+h2 {
   font-size: 1.5rem;
   color: #333;
 }
@@ -84,7 +87,7 @@ h1, h2 {
 
 /* Heading style */
 h4 {
-  color: #007bff; /* Warna biru untuk heading */
+  color: #ff6500; /* Warna orange untuk heading */
 }
 
 /* Margin dan spasi antar elemen */
@@ -108,17 +111,20 @@ p {
 }
 
 .icon-link:hover {
-  color: #007bff;
+  color: #ff6500;
   transform: translateY(-5px);
 }
 
 /* Media query untuk ponsel kecil (di bawah 480px) */
 @media only screen and (max-width: 480px) {
-  .gambar-slider-1, .gambar-slider-2, .gambar-slider-3 {
+  .gambar-slider-1,
+  .gambar-slider-2,
+  .gambar-slider-3 {
     height: 35vh;
   }
 
-  h1, h2 {
+  h1,
+  h2 {
     font-size: 1.2rem;
   }
 
@@ -129,22 +135,28 @@ p {
 
 /* Media query untuk layar sedang (min-width: 768px) */
 @media only screen and (min-width: 768px) {
-  .gambar-slider-1, .gambar-slider-2, .gambar-slider-3 {
+  .gambar-slider-1,
+  .gambar-slider-2,
+  .gambar-slider-3 {
     height: 50vh;
   }
 
-  h1, h2 {
+  h1,
+  h2 {
     font-size: 1.5rem;
   }
 }
 
 /* Media query untuk layar besar (min-width: 1200px) */
 @media only screen and (min-width: 1200px) {
-  .gambar-slider-1, .gambar-slider-2, .gambar-slider-3 {
+  .gambar-slider-1,
+  .gambar-slider-2,
+  .gambar-slider-3 {
     height: 60vh;
   }
 
-  h1, h2 {
+  h1,
+  h2 {
     font-size: 2rem;
   }
 }

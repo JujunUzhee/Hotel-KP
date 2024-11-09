@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3307
--- Waktu pembuatan: 15 Okt 2024 pada 05.08
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 09 Nov 2024 pada 07.26
+-- Versi server: 10.4.27-MariaDB
+-- Versi PHP: 8.0.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -114,9 +114,9 @@ CREATE TABLE `kamar` (
 
 INSERT INTO `kamar` (`id`, `id_stok_kamar`, `jenis_kamar`, `gambar`, `no_kamar`, `status`, `tgl_pemesanan`, `tgl_check_out`, `tarif`) VALUES
 (1, 1, 'Standard', 'hotel1.png', '12', 'tersedia', NULL, NULL, '120000'),
-(3, 2, 'deluxe', 'hotel2.png', '15', 'tersedia', NULL, NULL, '150000'),
-(36, 2, 'deluxe', 'hotel2.png', '8', 'tersedia', NULL, NULL, '150000'),
-(38, 2, 'deluxe', 'hotel2.png', '14', 'tersedia', NULL, NULL, '150000'),
+(3, 2, 'deluxe', 'hotel2.png', '15', 'dipesan', '2024-11-06 11:51:00', '2024-11-09', '150000'),
+(36, 2, 'deluxe', 'hotel2.png', '8', 'dipesan', '2024-11-06 11:51:00', '2024-11-09', '150000'),
+(38, 2, 'deluxe', 'hotel2.png', '14', 'terisi', '2024-10-15 12:07:00', '2024-10-17', '150000'),
 (39, 1, 'Standard', 'hotel1.png', '21', 'tersedia', NULL, NULL, '120000'),
 (40, 2, 'deluxe', 'hotel2.png', '23', 'tersedia', NULL, NULL, '150000');
 
@@ -143,10 +143,8 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id`, `foto`, `nama`, `email`, `jenis_kelamin`, `username`, `password`, `telp`, `role`) VALUES
-(1, 'default-laki-laki.png', 'Dimas Candraa', 'dimasbomz13@gmail.com', 'laki-laki', 'Udinsenudin', 'Anduskar16', '+6283809192165', 'admin'),
-(3, 'dasda', 'Jujun Junaedi', 'jujun@gmail.com', 'laki-laki', 'Udinsenudin', 'Anduskar16', '123213', 'admin'),
-(7, 'default-perempuan.png', 'Sri Aminah', 'aminahsri092@gmail.com', 'perempuan', 'sri', '8d23cf6c86e834a7aa6eded54c26ce2bb2e74903538c61bdd5d2197997ab2f72', '+6283812923195', 'resepsionis'),
-(8, 'default-laki-laki.png', 'jujun', 'jujun@gmail.com', 'laki-laki', 'bgjujun', '525347a7921ea6ff2bf29a38e54f5e187a4861a77e6fa12dd817346c4429a962', '21313123', 'admin');
+(8, 'default-laki-laki.png', 'jujun', 'jujun@gmail.com', 'laki-laki', 'bgjujun', '525347a7921ea6ff2bf29a38e54f5e187a4861a77e6fa12dd817346c4429a962', '21313123', 'admin'),
+(10, 'default-laki-laki.png', 'Hotel Rahayu', 'HotelRahayu021@gmail.com', 'laki-laki', 'HotelRahayu', '00793dfbf0127fa4af57be5b001eff8be8e0961594e26d54cce9f7984eb7284c', '+6285794300733', 'admin');
 
 -- --------------------------------------------------------
 
@@ -198,11 +196,12 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`id`, `id_pemesanan`, `tgl_pembayaran`, `nama_pembayar`, `bank`, `no_rekening`, `nama_pemilik_kartu`, `total_akhir`, `bukti`) VALUES
-(37, 114, '23 Februari 2022', 'Tiyas Frahesta', 'BCA', 'asdasd', 'asdasd', '1.800.000,00', '62153a06280e7.jpg'),
 (38, 116, '23 Februari 2022', 'Tiyas Frahesta', 'Mandiri', '34567243', 'asdgfsdf', '4.050.000,00', '62153a4f24e8b.jpg'),
 (39, 115, '23 Februari 2022', 'Tiyas Frahesta', 'Mandiri', '2312345435', 'asdfghbvnhfghtf', '1.800.000,00', '62153a700b795.jpg'),
 (40, 117, '23 Februari 2022', 'Tiyas Frahesta', 'Mandiri', '12321', 'terdfgsdvfs', '820.000,00', '62153a8551664.jpg'),
-(41, 119, '23 Februari 2022', 'Tiyas Frahesta', 'Mandiri', '5434234', 'fgdhesrnj', '410.000,00', '62153af4e289a.jpg');
+(41, 119, '23 Februari 2022', 'Tiyas Frahesta', 'Mandiri', '5434234', 'fgdhesrnj', '410.000,00', '62153af4e289a.jpg'),
+(42, 123, '15 Oktober 2024', 'jujun', 'Mandiri', '4123123', 'rinal', '450.000,00', '670dfa49968ae.png'),
+(43, 124, '15 Oktober 2024', 'jujun', 'BRI', '231313', 'hhthtfr', '410.000,00', '670dfb125ba50.png');
 
 -- --------------------------------------------------------
 
@@ -240,8 +239,10 @@ INSERT INTO `pemesanan` (`id`, `id_pelanggan`, `tgl_pemesanan`, `tgl_cek_in`, `t
 (117, 14, '2022-02-23 02:29:00', '2022-02-24', '2022-02-25', 'Standard', '410.000,00', '2', 'Tiyas Frahesta', 'Desa Kadipaten', '97009098', '1', '820.000,00', 'pending', '2022-02-24 12:00:00'),
 (118, 14, '2022-02-23 02:30:00', '2022-02-24', '2022-02-28', 'Standard', '410.000,00', '3', 'Tiyas Frahesta', 'Desa Kadipaten', '97009098', '4', '4.920.000,00', 'batal', '2022-02-24 12:00:00'),
 (119, 14, '2022-02-23 02:34:00', '2022-02-24', '2022-02-25', 'Standard', '410.000,00', '1', 'Tiyas Frahesta', 'Desa Kadipaten', '97009098', '1', '410.000,00', 'pending', '2022-02-24 12:00:00'),
-(121, 19, '2024-10-13 18:25:00', '2024-10-15', '2024-10-22', 'Deluxe', '3.150.000', '1', 'jujun', 'jawa', '0859843434', '7', '3.150.000,00', 'check out', '2024-10-14 12:00:00'),
-(122, 19, '2024-10-13 20:25:00', '2024-10-16', '2024-10-18', 'Standard', '820.000', '1', 'jujun', 'jawa', '0859843434', '2', '820.000,00', 'batal', '2024-10-14 12:00:00');
+(122, 19, '2024-10-13 20:25:00', '2024-10-16', '2024-10-18', 'Standard', '820.000', '1', 'jujun', 'jawa', '0859843434', '2', '820.000,00', 'batal', '2024-10-14 12:00:00'),
+(123, 19, '2024-10-15 12:07:00', '2024-10-16', '2024-10-17', 'Deluxe', '450.000', '1', 'jujun', 'oleced bagian timur', '0859843434', '1', '450.000,00', 'batal', '2024-10-16 12:00:00'),
+(124, 19, '2024-10-15 12:17:00', '2024-10-16', '2024-10-17', 'Standard', '410.000', '1', 'jujun', 'jawa', '0859843434', '1', '410.000,00', 'check out', '2024-10-16 12:00:00'),
+(125, 19, '2024-11-06 11:51:00', '2024-11-07', '2024-11-09', 'Deluxe', '1.800.000', '2', 'jujun', 'jawa', '0859843434', '2', '1.800.000,00', 'belum dibayar', '2024-11-07 12:00:00');
 
 -- --------------------------------------------------------
 
@@ -284,7 +285,7 @@ CREATE TABLE `stok_kamar` (
 
 INSERT INTO `stok_kamar` (`id_stok_kamar`, `tipe`, `gambar`, `jumlah_kamar`, `stok`) VALUES
 (1, 'Standard', 'superior.png', '11', '3'),
-(2, 'Deluxe', 'deluxe.png', '16', '4');
+(2, 'Deluxe', 'deluxe.png', '16', '1');
 
 --
 -- Indexes for dumped tables
@@ -373,7 +374,7 @@ ALTER TABLE `kamar`
 -- AUTO_INCREMENT untuk tabel `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `pelanggan`
@@ -385,13 +386,13 @@ ALTER TABLE `pelanggan`
 -- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
 
 --
 -- AUTO_INCREMENT untuk tabel `sosial_media`
