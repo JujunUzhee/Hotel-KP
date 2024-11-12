@@ -26,12 +26,16 @@
 
                 <!-- Profile Dropdown -->
                 <div class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="img/profil/<?= $dataPelanggan['foto']; ?>" alt="Profile" width="30" height="30" class="rounded-circle">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="img/profil/<?= $dataPelanggan['foto']; ?>" alt="Profile" width="30" height="30"
+                            class="rounded-circle">
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <li> <a class="dropdown-item" href="./profile.php?page=profile">Profil</a></li>
-                        <li><hr class="dropdown-divider"></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
                         <li><a class="dropdown-item" href="./logic/proses-logout.php">Logout</a></li>
                     </ul>
                 </div>
@@ -55,6 +59,8 @@
             <div class="navbar-nav">
                 <a class="nav-link <?= $_GET['page'] == 'index' ? 'active' : ''; ?>" href="./index.php?page=index"
                     style="padding: 10px 15px;">Beranda</a>
+                <a class="nav-link <?= $_GET['page'] == 'about' ? 'active' : ''; ?>" href="./about.php?page=about"
+                    style="padding: 10px 15px;">Tentang</a>
                 <a class="nav-link <?= $_GET['page'] == 'kamar' ? 'active' : ''; ?>" href="./kamar.php?page=kamar"
                     style="padding: 10px 15px;">Kamar</a>
                 <a class="nav-link <?= $_GET['page'] == 'fasilitas' ? 'active' : ''; ?>"
