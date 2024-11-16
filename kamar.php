@@ -70,7 +70,7 @@ $hotel = query("SELECT * FROM identitas")[0];
             </button>
         </div>
 
-        <h1 class="mt-5 ">Tipe Kamar</h1>
+        <h1 class="mt-5 text-center fw-bold">TIPE KAMAR</h1>
         <div class="row mt-3 mb-5 g-5">
             <?php foreach ($data as $kamar) : ?>
             <div class="col-12 col-lg-6">

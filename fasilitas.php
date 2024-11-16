@@ -59,7 +59,7 @@ $hotel = query("SELECT * FROM identitas")[0];
             </button>
         </div>
 
-        <h1 class="mt-5">Fasilitas</h1>
+        <h1 class="mt-5 text-center fw-bold">FASILITAS</h1>
         <div class="card card-primary card-outline card-outline-tabs mb-5">
             <div class="card-header p-0 border-bottom-0">
                 <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">

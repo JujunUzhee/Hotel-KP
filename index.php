@@ -59,56 +59,133 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
             </button>
         </div>
 
+ <!-- Selamat Datang -->
+ <div class="row justify-content-center mt-5">
+            <div class="text-center">
+                <h3 class="fw-bold">SELAMAT DATANG DI HOTEL RAHAYU</h3>
+                <p class="lead text-center mx-5 my-4" style="font-size: 16px; line-height: 1.8;">Hotel Rahayu dikelilingi oleh keindahan pegunungan yang indah, danau dan sawah menghijau. Nikmati sore yang hangat dengan berenang di kolam renang dengan pemandangan matahari terbenam yang memukau.</p>
+                <div class="d-flex justify-content-center gap-5 flex-wrap mt-4">
+                <div class="card" style="width: 24rem;">
+                <img src="./img/Beranda/Pictures1.jpg" class="card-img-top" alt="...">
+                </div>
+                <div class="card" style="width: 24rem;">
+                <img src="./img/Beranda/Pictures2.jpg" class="card-img-top" alt="...">
+                </div>
+                <div class="card" style="width: 24rem;">
+                <img src="./img/Beranda/Pictures3.jpg" class="card-img-top" alt="...">
+                </div>
+                </div>
+            </div>
+        
+    </div>
 
-        <!-- Hubungi Kami -->
-        <div class="row justify-content-center mt-5">
-            <div class="col-lg-4 text-center">
-                <h2 class="fw-bold">Hubungi Kami</h2>
-                <p class="mt-2"><?= $hotel['nama_hotel'] ?></p>
-                <p class="text-muted"><?= $hotel['alamat'] ?></p>
-                <div class="d-flex justify-content-center mt-4">
-                    <a href="https://api.whatsapp.com/send/?phone=<?= $sosialMedia['whatsapp'] ?>&text&app_absent=0"
-                        target="_blank" class="me-4 icon-link">
-                        <i class="fab fa-whatsapp fs-2"></i>
-                    </a>
-                    <a href="https://www.facebook.com/<?= $sosialMedia['facebook'] ?>" target="_blank"
-                        class="me-4 icon-link">
-                        <i class="fab fa-facebook fs-2"></i>
-                    </a>
-                    <a href="https://twitter.com/<?= $sosialMedia['twitter'] ?>" target="_blank" class="me-4 icon-link">
-                        <i class="fab fa-twitter fs-2"></i>
-                    </a>
-                    <a href="https://www.instagram.com/<?= $sosialMedia['instagram'] ?>/" target="_blank"
-                        class="me-4 icon-link">
-                        <i class="fab fa-instagram fs-2"></i>
-                    </a>
-                    <a href="mailto:<?= $hotel['email'] ?>" target="_blank" class="icon-link">
-                        <i class="fas fa-envelope fs-2"></i>
-                    </a>
+
+    <!-- Hubungi Kami dan informasi -->
+    <div class="row justify-content-center mt-5">
+    <div class="col-12 text-center mb-4 mt-5">
+        <h2 class="fw-bold">HUBUNGI KAMI & INFORMASI</h2>
+    </div>
+    <div class="col-lg-5 bg-white p-4 text-center rounded shadow-sm me-4">
+        <h4 class="fw-bold ">Informasi</h4>
+        <div class="mt-4">
+            <h5>Check-In</h5>
+            <p>Jam Check-In Standar: 12.00 WIB</p>
+            <p class="text-muted" style="margin-top: -1.3rem;">*Waktu Check-In dari plan mempunyai prioritas lebih besar</p>
+            <h5 class="mt-4">Check-Out</h5>
+            <p>Jam Check-Out Standar: 12.00 WIB</p>
+            <p class="text-muted" style="margin-top: -1.3rem;">*Waktu Check-Out dari plan mempunyai prioritas lebih besar</p>
+        </div>
+    </div>
+    <div class="col-lg-5 bg-white p-4 text-center rounded shadow-sm">
+        <h4 class="fw-bold ">Hubungi Kami</h4>
+        <p class="text-muted mt-5"><?= $hotel['alamat'] ?></p>
+        <div class="d-flex justify-content-center mt-4">
+            <a href="https://api.whatsapp.com/send/?phone=<?= $sosialMedia['whatsapp'] ?>&text&app_absent=0"
+                target="_blank" class="me-4 icon-link">
+                <i class="fab fa-whatsapp fs-2"></i>
+            </a>
+            <a href="https://www.facebook.com/<?= $sosialMedia['facebook'] ?>" target="_blank"
+                class="me-4 icon-link">
+                <i class="fab fa-facebook fs-2"></i>
+            </a>
+            <a href="https://twitter.com/<?= $sosialMedia['twitter'] ?>" target="_blank" class="me-4 icon-link">
+                <i class="fab fa-twitter fs-2"></i>
+            </a>
+            <a href="https://www.instagram.com/<?= $sosialMedia['instagram'] ?>/" target="_blank"
+                class="me-4 icon-link">
+                <i class="fab fa-instagram fs-2"></i>
+            </a>
+            <a href="mailto:<?= $hotel['email'] ?>" target="_blank" class="icon-link">
+                <i class="fas fa-envelope fs-2"></i>
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Ulasan -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <!-- Judul -->
+        <div class="col-12 text-center mb-4 mt-5">
+            <h2 class="fw-bold">ULASAN PELANGGAN</h2>
+            <p class="text-muted">Terima kasih telah memesan di Hotel Rahayu! Berikut ulasan dari pelanggan kami.</p>
+        </div>
+
+        <!-- Card Container -->
+        <div class="col-lg-10">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <!-- Card 1 -->
+                <div class="col">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <img src="./img/profil/default-laki-laki.png" alt="Customer" class="rounded-circle mb-2" width="80">
+                            <h5 class="fw-bold">James Conway</h5>
+
+                            <p class="card-text">"Pelayanan sangat baik dan fasilitas memuaskan!"</p>
+                            <div class="text-warning">
+                                ★★★★★
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <img src="./img/profil/default-laki-laki.png" alt="Customer" class="rounded-circle mb-2" width="80">
+                            <h5 class="fw-bold">Augustine Watkins</h5>
+                      
+                            <p class="card-text">"Hotel ini memberikan pengalaman terbaik selama liburan."</p>
+                            <div class="text-warning">
+                                ★★★★☆
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col">
+                    <div class="card text-center h-100 shadow-sm">
+                        <div class="card-body">
+                            <img src="./img/profil/default-perempuan.png" alt="Customer" class="rounded-circle mb-2" width="80">
+                            <h5 class="fw-bold">Jorge McLaughlin</h5>
+                   
+                            <p class="card-text">"Kamar bersih, nyaman, dan lokasi strategis."</p>
+                            <div class="text-warning">
+                                ★★★★★
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- INformasi -->
-    <div class="row justify-content-center mb-5">
-        <div class="col-11 col-lg-9 bg-white mt-5 pt-4 px-4 text-center rounded shadow-sm">
-            <i class="fas fa-quote-left text-muted mb-3 fs-3"></i>
-            <h4 class="fw-bold text-primary">Informasi</h4>
-            <h5 class="mt-4">Check-In</h5>
-            <p>Jam Check-In Standar : 12.00 WIB</p>
-            <p class="text-muted" style="margin-top: -1.3rem;">*Waktu Check-In dari plan mempunyai prioritas lebih besar
-            </p>
-            <h5 class="mt-4">Check-Out</h5>
-            <p>Jam Check-Out Standar : 12.00 WIB</p>
-            <p class="text-muted" style="margin-top: -1.3rem;">*Waktu Check-Out dari plan mempunyai prioritas lebih
-                besar</p>
-        </div>
-    </div>
 
+    
     <!-- Peta -->
-    <div class="col-lg-12">
-        <h3 class="mt-5 text-center fw-bold">Peta Lokasi</h3>
+    <div class="col-lg-12 mb-5">
+        <h3 class="mt-5 text-center fw-bold">PETA LOKASI</h3>
         <div class="col-lg-12">
             <iframe class="map my-3 shadow"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.0414749525626!2d108.50022669619666!3d-6.885635663660207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f19e7a1a8f0dd%3A0x7d120ee5e66d7dc7!2sHotel%20Rahayu!5e0!3m2!1sid!2sid!4v1728752470324!5m2!1sid!2sid"

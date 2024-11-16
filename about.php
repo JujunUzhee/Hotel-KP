@@ -24,9 +24,9 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
     <!-- Foto Tentang -->
     <div class="container mt-5">
         <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
+            <div class="col-lg-8 text-center w-100">
                 <div class="card shadow border-0 mt-5">
-                    <div  style="background-image: url('https://picsum.photos/1200/400'); height: 400px; background-size: cover; background-position: center; border-radius: 0.5rem;"></div>
+                    <div  style="background-image: url('https://picsum.photos/1200/400'); height: 500px; background-size: cover; background-position: center; border-radius: 0.5rem;"></div>
                 </div>
             </div>
         </div>
@@ -34,9 +34,9 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
         <!-- Tentang Kami -->
 <div class="container py-5">
     <div class="row justify-content-center ">
-        <div class="col-lg-8 text-center ">
+        <div class="col-lg-10 text-center ">
             <h1 class="fw-bold mb-4 ">Tentang Kami</h1>
-            <p class="lead" style="font-size: 18px; line-height: 1.8;"><?= $hotel['nama_hotel'] ?> <?= $hotel['tentang'] ?></p>
+            <p class="lead text-center" style="font-size: 18px; line-height: 1.8;"><?= $hotel['nama_hotel'] ?> <?= $hotel['tentang'] ?></p>
         </div>
     </div>
 
@@ -147,33 +147,6 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
 </div>
 
 
-
-    <!-- Hubungi Kami -->
-    <div class="row justify-content-center mt-5">
-        <div class="col-lg-4 text-center">
-            <h2 class="fw-bold">Hubungi Kami</h2>
-            <p class="mt-2"><?= $hotel['nama_hotel'] ?></p>
-            <p class="text-muted"><?= $hotel['alamat'] ?></p>
-            <div class="d-flex justify-content-center mt-4">
-                <a href="https://api.whatsapp.com/send/?phone=<?= $sosialMedia['whatsapp'] ?>&text&app_absent=0" target="_blank" class="me-4 icon-link">
-                    <i class="fab fa-whatsapp fs-2"></i>
-                </a>
-                <a href="https://www.facebook.com/<?= $sosialMedia['facebook'] ?>" target="_blank" class="me-4 icon-link">
-                    <i class="fab fa-facebook fs-2"></i>
-                </a>
-                <a href="https://twitter.com/<?= $sosialMedia['twitter'] ?>" target="_blank" class="me-4 icon-link">
-                    <i class="fab fa-twitter fs-2"></i>
-                </a>
-                <a href="https://www.instagram.com/<?= $sosialMedia['instagram'] ?>/" target="_blank" class="me-4 icon-link">
-                    <i class="fab fa-instagram fs-2"></i>
-                </a>
-                <a href="mailto:<?= $hotel['email'] ?>" target="_blank" class="icon-link">
-                    <i class="fas fa-envelope fs-2"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
 
 
             <!-- Peta -->
