@@ -14,7 +14,7 @@ include "../logic/functions.php";
 $id = $_SESSION['id'];
 $data = query("SELECT * FROM pegawai WHERE id = '$id'")[0];
 
-$dataSuperior = query("SELECT * FROM fasilitas WHERE tipe_kamar = 'superior' ");
+$dataSuperior = query("SELECT * FROM fasilitas WHERE tipe_kamar = 'Standard' ");
 $dataDeluxe = query("SELECT * FROM fasilitas WHERE tipe_kamar = 'deluxe' ");
 $hotel = query("SELECT * FROM identitas")[0];
 ?>
@@ -56,7 +56,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                 <div class="container-fluid p-5">
 
                     <button class="btn fs-4 text-center d-block m-auto position-relative">
-                        Superior
+                        Standard
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                             <?= count($dataSuperior) ?>
                         </span>

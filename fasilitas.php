@@ -2,7 +2,7 @@
 session_start();
 include "logic/functions.php";
 
-$dataSuperior = query("SELECT * FROM fasilitas WHERE tipe_kamar = 'superior' ");
+$dataSuperior = query("SELECT * FROM fasilitas WHERE tipe_kamar = 'Standard' ");
 $dataDeluxe = query("SELECT * FROM fasilitas WHERE tipe_kamar = 'deluxe' ");
 
 if (!$_GET['page']) {
@@ -59,82 +59,74 @@ $hotel = query("SELECT * FROM identitas")[0];
             </button>
         </div>
 
-        <h1 class="mt-5 text-center fw-bold">FASILITAS</h1>
-        <div class="card card-primary card-outline card-outline-tabs mb-5">
-            <div class="card-header p-0 border-bottom-0">
-                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                    <li class="nav-item">
-                    </li>
-                    <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#superior"
-                        role="tab" aria-controls="superior" aria-selected="true">Standard</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#deluxe"
-                            role="tab" aria-controls="deluxe" aria-selected="false">Deluxe</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-body">
-                <div class="tab-content" id="custom-tabs-four-tabContent">
-                    <div class="tab-pane fade active show" id="superior" role="tabpanel"
-                        aria-labelledby="custom-tabs-four-home-tab">
-                        <?php foreach ($dataSuperior as $superior) : ?>
-                        <div class="row">
-                            <div class="col-md-2">
+   <!-- Fasilitas -->
+<h1 class="mt-5 text-center fw-bold">FASILITAS</h1>
+<div class="card card-primary card-outline card-outline-tabs mb-5">
+    <div class="card-header p-0 border-bottom-0 d-flex justify-content-center">
+        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#standard"
+                    role="tab" aria-controls="standard" aria-selected="true">Standard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#deluxe"
+                    role="tab" aria-controls="deluxe" aria-selected="false">Deluxe</a>
+            </li>
+        </ul>
+    </div>
+    <div class="card-body">
+        <div class="tab-content" id="custom-tabs-four-tabContent">
+            <!-- Tab Standard -->
+            <div class="tab-pane fade active show" id="superior" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                <div class="row">
+                    <?php foreach ($dataSuperior as $superior) : ?>
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
                                 <a href="img/fasilitas/<?= $superior['gambar'] ?>" data-toggle="lightbox"
-                                    data-title="<?= $superior['fasilitas'] ?>" data-gallery="gallery"
-                                    data-footer="<?= $superior['deskripsi'] ?>">
-                                    <img src="img/fasilitas/<?= $superior['gambar'] ?>" class="img-fluid"
-                                        alt="Responsive image">
+                                    data-title="<?= $superior['fasilitas'] ?>" data-gallery="gallery">
+                                    <img src="img/fasilitas/<?= $superior['gambar'] ?>" class="card-img-top img-fluid " alt="Responsive image"  style="height: 250px; ">
                                 </a>
-                            </div>
-                            <div class="col-md-8">
-                                <h5><?= $superior['fasilitas'] ?></h5>
-                                <p><?= $superior['deskripsi'] ?></p>
+                                <h5 class="card-title text-center mt-2 fw-bold"><?= $superior['fasilitas'] ?></h5>
+                                <div class="card-body">
+                                    <p class="card-text text-center"><?= $superior['deskripsi'] ?></p>
+                                </div>
                             </div>
                         </div>
-                        <hr>
-                        <?php endforeach; ?>
-                    </div>
-                    <div class="tab-pane fade" id="deluxe" role="tabpanel"
-                        aria-labelledby="custom-tabs-four-profile-tab">
-                        <?php foreach ($dataDeluxe as $deluxe) : ?>
-                        <div class="row">
-                            <div class="col-md-2">
-                                <a href="img/fasilitas/<?= $deluxe['gambar'] ?>" data-toggle="lightbox"
-                                    data-title="<?= $deluxe['fasilitas'] ?>" data-gallery="gallery">
-                                    <img src="img/fasilitas/<?= $deluxe['gambar'] ?>" class="img-fluid"
-                                        alt="Responsive image">
-                                </a>
-                            </div>
-                            <div class="col-md-8">
-                                <h5><?= $deluxe['fasilitas'] ?></h5>
-                                <p><?= $deluxe['deskripsi'] ?></p>
-                            </div>
-                        </div>
-                        <hr>
-                        <?php endforeach; ?>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
-
+            <!-- Tab Deluxe -->
+            <div class="tab-pane fade" id="deluxe" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+                <div class="row">
+                    <?php foreach ($dataDeluxe as $deluxe) : ?>
+                        <div class="col-md-4 mb-4">
+                            <div class="card">
+                                <a href="img/fasilitas/<?= $deluxe['gambar'] ?>" data-toggle="lightbox"
+                                    data-title="<?= $deluxe['fasilitas'] ?>" data-gallery="gallery">
+                                    <img src="img/fasilitas/<?= $deluxe['gambar'] ?>" class="card-img-top img-fluid" alt="Responsive image style="height: 250px; ">
+                                </a>
+                                <h5 class="card-title text-center fw-bold mt-2"><?= $deluxe['fasilitas'] ?></h5>
+                                <div class="card-body">                              
+                                    <p class="card-text text-center"><?= $deluxe['deskripsi'] ?></p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
         </div>
     </div>
+</div>
+                    </div>
 
-    <?php include "layout/footer.php" ?>
+                    <?php include "layout/footer.php" ?>
+<script src="src/plugins/jquery/jquery.min.js"></script>
+<script src="src/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="src/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+<script src="src/dist/js/adminlte.min.js?v=3.2.0"></script>
+<script src="src/plugins/filterizr/jquery.filterizr.min.js"></script>
 
-    <script src="src/plugins/jquery/jquery.min.js"></script>
-
-    <script src="src/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <script src="src/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
-
-    <script src="src/dist/js/adminlte.min.js?v=3.2.0"></script>
-
-    <script src="src/plugins/filterizr/jquery.filterizr.min.js"></script>
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
-    <script>
+<script>
     $(function() {
         $(document).on('click', '[data-toggle="lightbox"]', function(event) {
             event.preventDefault();
@@ -142,16 +134,11 @@ $hotel = query("SELECT * FROM identitas")[0];
                 alwaysShowClose: true
             });
         });
+    });
+</script>
 
-        $('.filter-container').filterizr({
-            gutterPixels: 3
-        });
-        $('.btn[data-filter]').on('click', function() {
-            $('.btn[data-filter]').removeClass('active');
-            $(this).addClass('active');
-        });
-    })
-    </script>
+
+
 </body>
 
 </html>

@@ -32,113 +32,103 @@ $hotel = query("SELECT * FROM identitas")[0];
     <title>Buat Akun</title>
     <style>
     body {
-        background-image: url('../img/pattern.png');
+        background-image: url('../img/background.jpg');
     }
     </style>
 </head>
 
-<body class="bg-primary">
-
-    <div class="container my-5">
-        <div class="daftar card m-auto" style="background: #eaeaea;">
-            <main class="mt-5">
-                <div class="text-center">
-                    <img class="d-block mx-auto mb-4" src="../img/logo/<?= $hotel['logo_primary'] ?>" alt="Logo"
-                        width="100">
-                    <h2><?= $hotel['nama_hotel'] ?></h2>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-12 col-lg-10">
-                        <h4 class="mt-5 text-center">Daftar</h4>
-                        <p class="text-center">Isi Sesuai Kartu Identitas Anda (KTP/SIM/Passport)</p>
-                        <form action="" method="post" autocomplete="off">
-                            <div class="container">
-                                <div class="row g-3">
-                                    <div class="col-sm-6">
-                                        <label for="nama" class="form-label">Nama</label>
-                                        <input style="background-color: #e8f0fe;" type="text" name="nama"
-                                            class="form-control" id="nama" value="<?= @$_SESSION['nama'] ?>" required
-                                            placeholder="Nama">
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label for="username" class="form-label">Username</label>
-                                        <input style="background-color: #e8f0fe;" type="text" name="username"
-                                            class="form-control" id="username" value="<?= @$_SESSION['username'] ?>"
-                                            placeholder="Username" required>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="password">Password</label>
-                                            <div class="input-group" id="show_hide_password">
-                                                <input type="password" style="background-color: #e8f0fe;"
-                                                    name='password' class="form-control"
-                                                    value="<?= @$_SESSION['password'] ?>" required
-                                                    placeholder="Password">
-                                                <div class="input-group-append">
-                                                    <a href="" class="btn btn-outline-secondary"><i
-                                                            class="bi bi-eye-slash" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label for="confirm-password">Password</label>
-                                            <div class="input-group" id="show_hide_password_2">
-                                                <input type="password" style="background-color: #e8f0fe;"
-                                                    name='confirm-password' class="form-control"
-                                                    value="<?= @$_SESSION['confirm-password'] ?>"
-                                                    name="confirm-password" required placeholder="Konfirmasi Password">
-                                                <div class="input-group-append">
-                                                    <a href="" class="btn btn-outline-secondary"><i
-                                                            class="bi bi-eye-slash" aria-hidden="true"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label for="email" class="form-label">Email</label>
-                                        <input style="background-color: #e8f0fe;" type="email" name="email"
-                                            class="form-control" value="<?= @$_SESSION['email'] ?>" id="email"
-                                            placeholder="Email" required>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <label for="telp" class="form-label">Telepon</label>
-                                        <input style="background-color: #e8f0fe;" type="text" name="telp"
-                                            class="form-control" value="<?= @$_SESSION['telp'] ?>" id="telp"
-                                            placeholder="No HP" required>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <label for="alamat" class="form-label">Alamat</label>
-                                        <input style="background-color: #e8f0fe;" type="text" name="alamat"
-                                            class="form-control" value="<?= @$_SESSION['alamat'] ?>" id="alamat"
-                                            placeholder="Alamat" required>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <label for="jenis-kelamin" class="form-label">Jenis Kelamin</label>
-                                        <select name="jenis-kelamin" id="jenis-kelamin"
-                                            style="background-color: #e8f0fe;" class="form-select">
-                                            <option value="" disabled selected>-- Pilih Jenis Kelamin--</option>
-                                            <option value="laki-laki"
-                                                <?= @$_SESSION['jenis-kelamin'] == "laki-laki" ? "selected" : "" ?>>
-                                                Laki-laki</option>
-                                            <option value="perempuan"
-                                                <?= @$_SESSION['jenis-kelamin'] == "perempuan" ? "selected" : "" ?>>
-                                                Perempuan</option>
-                                        </select>
-                                    </div>
-                                    <hr class="my-4">
-                                    <button class="w-100 btn text-white btn-lg" style="background: #174578;"
-                                        name="register" type="submit">Daftar</button>
-                                    <a class="nav-link text-center mb-5" style="color: #174578;" href="./login.php">Atau
-                                        sudah punya akun?</a>
+<body>
+<div class="container my-5">
+    <div class="daftar card m-auto shadow-lg" style="background-color: rgba(255, 255, 255, 0.9); border-radius: 15px;">
+        <main class="mt-5">
+            <div class="text-center">
+                <img class="d-block mx-auto mb-4" src="../img/logo/<?= $hotel['logo_primary'] ?>" alt="Logo" width="100">
+                <h2><?= $hotel['nama_hotel'] ?></h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <h4 class="mt-5 text-center">Daftar</h4>
+                    <p class="text-center">Isi Sesuai Kartu Identitas Anda (KTP/SIM/Passport)</p>
+                    <form action="" method="post" autocomplete="off">
+                        <div class="container">
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <label for="nama" class="form-label">Nama</label>
+                                    <input style="background-color: #e8f0fe;" type="text" name="nama" class="form-control" id="nama"
+                                        value="<?= @$_SESSION['nama'] ?>" required placeholder="Nama">
                                 </div>
-                        </form>
-                    </div>
+                                <div class="col-lg-6">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input style="background-color: #e8f0fe;" type="text" name="username" class="form-control"
+                                        id="username" value="<?= @$_SESSION['username'] ?>" placeholder="Username" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <div class="input-group" id="show_hide_password">
+                                            <input type="password" style="background-color: #e8f0fe;" name='password'
+                                                class="form-control" value="<?= @$_SESSION['password'] ?>" required placeholder="Password">
+                                            <div class="input-group-append">
+                                                <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash"
+                                                        aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label for="confirm-password">Password</label>
+                                        <div class="input-group" id="show_hide_password_2">
+                                            <input type="password" style="background-color: #e8f0fe;" name='confirm-password'
+                                                class="form-control" value="<?= @$_SESSION['confirm-password'] ?>" required
+                                                placeholder="Konfirmasi Password">
+                                            <div class="input-group-append">
+                                                <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash"
+                                                        aria-hidden="true"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input style="background-color: #e8f0fe;" type="email" name="email" class="form-control"
+                                        value="<?= @$_SESSION['email'] ?>" id="email" placeholder="Email" required>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="telp" class="form-label">Telepon</label>
+                                    <input style="background-color: #e8f0fe;" type="text" name="telp" class="form-control"
+                                        value="<?= @$_SESSION['telp'] ?>" id="telp" placeholder="No HP" required>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label for="alamat" class="form-label">Alamat</label>
+                                    <input style="background-color: #e8f0fe;" type="text" name="alamat" class="form-control"
+                                        value="<?= @$_SESSION['alamat'] ?>" id="alamat" placeholder="Alamat" required>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label for="jenis-kelamin" class="form-label">Jenis Kelamin</label>
+                                    <select name="jenis-kelamin" id="jenis-kelamin" style="background-color: #e8f0fe;"
+                                        class="form-select">
+                                        <option value="" disabled selected>-- Pilih Jenis Kelamin--</option>
+                                        <option value="laki-laki"
+                                            <?= @$_SESSION['jenis-kelamin'] == "laki-laki" ? "selected" : "" ?>>Laki-laki
+                                        </option>
+                                        <option value="perempuan"
+                                            <?= @$_SESSION['jenis-kelamin'] == "perempuan" ? "selected" : "" ?>>Perempuan
+                                        </option>
+                                    </select>
+                                </div>
+                                <hr class="my-4">
+                                <button class="w-100 btn text-white btn-lg" style="background: #FF6500;" name="register"
+                                    type="submit">Daftar</button>
+                                <a class="nav-link text-center mb-5" style="color: #FF6500;" href="./login.php">Atau sudah punya akun?</a>
+                            </div>
+                    </form>
                 </div>
-            </main>
-        </div>
+            </div>
+        </main>
     </div>
+</div>
+
 
     <?php
   if (isset($_POST['register'])) {

@@ -73,66 +73,72 @@ $hotel = query("SELECT * FROM identitas")[0];
         <h1 class="mt-5 text-center fw-bold">TIPE KAMAR</h1>
         <div class="row mt-3 mb-5 g-5">
             <?php foreach ($data as $kamar) : ?>
-            <div class="col-12 col-lg-6">
-                <div class="card">
-                    <img src="img/fasilitas/<?= $kamar['gambar'] ?>" class="card-img-top" alt="<?= $kamar['gambar'] ?>">
-                    <div class="card-header">
-                        <h5 class="text-center my-3 "><?= $kamar['tipe'] ?></h5>
-                    </div>
-                    <div class="card-body">
+                <div class="col-12 col-lg-6">
+                    <div class="card">
+                        <img src="img/fasilitas/<?= $kamar['gambar'] ?>" class="card-img-top" alt="<?= $kamar['gambar'] ?>">
+                        <div class="card-header">
+                            <h5 class="text-center my-3 "><?= $kamar['tipe'] ?></h5>
+                        </div>
+                        <div class="card-body">
 
-                        <?php if ($_SESSION['login'] == 1) : ?>
-                        <?php if ($kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) > 1) : ?>
-                        <p class="text-center bold">Tersedia <?= $kamarDeluxe; ?> Kamar lagi</p>
-                        <?php elseif ($kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) < 1) : ?>
-                        <p class="text-center bold" style="<?= $kamarDeluxe ? 'display:none' :  ''; ?>">Kamar Sudah
-                            Penuh</p>
-                        <?php endif; ?>
-                        <?php endif; ?>
-
-
-                        <?php if ($_SESSION['login'] == 1) : ?>
-                        <?php if ($kamar['tipe'] == "Standard" && intval($kamarSuperior) > 1) : ?>
-                        <p class="text-center bold">Tersedia <?= $kamarSuperior; ?> Kamar lagi</p>
-                        <?php elseif ($kamar['tipe'] == "Standard" && intval($kamarSuperior) < 1) : ?>
-                        <p class="text-center bold">Kamar Sudah Penuh</p>
-                        <?php endif; ?>
-                        <?php endif; ?>
+                            <?php if ($_SESSION['login'] == 1) : ?>
+                                <?php if ($kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) > 1) : ?>
+                                    <p class="text-center bold">Tersedia <?= $kamarDeluxe; ?> Kamar lagi</p>
+                                <?php elseif ($kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) < 1) : ?>
+                                    <p class="text-center bold" style="<?= $kamarDeluxe ? 'display:none' :  ''; ?>">Kamar Sudah
+                                        Penuh</p>
+                                <?php endif; ?>
+                            <?php endif; ?>
 
 
-                        <div class="row">
-                            <div class="col-lg-12 mb-4">
-                                <form action="pemesanan.php" method="POST" autocomplete="off">
-                                    <input type="hidden" name="tipe-kamar" value="<?= $kamar["tipe"] ?>">
-                                    <?php if ($_SESSION) : ?>
-                                    <?php if ($_SESSION['login'] == 1) : ?>
-                                    <?php if ($kamar['tipe'] == "Standard") : ?>
-                                    <input required name="jumlah-kamar" type="number"
-                                        style="width: 30%; text-align: center;" class="form-control m-auto"
-                                        placeholder="Jumlah Kamar" min="1" max="<?= $stokKamarSuperior ?>">
-                                    <button style="background-color: #FF6500;"
-                                        class="btn text-white w-75 d-block m-auto mt-3"
-                                        <?= $kamar['tipe'] == "Standard" && intval($kamarSuperior) < 1 ? 'disabled' : '' ?>>Pesan</button>
-                                    <?php endif; ?>
-                                    <?php if ($kamar['tipe'] == "Deluxe") : ?>
-                                    <input required name="jumlah-kamar" type="number"
-                                        style="width: 30%; text-align: center;" class="form-control m-auto"
-                                        placeholder="Jumlah Kamar" min="1" max="<?= $stokKamarDeluxe ?>">
-                                    <button style="background-color: #FF6500;"
-                                        class="btn text-white w-75 d-block m-auto mt-3"
-                                        <?= $kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) < 1 ? 'disabled' : '' ?>>Pesan</button>
-                                    <?php endif; ?>
-                                    <?php else : ?>
-                                    <a href="./fasilitas.php" style="background-color: #FF6500;"
-                                        class="btn text-white w-75 d-block m-auto mt-5">Lihat Fasilitas</a>
-                                    <?php endif; ?>
-                                    <?php endif; ?>
-                                </form>
+                            <?php if ($_SESSION['login'] == 1) : ?>
+                                <?php if ($kamar['tipe'] == "Standard" && intval($kamarSuperior) > 1) : ?>
+                                    <p class="text-center bold">Tersedia <?= $kamarSuperior; ?> Kamar lagi</p>
+                                <?php elseif ($kamar['tipe'] == "Standard" && intval($kamarSuperior) < 1) : ?>
+                                    <p class="text-center bold">Kamar Sudah Penuh</p>
+                                <?php endif; ?>
+                            <?php endif; ?>
+
+
+                            <div class="row">
+                                <div class="col-lg-12 mb-4">
+                                    <form action="pemesanan.php" method="POST" autocomplete="off">
+                                        <input type="hidden" name="tipe-kamar" value="<?= $kamar["tipe"] ?>">
+                                        <?php if ($_SESSION) : ?>
+                                            <?php if ($_SESSION['login'] == 1) : ?>
+                                                <?php if ($kamar['tipe'] == "Standard") : ?>
+                                                    <input required name="jumlah-kamar" type="number"
+                                                        style="width: 30%; text-align: center;" class="form-control m-auto"
+                                                        placeholder="Jumlah Kamar" min="1" max="<?= $stokKamarSuperior ?>">
+                                                    <button style="background-color: #FF6500;"
+                                                        class="btn text-white w-75 d-block m-auto mt-3"
+                                                        <?= $kamar['tipe'] == "Standard" && intval($kamarSuperior) < 1 ? 'disabled' : '' ?>>Pesan</button>
+                                                <?php endif; ?>
+                                                <?php if ($kamar['tipe'] == "Deluxe") : ?>
+                                                    <input required name="jumlah-kamar" type="number"
+                                                        style="width: 30%; text-align: center;" class="form-control m-auto"
+                                                        placeholder="Jumlah Kamar" min="1" max="<?= $stokKamarDeluxe ?>">
+                                                    <button style="background-color: #FF6500;"
+                                                        class="btn text-white w-75 d-block m-auto mt-3"
+                                                        <?= $kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) < 1 ? 'disabled' : '' ?>>Pesan</button>
+                                                <?php endif; ?>
+                                            <?php else : ?>
+                                                <a href="./fasilitas.php"
+                                                    class="btn w-75 d-block m-auto mt-5"
+                                                    style="background-color: #FF6500; color: white; border: 2px solid #FF6500; text-align: center; transition: all 0.3s ease;"
+                                                    onmouseover="this.style.backgroundColor='white'; this.style.color='#FF6500';"
+                                                    onmouseout="this.style.backgroundColor='#FF6500'; this.style.color='white';">
+                                                    Lihat Fasilitas
+                                                </a>
+
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <?php endforeach; ?>
         </div>
     </div>
@@ -140,30 +146,30 @@ $hotel = query("SELECT * FROM identitas")[0];
     <?php include "layout/footer.php" ?>
 
     <?php if (isset($_GET['pesan'])) : ?>
-    <?php if ($_GET['pesan'] == "tgltdkvalid") : ?>
-    <div class="container">
-        <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Pesanan gagal!',
-            text: 'Format Tanggal tidak valid!',
-            footer: 'Coba cek kembali format tanggal'
-        })
-        </script>
-    </div>
-    <?php endif; ?>
-    <?php if ($_GET['pesan'] == "tgl-cekin-salah") : ?>
-    <div class="container">
-        <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Pesanan gagal!',
-            text: 'Tanggal Checkin tidak boleh lebih kecil dari tanggal sekarang!',
-            footer: 'atau lebih dari jam 12 siang'
-        })
-        </script>
-    </div>
-    <?php endif; ?>
+        <?php if ($_GET['pesan'] == "tgltdkvalid") : ?>
+            <div class="container">
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Pesanan gagal!',
+                        text: 'Format Tanggal tidak valid!',
+                        footer: 'Coba cek kembali format tanggal'
+                    })
+                </script>
+            </div>
+        <?php endif; ?>
+        <?php if ($_GET['pesan'] == "tgl-cekin-salah") : ?>
+            <div class="container">
+                <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Pesanan gagal!',
+                        text: 'Tanggal Checkin tidak boleh lebih kecil dari tanggal sekarang!',
+                        footer: 'atau lebih dari jam 12 siang'
+                    })
+                </script>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

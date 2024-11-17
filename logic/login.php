@@ -33,117 +33,100 @@ $hotel = query("SELECT * FROM identitas")[0];
   <title>Login</title>
   <style>
     body {
-      background-image: url('../img/pattern.png');
+      background-image: url('../img/background.jpg');
+      background-repeat: no-repeat; 
+  background-size: cover; 
     }
   </style>
 </head>
 
 <body>
 
-  <div class="container overflow-hidden mt-lg-5">
-    <div class="card my-2" style="background: #eaeaea;">
-      <div class="row">
-        <div class="col-lg-5 pt-5 text-center">
-          <img src="../img/logo/<?= $hotel['logo_primary'] ?>" class="logo" alt="Logo SMKN 1 Kadipaten">
-          <h1 class="lead mt-3"><?= $hotel['nama_hotel'] ?>!</h1>
-        </div>
-        <div class="col-lg-7 p-1 pt-lg-5">
-          <h1 class="lead text-center">Login</h1>
-          <div class="row justify-content-center">
-            <div class="col-8 mb-3">
-              <form action="cek_login.php" method="post" autocomplete="off">
-                <div class="my-3">
-                  <label for="username" class="form-label">Username</label>
-                  <input type="text" style="background-color: #e8f0fe;" class="form-control" name="username" id="username" placeholder="Masukkan Username" autofocus>
-                </div>
-                <div class="my-3">
-                  <div class="form-group">
-                    <label for="password">Password</label>
-                    <div class="input-group" id="show_hide_password">
-                      <input type="password" style="background-color: #e8f0fe;" name='password' class="form-control" name="password" required placeholder="Password">
-                      <div class="input-group-append">
-                        <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
-                      </div>
+<div class="container overflow-hidden mt-lg-5">
+  <div class="card my-2 shadow-md" style="background-color: rgba(255, 255, 255, 0.8); border-radius: 15px;">
+    <div class="row">
+      <div class="col-lg-5 pt-5 text-center">
+        <img src="../img/login.png" class="logo" alt="Logo">
+      </div>
+      <div class="col-lg-7 p-1 pt-lg-5">
+        <h3 class="text-center">Login</h3>
+        <div class="row justify-content-center">
+          <div class="col-8 mb-3">
+            <form action="cek_login.php" method="post" autocomplete="off">
+              <div class="my-3">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" style="background-color: #e8f0fe;" class="form-control" name="username" id="username" placeholder="Masukkan Username" autofocus>
+              </div>
+              <div class="my-3">
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <div class="input-group" id="show_hide_password">
+                    <input type="password" style="background-color: #e8f0fe;" name='password' class="form-control" name="password" required placeholder="Password">
+                    <div class="input-group-append">
+                      <a href="" class="btn btn-outline-secondary"><i class="bi bi-eye-slash" aria-hidden="true"></i></a>
                     </div>
                   </div>
                 </div>
-                <div class="my-3">
-                  <div class="form-check form-switch">
-                    <input name="remember" class="form-check-input" type="checkbox" id="remember">
-                    <label class="form-check-label" for="remember">Remember Me</label>
-                  </div>
+              </div>
+              <div class="my-3">
+                <div class="form-check form-switch">
+                  <input name="remember" class="form-check-input" type="checkbox" id="remember">
+                  <label class="form-check-label" for="remember">Remember Me</label>
                 </div>
-                <div class="my-3">
-                  <button style="background-color: #174578;" class="btn text-white w-100" type="submit" name="login">Login</button>
-                </div>
-                <a style="color: #174578;" href="./register.php" class="lg nav-link text-center">Belum punya akun? Daftar sekarang</a>
-                <a style="color: #174578;" href="./register.php" class="sm nav-link text-center">Daftar?</a>
-                <a style="color: #174578;" href="../index.php" class="nav-link text-center">Kembali ke halaman awal</a>
-              </form>
-            </div>
+              </div>
+              <div class="my-3">
+                <button style="background-color: #FF6500;" class="btn text-white w-100" type="submit" name="login">Login</button>
+              </div>
+              <a style="color: #FF6500;" href="./register.php" class="lg nav-link text-center">Belum punya akun? Daftar sekarang</a>
+              <a style="color: #FF6500;" href="./register.php" class="sm nav-link text-center">Daftar?</a>
+              <a style="color: #FF6500;" href="../index.php" class="nav-link text-center">Kembali ke halaman awal</a>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
+
 
   <?php if (isset($_GET['pesan'])) : ?>
-    <?php if ($_GET['pesan'] == "gagal") : ?>
-      <div class="container">
-        <script>
-          Swal.fire({
-            icon: 'error',
-            title: 'Login Gagal!',
-            text: 'Username atau Password salah!',
-          })
-        </script>
-      </div>
-    <?php endif; ?>
-    <?php if ($_GET['pesan'] == "berhasil-logout") : ?>
-      <div class="container">
-        <script>
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
+  <div class="container">
+    <script>
+      // Deklarasi Toast hanya satu kali
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 1500,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        }
+      });
 
-          Toast.fire({
-            icon: 'success',
-            title: 'Anda berhasil logout!'
-          })
-        </script>
-      </div>
-    <?php endif; ?>
-    <?php if ($_GET['pesan'] == "daftar-berhasil") : ?>
-      <div class="container">
-        <script>
-          const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.addEventListener('mouseenter', Swal.stopTimer)
-              toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-          })
+      // Cek kondisi pesan
+      <?php if ($_GET['pesan'] == "gagal") : ?>
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Gagal!',
+          text: 'Username atau Password salah!',
+        });
+      <?php elseif ($_GET['pesan'] == "berhasil-logout") : ?>
+        Toast.fire({
+          icon: 'success',
+          title: 'Anda berhasil logout!'
+        });
+      <?php elseif ($_GET['pesan'] == "daftar-berhasil") : ?>
+        Toast.fire({
+          icon: 'success',
+          title: 'Akun berhasil dibuat!'
+        });
+      <?php endif; ?>
+    </script>
+  </div>
+<?php endif; ?>
 
-          Toast.fire({
-            icon: 'success',
-            title: 'Akun berhasil dibuat!'
-          })
-        </script>
-      </div>
-    <?php endif; ?>
-  <?php endif; ?>
 
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

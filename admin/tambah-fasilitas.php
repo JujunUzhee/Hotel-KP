@@ -68,7 +68,7 @@ if ($data['role'] == "resepsionis") {
                                 <div class="col-lg-7 m-auto">
                                     <select name="tipe" id="tipe-kamar" class="form-select" required>
                                         <option value="" disabled selected>Pilih Jenis Kamar</option>
-                                        <option value="Superior">Superior</option>
+                                        <option value="Standard">Standard</option>
                                         <option value="Deluxe">Deluxe</option>
                                     </select>
                                 </div>

@@ -750,9 +750,9 @@ function tambahFasilitas($data)
     }
 
     if ($tipeKamar == "Standard") {
-        $harga = "120000";
-    } elseif ($tipeKamar == "deluxe") {
         $harga = "150000";
+    } elseif ($tipeKamar == "deluxe") {
+        $harga = "200000";
     }
 
     $query = "INSERT INTO fasilitas VALUES ('','$tipeKamar','$fasilitas','$gambar','$deskripsi','$harga')";
@@ -804,7 +804,7 @@ function uploadFasilitas()
         return false;
     }
 
-    $ekstensiGambarValid = ['jpg', 'jpeg', 'png'];
+    $ekstensiGambarValid = ['jpg', 'jpeg', 'png','jfif'];
     $ekstensiGambar = explode(".", $namaFile);
     $ekstensiGambar = strtolower(end($ekstensiGambar));
 

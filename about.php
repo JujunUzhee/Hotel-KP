@@ -161,51 +161,34 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
     </div>
 
     <?php if (isset($_GET['pesan'])) : ?>
-        <?php if ($_GET['pesan'] == "berhasil") : ?>
-            <div class="container">
-                <script>
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    })
+    <div class="container">
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
 
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Anda berhasil Masuk!'
-                    })
-                </script>
-            </div>
-        <?php endif; ?>
-        <?php if ($_GET['pesan'] == "berhasil-logout") : ?>
-            <div class="container">
-                <script>
-                    const Toast = Swal.mixin({
-                        toast: true,
-                        position: 'top-end',
-                        showConfirmButton: false,
-                        timer: 1500,
-                        timerProgressBar: true,
-                        didOpen: (toast) => {
-                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                        }
-                    })
-
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'Anda berhasil Keluar!'
-                    })
-                </script>
-            </div>
-        <?php endif; ?>
-    <?php endif; ?>
+            <?php if ($_GET['pesan'] == "berhasil") : ?>
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Anda berhasil Masuk!'
+                });
+            <?php elseif ($_GET['pesan'] == "berhasil-logout") : ?>
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Anda berhasil Keluar!'
+                });
+            <?php endif; ?>
+        </script>
+    </div>
+<?php endif; ?>
 
     <?php include "layout/footer.php" ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
