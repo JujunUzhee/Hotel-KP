@@ -35,15 +35,14 @@ $hotel = query("SELECT * FROM identitas")[0];
     body {
       background-image: url('../img/background.jpg');
       background-repeat: no-repeat; 
-  background-size: cover; 
     }
   </style>
 </head>
 
 <body>
 
-<div class="container overflow-hidden mt-lg-5">
-  <div class="card my-2 shadow-md" style="background-color: rgba(255, 255, 255, 0.8); border-radius: 15px;">
+ <div class="container overflow-hidden mt-lg-5">
+  <div class="card my-2 shadow-md mt-5" style="background-color: rgba(255, 255, 255, 0.8); border-radius: 15px;">
     <div class="row">
       <div class="col-lg-5 pt-5 text-center">
         <img src="../img/login.png" class="logo" alt="Logo">

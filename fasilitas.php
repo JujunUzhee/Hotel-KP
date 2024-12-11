@@ -59,84 +59,85 @@ $hotel = query("SELECT * FROM identitas")[0];
             </button>
         </div>
 
-   <!-- Fasilitas -->
-<h1 class="mt-5 text-center fw-bold">FASILITAS</h1>
-<div class="card card-primary card-outline card-outline-tabs mb-5">
-    <div class="card-header p-0 border-bottom-0 d-flex justify-content-center">
-        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#standard"
-                    role="tab" aria-controls="standard" aria-selected="true">Standard</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#deluxe"
-                    role="tab" aria-controls="deluxe" aria-selected="false">Deluxe</a>
-            </li>
-        </ul>
-    </div>
-    <div class="card-body">
-        <div class="tab-content" id="custom-tabs-four-tabContent">
-            <!-- Tab Standard -->
-            <div class="tab-pane fade active show" id="superior" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                <div class="row">
-                    <?php foreach ($dataSuperior as $superior) : ?>
-                        <div class="col-md-4 mb-4">
-                            <div class="card">
-                                <a href="img/fasilitas/<?= $superior['gambar'] ?>" data-toggle="lightbox"
-                                    data-title="<?= $superior['fasilitas'] ?>" data-gallery="gallery">
-                                    <img src="img/fasilitas/<?= $superior['gambar'] ?>" class="card-img-top img-fluid " alt="Responsive image"  style="height: 250px; ">
-                                </a>
-                                <h5 class="card-title text-center mt-2 fw-bold"><?= $superior['fasilitas'] ?></h5>
-                                <div class="card-body">
-                                    <p class="card-text text-center"><?= $superior['deskripsi'] ?></p>
-                                </div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
+        <!-- Fasilitas -->
+        <h1 class="mt-5 text-center fw-bold">FASILITAS</h1>
+        <div class="card card-primary card-outline card-outline-tabs mb-5">
+            <div class="card-header p-0 border-bottom-0 d-flex justify-content-center">
+                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#standard"
+                            role="tab" aria-controls="standard" aria-selected="true">Standard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#deluxe"
+                            role="tab" aria-controls="deluxe" aria-selected="false">Deluxe</a>
+                    </li>
+                </ul>
             </div>
-            <!-- Tab Deluxe -->
-            <div class="tab-pane fade" id="deluxe" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
-                <div class="row">
-                    <?php foreach ($dataDeluxe as $deluxe) : ?>
-                        <div class="col-md-4 mb-4">
-                            <div class="card">
-                                <a href="img/fasilitas/<?= $deluxe['gambar'] ?>" data-toggle="lightbox"
-                                    data-title="<?= $deluxe['fasilitas'] ?>" data-gallery="gallery">
-                                    <img src="img/fasilitas/<?= $deluxe['gambar'] ?>" class="card-img-top img-fluid" alt="Responsive image style="height: 250px; ">
-                                </a>
-                                <h5 class="card-title text-center fw-bold mt-2"><?= $deluxe['fasilitas'] ?></h5>
-                                <div class="card-body">                              
-                                    <p class="card-text text-center"><?= $deluxe['deskripsi'] ?></p>
+            <div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                    <!-- Tab Standard -->
+                    <div class="tab-pane fade active show" id="standard" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                        <div class="row">
+                            <?php foreach ($dataSuperior as $superior) : ?>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <a href="img/fasilitas/<?= $superior['gambar'] ?>" data-toggle="lightbox"
+                                            data-title="<?= $superior['fasilitas'] ?>" data-gallery="gallery">
+                                            <img src="img/fasilitas/<?= $superior['gambar'] ?>" class="card-img-top img-fluid " alt="Responsive image" style="height: 250px; ">
+                                        </a>
+                                        <h5 class="card-title text-center mt-2 fw-bold"><?= $superior['fasilitas'] ?></h5>
+                                        <div class="card-body d-flex flex-column">
+                                            <p class="card-text text-center flex-grow-1"><?= $superior['deskripsi'] ?></p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endforeach; ?>
                         </div>
-                    <?php endforeach; ?>
+                    </div>
+                    <!-- Tab Deluxe -->
+                    <div class="tab-pane fade" id="deluxe" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
+                        <div class="row">
+                            <?php foreach ($dataDeluxe as $deluxe) : ?>
+                                <div class="col-md-4 mb-4">
+                                    <div class="card h-100">
+                                        <a href="img/fasilitas/<?= $deluxe['gambar'] ?>" data-toggle="lightbox"
+                                            data-title="<?= $deluxe['fasilitas'] ?>" data-gallery="gallery">
+                                            <img src="img/fasilitas/<?= $deluxe['gambar'] ?>" class="card-img-top img-fluid" alt="Fasilitas Hotel" style="height: 250px;">
+                                        </a>
+                                        <h5 class="card-title text-center fw-bold mt-2"><?= $deluxe['fasilitas'] ?></h5>
+                                        <div class="card-body d-flex flex-column">
+                                            <p class="card-text text-center flex-grow-1"><?= $deluxe['deskripsi'] ?></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-                    </div>
 
-                    <?php include "layout/footer.php" ?>
-<script src="src/plugins/jquery/jquery.min.js"></script>
-<script src="src/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="src/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
-<script src="src/dist/js/adminlte.min.js?v=3.2.0"></script>
-<script src="src/plugins/filterizr/jquery.filterizr.min.js"></script>
-
-<script>
-    $(function() {
-        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
-            event.preventDefault();
-            $(this).ekkoLightbox({
-                alwaysShowClose: true
+    <?php include "layout/footer.php" ?>
+    <script>
+        $(function() {
+            $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox({
+                    alwaysShowClose: true
+                });
             });
         });
-    });
-</script>
-
+    </script>
+    <script src="src/plugins/jquery/jquery.min.js"></script>
+    <script src="src/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="src/plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+    <script src="src/dist/js/adminlte.min.js?v=3.2.0"></script>
+    <script src="src/plugins/filterizr/jquery.filterizr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
 
 
 </body>

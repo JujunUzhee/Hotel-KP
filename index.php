@@ -84,6 +84,7 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
     <div class="row justify-content-center mt-5">
     <div class="col-12 text-center mb-4 mt-5">
         <h2 class="fw-bold">HUBUNGI KAMI & INFORMASI</h2>
+        <p class="text-muted">Kami siap membantu Anda! Hubungi kami untuk informasi lebih lanjut atau pertanyaan seputar layanan dan fasilitas di Hotel Rahayu.</p>
     </div>
     <div class="col-lg-5 bg-white p-4 text-center rounded shadow-sm me-4">
         <h4 class="fw-bold ">Informasi</h4>
@@ -198,51 +199,35 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
     </div>
 
     <?php if (isset($_GET['pesan'])) : ?>
-    <?php if ($_GET['pesan'] == "berhasil") : ?>
     <div class="container">
         <script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            });
 
-        Toast.fire({
-            icon: 'success',
-            title: 'Anda berhasil Masuk!'
-        })
+            <?php if ($_GET['pesan'] == "berhasil") : ?>
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Anda berhasil Masuk!'
+                });
+            <?php elseif ($_GET['pesan'] == "berhasil-logout") : ?>
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Anda berhasil Keluar!'
+                });
+            <?php endif; ?>
         </script>
     </div>
-    <?php endif; ?>
-    <?php if ($_GET['pesan'] == "berhasil-logout") : ?>
-    <div class="container">
-        <script>
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 1500,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer)
-                toast.addEventListener('mouseleave', Swal.resumeTimer)
-            }
-        })
+<?php endif; ?>
 
-        Toast.fire({
-            icon: 'success',
-            title: 'Anda berhasil Keluar!'
-        })
-        </script>
-    </div>
-    <?php endif; ?>
-    <?php endif; ?>
 
     <?php include "layout/footer.php" ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"

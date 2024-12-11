@@ -26,7 +26,7 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center w-100">
                 <div class="card shadow border-0 mt-5">
-                    <div  style="background-image: url('https://picsum.photos/1200/400'); height: 500px; background-size: cover; background-position: center; border-radius: 0.5rem;"></div>
+                    <div  style="background-image: url('https://picsum.photos/1200/400'); height: 400px; background-size: cover; background-position: center; border-radius: 0.5rem;"></div>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
 <div class="container py-5">
     <div class="row justify-content-center ">
         <div class="col-lg-10 text-center ">
-            <h1 class="fw-bold mb-4 ">Tentang Kami</h1>
+            <h1 class="fw-bold mb-4 text-uppercase">Tentang Kami</h1>
             <p class="lead text-center" style="font-size: 18px; line-height: 1.8;"><?= $hotel['nama_hotel'] ?> <?= $hotel['tentang'] ?></p>
         </div>
     </div>
@@ -43,120 +43,12 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
 
 <!-- Struktur Organisasi -->
 <div class="container mt-5">
-    <h2 class="text-center org-header mb-4">Struktur Organisasi Hotel</h2>
-
-    <!-- Owner -->
-    <div class="row justify-content-center mb-4">
-        <div class="col-lg-4 text-center">
-            <div class="card org-card">
-                <div class="org-image" style="background-image: url('https://picsum.photos/100');"></div>
-                <div class="card-body">
-                    <h5 class="org-title">Owner</h5>
-                    <p class="org-name">Nama Owner</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Manager Operasional -->
-    <div class="row justify-content-center mb-4">
-        <div class="col-lg-4 text-center">
-            <div class="card org-card">
-                <div class="org-image" style="background-image: url('https://picsum.photos/100');"></div>
-                <div class="card-body">
-                    <h5 class="org-title">Manager Operasional</h5>
-                    <p class="org-name">Himmatul Aliyah</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Staff Rows -->
-    <div class="row text-center mb-4">
-        <div class="col-md-3 mb-3">
-            <div class="card org-card">
-                <div class="org-image" style="background-image: url('https://picsum.photos/80');"></div>
-                <div class="card-body">
-                    <h5 class="org-title">Admin</h5>
-                    <p class="org-name">Himmatul Aliyah</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card org-card">
-                <div class="org-image" style="background-image: url('https://picsum.photos/80');"></div>
-                <div class="card-body">
-                    <h5 class="org-title">Keuangan</h5>
-                    <p class="org-name">Uwaisy Al-Qorni</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card org-card">
-                <div class="org-image" style="background-image: url('https://picsum.photos/80');"></div>
-                <div class="card-body">
-                    <h5 class="org-title">Maintenance</h5>
-                    <p class="org-name">Mumuh Muhidin</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3 mb-3">
-            <div class="card org-card">
-                <div class="org-image" style="background-image: url('https://picsum.photos/80');"></div>
-                <div class="card-body">
-                    <h5 class="org-title">Kontrol Logistik</h5>
-                    <p class="org-name">Edi Sumardi</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Leaders -->
-    <div class="row text-center mb-4">
-        <div class="col-md-6 mb-3">
-            <div class="card org-card">
-                <div class="org-image" style="background-image: url('https://picsum.photos/80');"></div>
-                <div class="card-body">
-                    <h5 class="org-title">Leader 1</h5>
-                    <p class="org-name">Tatang Herdianto</p>
-                    <ul class="list-unstyled mt-3">
-                        <li class="org-role">Junaidi</li>
-                        <li class="org-role">Wawan</li>
-                        <li class="org-role">Aat</li>
-                        <li class="org-role">Diki</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6 mb-3">
-            <div class="card org-card">
-                <div class="org-image" style="background-image: url('https://picsum.photos/80');"></div>
-                <div class="card-body">
-                    <h5 class="org-title">Leader 2</h5>
-                    <p class="org-name">Rohman</p>
-                    <ul class="list-unstyled mt-3">
-                        <li class="org-role">Slamet S</li>
-                        <li class="org-role">Tata Suarta</li>
-                        <li class="org-role">Jumad</li>
-                        <li class="org-role">Edi S</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+    <h3 class="text-center fw-bold mb-4 text-uppercase">Struktur Hotel Rahayu</h3>
+    <div class="d-flex justify-content-center mt-5">
+        <img src="./img/Stuktur.png" alt="Struktur Hotel Rahayu" class="img-fluid  custom-responsive">
     </div>
 </div>
-
-
-
-
-            <!-- Peta -->
-            <div class="col-lg-12">
-            <h3 class="mt-5 text-center fw-bold">Peta Lokasi</h3>
-                    <div class="col-lg-12">
-                    <iframe class="map my-3 shadow" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3961.0414749525626!2d108.50022669619666!3d-6.885635663660207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f19e7a1a8f0dd%3A0x7d120ee5e66d7dc7!2sHotel%20Rahayu!5e0!3m2!1sid!2sid!4v1728752470324!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                           </div>
-                    <p class="text-center fw-normal text-muted"><?= $hotel['alamat'] ?></p>
-            </div>
+   
         </div>
     </div>
 

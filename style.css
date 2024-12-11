@@ -161,6 +161,20 @@ p {
   }
 }
 
+.custom-responsive {
+  width: 40%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Media query untuk HP (layar dengan lebar <= 768px) */
+@media (max-width: 768px) {
+  .custom-responsive {
+      width: 80%; /* Lebar 80% pada perangkat HP */
+  }
+}
+
+
 /* Specific styling for the organization structure cards */
 .org-card {
   border-radius: 0.5rem;

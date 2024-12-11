@@ -31,110 +31,106 @@ $hotel = query("SELECT * FROM identitas")[0];
 <?php include "layout/atas.php"; ?>
 
 <body style="background-color: #eaeaea;">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #174578">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #FF6500;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="img/logo/<?= $hotel['logo_secondary'] ?>" width="30" alt="<?= $hotel['nama_hotel'] ?>"> <span class="bold"><?= $hotel['nama_hotel'] ?></span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo/<?= $hotel['logo_secondary'] ?>" width="30" alt="<?= $hotel['logo_primary'] ?>"
+                    style="margin-right: 5px;">
+                <span style="font-weight: 600;"><?= $hotel['nama_hotel'] ?></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="./index.php?page=index">Beranda</a>
-                    <a class="nav-link" href="./kamar.php?page=kamar">Kamar</a>
-                    <a class="nav-link" href="./fasilitas.php?page=fasilitas">Fasilitas</a>
-                    <a class="nav-link" href="./pesanan.php?page=pesanan">Pesanan</a>
-                    <a class="nav-link" href="./logic/logout.php">Logout</a>
+                    <a class="nav-link" href="./index.php?page=index"
+                        style="padding: 10px 15px;">Beranda</a>
+                    <a class="nav-link" href="./about.php?page=about"
+                        style="padding: 10px 15px;">Tentang</a>
+                    <a class="nav-link" href="./kamar.php?page=kamar"
+                        style="padding: 10px 15px;">Kamar</a>
+                    <a class="nav-link"
+                        href="./fasilitas.php?page=fasilitas" style="padding: 10px 15px;">Fasilitas</a>
+                    <a class="nav-link" href="./pesanan.php?page=pesanan"
+                        style="padding: 10px 15px;">Pesanan</a>
+
+                    <!-- Profile Dropdown -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="img/profil/<?= $dataPelanggan['foto']; ?>" alt="Profile" width="30" height="30"
+                                class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li> <a class="dropdown-item" href="./profile.php?page=profile">Profil</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="./logic/proses-logout.php">Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+        </div>
         </div>
     </nav>
 
-    <div class="container">
-        <div id="carouselExampleIndicators" class="carousel slide mt-5 h-25" data-bs-ride="carousel">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="d-block w-100 slide-foto gambar-slider-1"></div>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5><?= $hotel['nama_hotel'] ?></h5>
-                        <p>Cari hotel dengan keamanan paling baik? silakan kunjungi <?= $hotel['nama_hotel'] ?> dan dapatkan fasilitas lengkap lainnya.</p>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="d-block w-100 slide-foto gambar-slider-2"></div>
-                </div>
-                <div class="carousel-item">
-                    <div class="d-block w-100 slide-foto gambar-slider-3"></div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-
-        <h2 class="mt-5 text-center">Pesan Kamar</h2>
+    <div class="container pt-5">
+        <h2 class="mt-5 text-center text-uppercase">Detail Pemesanan</h2>
         <div class="container my-5">
             <div class="m-auto rounded-3">
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-5">
                         <div class="card p-4">
-                            <img src="img/fasilitas/<?= $gambar ?>" class="card-img-top" alt="<?= $gambar ?>">
+                            <img src="img/fasilitas/<?= $gambar ?>" class="card-img-top img-fluid" alt="<?= $gambar ?>"  style="max-height: 250px; object-fit: cover;">
                             <div class="row justify-content-center mt-3">
-                                <div class="col-6 text-end">Tipe Kamar</div>
-                                <div class="col-6"><?= $_POST['tipe-kamar'] ?></div>
+                                <div class="col-6 text-end fw-light">Tipe Kamar : </div>
+                                <div class="col-6 fw-light"><?= $_POST['tipe-kamar'] ?></div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-6 text-end">Nomor Kamar</div>
-                                <div class="col-6">
+                                <div class="col-6 text-end fw-light">Nomor Kamar : </div>
+                                <div class="col-6 fw-light">
                                     <?php for ($i = 1; $i <= $_POST['jumlah-kamar']; $i++) : ?>
                                         (<?= $_POST["nomor-kamar-$i"] ?>)
                                     <?php endfor; ?>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-6 text-end">Harga / Malam</div>
-                                <div class="col-6">Rp.<?= $_POST['malam'] ?></div>
+                                <div class="col-6 text-end fw-light">Harga / Malam : </div>
+                                <div class="col-6 fw-light">Rp.<?= $_POST['malam'] ?></div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-6 text-end">Jumlah Kamar</div>
-                                <div class="col-6"><?= $_POST['jumlah-kamar'] ?></div>
+                                <div class="col-6 text-end fw-light">Jumlah Kamar : </div>
+                                <div class="col-6 fw-light"><?= $_POST['jumlah-kamar'] ?></div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-6 text-end">Nama Pemesan</div>
-                                <div class="col-6"><?= $_POST['nama'] ?></div>
+                                <div class="col-6 text-end fw-light">Nama Pemesan : </div>
+                                <div class="col-6 fw-light"><?= $_POST['nama'] ?></div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-6 text-end">Alamat</div>
-                                <div class="col-6"><?= $_POST['alamat'] ?></div>
+                                <div class="col-6 text-end fw-light">Alamat : </div>
+                                <div class="col-6 fw-light"><?= $_POST['alamat'] ?></div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-6 text-end">No Telepon</div>
-                                <div class="col-6"><?= $_POST['telp'] ?></div>
+                                <div class="col-6 text-end fw-light">No Telepon : </div>
+                                <div class="col-6 fw-light"><?= $_POST['telp'] ?></div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-6 text-end">Check In</div>
-                                <div class="col-6"><?= tanggal_indonesia($_POST['cekin']) ?></div>
+                                <div class="col-6 text-end fw-light">Check In : </div>
+                                <div class="col-6 fw-light"><?= tanggal_indonesia($_POST['cekin']) ?></div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-6 text-end">Check Out</div>
-                                <div class="col-6"><?= tanggal_indonesia($_POST['cekout']) ?></div>
+                                <div class="col-6 text-end fw-light">Check Out : </div>
+                                <div class="col-6 fw-light"><?= tanggal_indonesia($_POST['cekout']) ?></div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-6 text-end">Durasi Menginap</div>
-                                <div class="col-6"><?= $durasi; ?> Malam</div>
+                                <div class="col-6 text-end fw-light">Durasi Menginap : </div>
+                                <div class="col-6 fw-light"><?= $durasi; ?> Malam</div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col-6 text-end">Total Biaya</div>
-                                <div class="col-6">Rp. <?= $totalBiaya; ?></div>
+                                <div class="col-6 text-end fw-light">Total Biaya : </div>
+                                <div class="col-6 fw-light">Rp. <?= rupiah($totalBiaya); ?></div>
                             </div>
                         </div>
                     </div>
@@ -155,7 +151,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                             <input name="total-biaya" type="hidden" value="<?= $totalBiaya; ?>">
                         <?php endfor; ?>
                         <div class="row justify-content-center mt-3">
-                            <button class="w-25 btn text-white btn-lg mb-5" style="background-color: #174578" name="pesan" type="submit">Pesan</button>
+                            <button class="w-25 btn text-white btn-lg mb-5" style="background-color: #FF6500" name="pesan" type="submit">Pesan</button>
                         </div>
                     </form>
                 </div>

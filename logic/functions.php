@@ -21,10 +21,19 @@ function checkOut()
 
 function rupiah($angka)
 {
+    // Menghapus titik (untuk pemisah ribuan) dan mengganti koma dengan titik (untuk desimal)
+    $angka = str_replace('.', '', $angka);  // Menghapus titik yang ada (jika ada pemisah ribuan)
+    $angka = str_replace(',', '.', $angka); // Mengganti koma menjadi titik untuk desimal
 
-    $hasil_rupiah = number_format($angka, 2, ',', '.');
+    // Mengonversi menjadi float
+    $angka = (float) $angka;
+
+    // Menggunakan number_format untuk format uang
+    $hasil_rupiah = number_format($angka, 0, ',', '.');
+    
     return $hasil_rupiah;
 }
+
 
 function tanggal_indonesia($tanggal)
 {

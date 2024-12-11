@@ -4,14 +4,14 @@ include "logic/functions.php";
 $data = query("SELECT * FROM stok_kamar");
 $dataSuperior = query("SELECT * FROM fasilitas WHERE tipe_kamar = 'Standard'");
 $dataDeluxe = query("SELECT * FROM fasilitas WHERE tipe_kamar = 'deluxe'");
-$kamarSuperior = query("SELECT stok FROM stok_kamar WHERE tipe = 'Standard'")[0]['stok'];
+$kamarStandard = query("SELECT stok FROM stok_kamar WHERE tipe = 'Standard'")[0]['stok'];
 $kamarDeluxe = query("SELECT stok FROM stok_kamar WHERE tipe = 'Deluxe'")[0]['stok'];
 
-$jumlahKamarSuperior = query("SELECT jumlah_kamar FROM stok_kamar WHERE tipe = 'Standard'")[0]['jumlah_kamar'];
+$jumlahKamarStandard = query("SELECT jumlah_kamar FROM stok_kamar WHERE tipe = 'Standard'")[0]['jumlah_kamar'];
 $jumlahKamarDeluxe = query("SELECT jumlah_kamar FROM stok_kamar WHERE tipe = 'Deluxe'")[0]['jumlah_kamar'];
 
-$stokKamarDeluxe = query("SELECT * FROM stok_kamar WHERE tipe = 'deluxe'")[0]['stok'];
-$stokKamarSuperior = query("SELECT * FROM stok_kamar WHERE tipe = 'Standard'")[0]['stok'];
+$stokKamarDeluxe = query("SELECT * FROM stok_kamar WHERE tipe = 'Deluxe'")[0]['stok'];
+$stokKamarStandard = query("SELECT * FROM stok_kamar WHERE tipe = 'Standard'")[0]['stok'];
 
 if (!$_GET['page']) {
     header("Location: ./kamar.php?page=kamar");
@@ -70,8 +70,12 @@ $hotel = query("SELECT * FROM identitas")[0];
             </button>
         </div>
 
-        <h1 class="mt-5 text-center fw-bold">TIPE KAMAR</h1>
-        <div class="row mt-3 mb-5 g-5">
+        <h3 class="mt-5 text-center fw-bold">TIPE KAMAR</h3>
+        <p class="lead text-center mx-5 my-4" style="font-size: 16px; line-height: 1.8;">
+            Pilihan kamar dengan fasilitas terbaik untuk kenyamanan Anda.
+            Tersedia tipe Deluxe dan Standard, masing-masing memberikan pengalaman menginap yang nyaman.
+        </p>
+        <div class="row  mb-5 g-5">
             <?php foreach ($data as $kamar) : ?>
                 <div class="col-12 col-lg-6">
                     <div class="card">
@@ -82,7 +86,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                         <div class="card-body">
 
                             <?php if ($_SESSION['login'] == 1) : ?>
-                                <?php if ($kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) > 1) : ?>
+                                <?php if ($kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) >= 1) : ?>
                                     <p class="text-center bold">Tersedia <?= $kamarDeluxe; ?> Kamar lagi</p>
                                 <?php elseif ($kamar['tipe'] == "Deluxe" && intval($kamarDeluxe) < 1) : ?>
                                     <p class="text-center bold" style="<?= $kamarDeluxe ? 'display:none' :  ''; ?>">Kamar Sudah
@@ -92,9 +96,9 @@ $hotel = query("SELECT * FROM identitas")[0];
 
 
                             <?php if ($_SESSION['login'] == 1) : ?>
-                                <?php if ($kamar['tipe'] == "Standard" && intval($kamarSuperior) > 1) : ?>
-                                    <p class="text-center bold">Tersedia <?= $kamarSuperior; ?> Kamar lagi</p>
-                                <?php elseif ($kamar['tipe'] == "Standard" && intval($kamarSuperior) < 1) : ?>
+                                <?php if ($kamar['tipe'] == "Standard" && intval($kamarStandard) >= 1) : ?>
+                                    <p class="text-center bold">Tersedia <?= $kamarStandard; ?> Kamar lagi</p>
+                                <?php elseif ($kamar['tipe'] == "Standard" && intval($kamarStandard) < 1) : ?>
                                     <p class="text-center bold">Kamar Sudah Penuh</p>
                                 <?php endif; ?>
                             <?php endif; ?>
@@ -109,10 +113,10 @@ $hotel = query("SELECT * FROM identitas")[0];
                                                 <?php if ($kamar['tipe'] == "Standard") : ?>
                                                     <input required name="jumlah-kamar" type="number"
                                                         style="width: 30%; text-align: center;" class="form-control m-auto"
-                                                        placeholder="Jumlah Kamar" min="1" max="<?= $stokKamarSuperior ?>">
+                                                        placeholder="Jumlah Kamar" min="1" max="<?= $stokKamarStandard ?>">
                                                     <button style="background-color: #FF6500;"
                                                         class="btn text-white w-75 d-block m-auto mt-3"
-                                                        <?= $kamar['tipe'] == "Standard" && intval($kamarSuperior) < 1 ? 'disabled' : '' ?>>Pesan</button>
+                                                        <?= $kamar['tipe'] == "Standard" && intval($kamarStandard) < 1 ? 'disabled' : '' ?>>Pesan</button>
                                                 <?php endif; ?>
                                                 <?php if ($kamar['tipe'] == "Deluxe") : ?>
                                                     <input required name="jumlah-kamar" type="number"

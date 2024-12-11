@@ -25,127 +25,160 @@ $hotel = query("SELECT * FROM identitas")[0];
 <?php include "layout/atas.php"; ?>
 
 <body style="background-color: #eaeaea;">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #174578">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #FF6500;">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#"><img src="img/logo/<?= $hotel['logo_secondary'] ?>" width="30" alt="<?= $hotel['nama_hotel'] ?>"> <span class="bold"><?= $hotel['nama_hotel'] ?></span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand" href="#">
+                <img src="img/logo/<?= $hotel['logo_secondary'] ?>" width="30" alt="<?= $hotel['logo_primary'] ?>"
+                    style="margin-right: 5px;">
+                <span style="font-weight: 600;"><?= $hotel['nama_hotel'] ?></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link" href="./index.php?page=index">Beranda</a>
-                    <a class="nav-link" href="./kamar.php?page=kamar">Kamar</a>
-                    <a class="nav-link" href="./fasilitas.php?page=fasilitas">Fasilitas</a>
-                    <a class="nav-link" href="./pesanan.php?page=pesanan">Pesanan</a>
-                    <a class="nav-link" href="./logic/logout.php">Logout</a>
+                    <a class="nav-link" href="./index.php?page=index"
+                        style="padding: 10px 15px;">Beranda</a>
+                    <a class="nav-link" href="./about.php?page=about"
+                        style="padding: 10px 15px;">Tentang</a>
+                    <a class="nav-link" href="./kamar.php?page=kamar"
+                        style="padding: 10px 15px;">Kamar</a>
+                    <a class="nav-link"
+                        href="./fasilitas.php?page=fasilitas" style="padding: 10px 15px;">Fasilitas</a>
+                    <a class="nav-link" href="./pesanan.php?page=pesanan"
+                        style="padding: 10px 15px;">Pesanan</a>
+
+                    <!-- Profile Dropdown -->
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="img/profil/<?= $dataPelanggan['foto']; ?>" alt="Profile" width="30" height="30"
+                                class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li> <a class="dropdown-item" href="./profile.php?page=profile">Profil</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="./logic/proses-logout.php">Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <h2 class="mt-5 text-center">Pesan Kamar</h2>
+    <h2 class="mt-5 text-center pt-5 text-uppercase">Pesan Kamar</h2>
     <div class="container my-5">
         <div class="m-auto rounded-3">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-10 card">
-                    <img src="img/fasilitas/<?= $gambar ? "$gambar" : "hotel.jpg" ?>" class="gambar-kamar d-block m-auto mt-3 img-thumbnail">
+                    <img src="img/fasilitas/<?= $gambar ? "$gambar" : "hotel.jpg" ?>" class="d-block m-auto mt-3 img-thumbnail">
+
+
+
                     <form action="detail-pemesanan.php" method="post" autocomplete="off">
                         <div class="container">
                             <div class="row mt-5 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="tipe-kamar" class="form-label mt-2 text-lg-end d-block">Tipe Kamar</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input required readonly name="tipe-kamar" type="text" class="form-control" placeholder="Tipe Kamar" value="<?= $tipeKamar; ?>">
-                                </div>
-                            </div>
-                            <?php for ($i = 1; $i <= intval($jumlahKamar); $i++) : ?>
-                                <div class="row my-3 justify-content-center">
-                                    <div class="col-lg-3">
-                                        <label for="nomor-kamar" class="form-label mt-2 text-lg-end d-block">Kamar Nomor</label>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <select name="nomor-kamar-<?= $i; ?>" id="nomor-kamar" class="form-select" required>
-                                            <option value="" selected disabled>Pilih Nomor Kamar</option>
-                                            <?php foreach ($nomorKamar as $noKamar) : ?>
-                                                <option value="<?= $noKamar['no_kamar'] ?>"><?= $noKamar['no_kamar'] ?></option>
-                                            <?php endforeach; ?>
-                                        </select>
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-lg-9">
+                                        <label for="tipe-kamar" class="form-label">Tipe Kamar</label>
+                                        <input required readonly name="tipe-kamar" type="text" class="form-control" placeholder="Tipe Kamar" value="<?= $tipeKamar; ?>">
                                     </div>
                                 </div>
-                            <?php endfor; ?>
-                            <div class="row my-3 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="harga" class="form-label mt-2 text-lg-end d-block">Harga / Malam</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <span>Rp. </span><input required readonly name="malam" type="text" class="form-control w-75 d-inline" id="harga" onfocus="sum();" placeholder="Harga Kamar perhari" value="<?= rupiah($hargaAwal) ?>">
-                                </div>
-                            </div>
-                            <div class="row my-3 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="jumlah-kamar" class="form-label mt-2 text-lg-end d-block">Jumlah Kamar</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input required readonly name="jumlah-kamar" type="number" class="form-control" id="jumlah-kamar" min="1" max="<?= $stokKamar; ?>" placeholder="Tersedia <?= $stokKamar; ?>" value="<?= $_POST['jumlah-kamar'] ?>">
-                                </div>
-                            </div>
-                            <div class="row my-3 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="nama" class="form-label mt-2 text-lg-end d-block">Nama Lengkap</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input required name="nama" type="text" class="form-control" id="nama" placeholder="Nama Lengkap" value="<?= $dataPelanggan['nama']; ?>">
-                                </div>
-                            </div>
-                            <div class="row my-3 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="alamat" class="form-label mt-2 text-lg-end d-block">Alamat</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input required name="alamat" type="text" class="form-control" id="alamat" placeholder="Alamat" value="<?= $dataPelanggan['alamat']; ?>">
-                                </div>
-                            </div>
-                            <div class="row my-3 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="telp" class="form-label mt-2 text-lg-end d-block">No. Telepon</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input required name="telp" type="telp" class="form-control" id="telp" placeholder="No Telepon" value="<?= $dataPelanggan['telp']; ?>">
-                                </div>
-                            </div>
-                            <div class="row my-3 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="cekin" class="form-label mt-2 text-lg-end d-block">Check-In</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input required name="cekin" type="text" placeholder="Pilih tanggal check in" readonly class="form-control" id="cekin">
-                                </div>
-                            </div>
-                            <div class="row my-3 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="cekout" class="form-label mt-2 text-lg-end d-block">Check-Out</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input required name="cekout" type="text" placeholder="Pilih tanggal check out" readonly class="form-control" id="cekout" onchange="sum()">
-                                </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="row my-3 justify-content-center">
-                                    <div class="col-lg-3">
-                                        <label for="harga" class="form-label mt-2 text-lg-end d-block">Total Harga</label>
+                                <!-- Nomor Kamar -->
+                                <?php for ($i = 1; $i <= intval($jumlahKamar); $i++) : ?>
+                                    <div class="row justify-content-center mb-4">
+                                        <div class="col-lg-9">
+                                            <label for="nomor-kamar-<?= $i; ?>" class="form-label">Kamar Nomor</label>
+                                            <select name="nomor-kamar-<?= $i; ?>" id="nomor-kamar-<?= $i; ?>" class="form-select" required>
+                                                <option value="" selected disabled>Pilih Nomor Kamar</option>
+                                                <?php foreach ($nomorKamar as $noKamar) : ?>
+                                                    <option value="<?= $noKamar['no_kamar'] ?>"><?= $noKamar['no_kamar'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <span>Rp. </span><input required readonly name="harga" type="text" class="form-control w-75 d-inline" id="hasil" placeholder="Total Harga">
+                                <?php endfor; ?>
+
+
+                                <!-- Harga / Malam -->
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-lg-9">
+                                        <label for="harga" class="form-label">Harga / Malam</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">Rp</span>
+                                            <input required readonly name="malam" type="text" class="form-control" id="harga" placeholder="Harga Kamar perhari" onfocus="sum();" value="<?= rupiah($hargaAwal) ?>">
+                                        </div>
                                     </div>
                                 </div>
-                                <input type="hidden" class="form-control w-75 d-inline" id="total" placeholder="Harga Kamar perhari">
-                                <button class="w-50 btn text-white btn-lg mb-5" style="background-color: #174578" name="submit" type="submit">Pesan</button>
-                            </div>
+
+                                <!-- Jumlah Kamar -->
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-lg-9">
+                                        <label for="jumlah-kamar" class="form-label">Jumlah Kamar</label>
+                                        <input required readonly name="jumlah-kamar" type="number" class="form-control" id="jumlah-kamar" min="1" max="<?= $stokKamar; ?>" placeholder="Tersedia <?= $stokKamar; ?>" value="<?= $_POST['jumlah-kamar'] ?>">
+                                    </div>
+                                </div>
+
+                                <!-- Nama Lengkap -->
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-lg-9">
+                                        <label for="nama" class="form-label">Nama Lengkap</label>
+                                        <input required name="nama" type="text" class="form-control" id="nama" placeholder="Nama Lengkap" value="<?= $dataPelanggan['nama']; ?>">
+                                    </div>
+                                </div>
+                                <!-- Alamat -->
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-lg-9">
+                                        <label for="alamat" class="form-label">Alamat</label>
+                                        <input required name="alamat" type="text" class="form-control" id="alamat" placeholder="Alamat" value="<?= $dataPelanggan['alamat']; ?>">
+                                    </div>
+                                </div>
+                                <!-- Telepon -->
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-lg-9">
+                                        <label for="telp" class="form-label">No. Telepon</label>
+                                        <input required name="telp" type="tel" class="form-control" id="telp" placeholder="No Telepon" value="<?= $dataPelanggan['telp']; ?>">
+                                    </div>
+                                </div>
+                                <!-- Check-In -->
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-lg-9">
+                                        <label for="cekin" class="form-label">Check-In</label>
+                                        <input required name="cekin" type="text" placeholder="Pilih tanggal check in" readonly class="form-control" id="cekin">
+                                    </div>
+                                </div>
+
+                                <!-- Check-Out -->
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-lg-9">
+                                        <label for="cekout" class="form-label">Check-Out</label>
+                                        <input required name="cekout" type="text" placeholder="Pilih tanggal check out" readonly class="form-control" id="cekout">
+                                    </div>
+                                </div>
+
+                                <!-- Total Harga -->
+                                <div class="row justify-content-center mb-4">
+                                    <div class="col-lg-9">
+                                        <label for="hasil" class="form-label">Total Harga</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">Rp</span>
+                                            <input required readonly name="harga" type="text" class="form-control" id="hasil" placeholder="Total Harga">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <input type="hidden" class="form-control d-inline" id="total" placeholder="Harga Kamar perhari">
+                                    <button class="w-50 btn text-white btn-lg mb-5" style="background-color: #FF6500" name="submit" type="submit">Pesan</button>
+                                </div>
                     </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     </div>
 
