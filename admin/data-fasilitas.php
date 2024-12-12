@@ -67,7 +67,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                         <?php foreach ($dataSuperior as $superior) : ?>
                             <div class="col-10 col-lg-3">
                                 <div class="card" style="height: 22rem;">
-                                    <img src="../img/fasilitas/<?= $superior["gambar"] ?>" class="card-img-top" alt="...">
+                                    <img src="../img/fasilitas/<?= $superior["gambar"] ?>" class="card-img-top" alt="..." style="height:150px">
                                     <div class="card-body">
                                         <h5 class="card-title" style="font-size: 11pt; text-align: center; font-weight: bold;"><?= $superior["fasilitas"] ?></h5>
                                         <p class="card-text mt-3 position-relative-" style="text-align: justify; font-size: 9pt;"><?= $superior["deskripsi"] ?></p>
@@ -85,6 +85,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                         <?php endforeach; ?>
                         <!-- </div> -->
                     </div>
+                </div>
 
                     <button class="btn fs-4 text-center d-block m-auto position-relative">
                         Deluxe
@@ -98,7 +99,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                         <?php foreach ($dataDeluxe as $deluxe) : ?>
                             <div class="col-10 col-lg-3">
                                 <div class="card" style="height: 22rem;">
-                                    <img src="../img/fasilitas/<?= $deluxe["gambar"] ?>" class="card-img-top" alt="...">
+                                    <img src="../img/fasilitas/<?= $deluxe["gambar"] ?>" class="card-img-top" alt="..." style="height:150px">
                                     <div class="card-body">
                                         <h5 class="card-title" style="font-size: 11pt; text-align: center; font-weight: bold;"><?= $deluxe["fasilitas"] ?></h5>
                                         <p class="card-text mt-3" style="text-align: justify; font-size: 9pt;"><?= $deluxe["deskripsi"] ?></p>
@@ -125,10 +126,10 @@ $hotel = query("SELECT * FROM identitas")[0];
     </div>
     <!-- /.content-wrapper -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2021 <a href="#">Dimas Candra</a>.</strong>
+        <strong>Copyright &copy; 2024 <a href="#">Hotel Rahayu</a>.</strong>
         All rights reserved.
         <div class="float-right d-none d-sm-inline-block">
-            <b>Version</b> 3.1.0
+            <b>Version</b> 5.1.0
         </div>
     </footer>
 

@@ -317,10 +317,10 @@ $jmlPembayaran = query("SELECT COUNT(*) FROM pembayaran")[0]["COUNT(*)"];
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="#">Dimas Candra</a>.</strong>
+            <strong>Copyright &copy; 2024 <a href="#">Hotel Rahayu</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.1.0
+                <b>Version</b> 5.1.0
             </div>
         </footer>
 

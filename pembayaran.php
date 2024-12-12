@@ -30,108 +30,101 @@ $hotel = query("SELECT * FROM identitas")[0];
 <body style="background-color: #eaeaea;">
     <?php include "./layout/navbar.php" ?>
 
-    <h2 class="mt-5 text-center">Pembayaran</h2>
-    <div class="container my-5">
-        <div class="m-auto rounded-3">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-10 card">
-                    <form action="" method="post" autocomplete="off" enctype="multipart/form-data">
-                        <div class="container">
-                            <input type="hidden" name="id" value="<?= $pesanan['id']; ?>">
-                            <div class="row mt-5 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="tipe-kamar" class="form-label text-lg-end d-block">Tipe Kamar</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input required readonly name="nama-pembayar" type="text" class="form-control" placeholder="Nama Lengkap" value="<?= $pesanan['tipe_kamar'] ?>">
-                                </div>
-                            </div>
-                            <div class="row my-3 justify-content-center d-none">
-                                <div class="col-lg-3">
-                                    <label for="nomor-kamar" class="form-label text-lg-end d-block">Kamar Nomor</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <?php foreach ($nomorKamar as $noKamar) : ?>
-                                        <select name="nomor-kamar-<?= $i++; ?>" id="nomor-kamar" class="form-select" required>
-                                            <option value="" disabled>Pilih Nomor Kamar</option>
-                                            <option value="<?= $noKamar['no_kamar'] ?>" <?= $noKamar ? 'selected' : ''; ?>><?= $noKamar['no_kamar'] ?></option>
-                                        </select>
-                                    <?php endforeach; ?>
-                                </div>
-                            </div>
-                            <div class="row mt-3 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="tipe-kamar" class="form-label text-lg-end d-block">Nama lengkap</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input required name="nama-pembayar" type="text" class="form-control" placeholder="Nama Lengkap" value="<?= $pemesan['nama'] ?>">
-                                </div>
-                            </div>
-                            <div class="row mt-3 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="tipe-kamar" class="form-label text-lg-end d-block">Jumlah Kamar</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input required readonly name="jumlah-kamar" type="text" class="form-control" placeholder="Nama Lengkap" value="<?= $pesanan['jumlah_kamar'] ?>">
-                                </div>
-                            </div>
-                            <div class="row my-3 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="bank" class="form-label text-lg-end d-block">Bank</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <select name="bank" id="bank" class="form-select" required>
-                                        <option value="" disabled selected>-- Pilih Bank --</option>
-                                        <option value="Mandiri">Mandiri</option>
-                                        <option value="BCA">BCA</option>
-                                        <option value="BRI">BRI</option>
-                                        <option value="BNI">BNI</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row my-3 justify-content-center">
-                                <div class="col-lg-3">
-                                    <label for="telp" class="form-label text-lg-end d-block">No. Rekening</label>
-                                </div>
-                                <div class="col-lg-6">
-                                    <input required name="nomor-rekening" type="text" class="form-control" id="telp" placeholder="No Rekening"">
-                                </div>
-                            </div>
-                            <div class=" row my-3 justify-content-center">
-                                    <div class="col-lg-3">
-                                        <label for="cekin" class="form-label text-lg-end d-block">Nama Pemilik Kartu</label>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <input required name="nama-pemilik-kartu" type="text" class="form-control" id="telp" placeholder="Nama Pemilik Kartu"">
-                                </div>
-                            </div>
-                            <div class=" row my-3 justify-content-center">
-                                        <div class="col-lg-3">
-                                            <label for="harga" class="form-label text-lg-end d-block">Bukti Transfer</label>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <input required name="bukti" type="file" class="form-control w-100 d-inline" id="harga">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row my-3 justify-content-center">
-                                    <div class="col-lg-3">
-                                        <label for="harga" class="form-label text-lg-end d-block">Jumlah Bayar</label>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <span>Rp. </span><input readonly required name="total-bayar" type="text" class="form-control w-75 d-inline" id="harga" placeholder="Harga Kamar perhari" value="<?= $pesanan['total_biaya']; ?>">
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <button class="w-50 btn text-white btn-lg mb-5" style="background-color: #174578" name="bayar" type="submit">Bayar</button>
-                                </div>
+   
+    <div class="container my-5 pt-5">
+    <div class=" rounded-3 shadow-lg p-4 bg-white ">
+    <h1 class="container text-center " >PEMBAYARAN</h1>
+        <div class="row justify-content-center align-items-center">
+            <div class="col-12 col-lg-10 ">
+                <form action="" method="post" autocomplete="off" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="<?= $pesanan['id']; ?>">
+                    
+                    <!-- Tipe Kamar -->
+                    <div class="row mt-4 justify-content-center">
+                        <div class="col-lg-7">
+                            <label for="tipe-kamar" class="form-label">Tipe Kamar</label>
+                            <input required readonly name="tipe-kamar" type="text" class="form-control" value="<?= $pesanan['tipe_kamar'] ?>">
+                        </div>
+                    </div>
+
+                    <!-- Nama Lengkap -->
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-lg-7">
+                            <label for="nama-pembayar" class="form-label">Nama Lengkap</label>
+                            <input required name="nama-pembayar" type="text" class="form-control" placeholder="Nama Lengkap" value="<?= $pemesan['nama'] ?>">
+                        </div>
+                    </div>
+
+                    <!-- Jumlah Kamar -->
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-lg-7">
+                            <label for="jumlah-kamar" class="form-label">Jumlah Kamar</label>
+                            <input required readonly name="jumlah-kamar" type="text" class="form-control" value="<?= $pesanan['jumlah_kamar'] ?>">
+                        </div>
+                    </div>
+
+                    <!-- Pilih Bank -->
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-lg-7">
+                            <label for="bank" class="form-label">Bank</label>
+                            <select name="bank" id="bank" class="form-select" required>
+                                <option value="" disabled selected>-- Pilih Bank --</option>
+                                <option value="Mandiri">Mandiri</option>
+                                <option value="BCA">BCA</option>
+                                <option value="BRI">BRI</option>
+                                <option value="BNI">BNI</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- No Rekening -->
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-lg-7">
+                            <label for="nomor-rekening" class="form-label">No. Rekening</label>
+                            <input required name="nomor-rekening" type="text" class="form-control" placeholder="No Rekening">
+                        </div>
+                    </div>
+
+                    <!-- Nama Pemilik Kartu -->
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-lg-7">
+                            <label for="nama-pemilik-kartu" class="form-label">Nama Pemilik Kartu</label>
+                            <input required name="nama-pemilik-kartu" type="text" class="form-control" placeholder="Nama Pemilik Kartu">
+                        </div>
+                    </div>
+
+                    <!-- Bukti Transfer -->
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-lg-7">
+                            <label for="bukti" class="form-label">Bukti Transfer</label>
+                            <input required name="bukti" type="file" class="form-control">
+                        </div>
+                    </div>
+
+                    <!-- Jumlah Bayar -->
+                    <div class="row mt-3 justify-content-center">
+                        <div class="col-lg-7">
+                            <label for="total-bayar" class="form-label">Jumlah Bayar</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input readonly required name="total-bayar" type="text" class="form-control" value="<?= rupiah($pesanan['total_biaya']); ?>">
                             </div>
                         </div>
-                    </form>
-                </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="row justify-content-center mt-4">
+                        <div class="col-lg-6 text-center">
+                            <button class="btn text-white btn-lg my-3 w-100" style="background-color: #FF6500" name="bayar" type="submit">Bayar</button>
+                        </div>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
+</div>
+
     </div>
 
     <?php

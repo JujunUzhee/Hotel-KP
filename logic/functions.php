@@ -445,21 +445,39 @@ function batalkanPesanan($data)
 {
     global $koneksi;
 
-    $id = htmlspecialchars($data['id']);
-    $tipeKamar = htmlspecialchars($data['tipe_kamar']);
-    $jumlahKamar = htmlspecialchars($data['jumlah_kamar']);
-    $tglPemesanan = htmlspecialchars($data['tgl_pemesanan']);
-    $data = query("SELECT * FROM kamar WHERE tgl_pemesanan = '$tglPemesanan'");
+    // Validasi input data
+    if (!isset($data['id'], $data['tipe-kamar'], $data['jumlah-kamar'], $data['tgl-pemesanan'])) {
+        return "Data pembatalan tidak lengkap.";
+    }
 
-    mysqli_query($koneksi, "UPDATE stok_kamar SET stok = stok+$jumlahKamar WHERE tipe = '$tipeKamar'");
-    mysqli_query($koneksi, "UPDATE pemesanan SET status = 'batal' WHERE id = '$id'");
-    foreach ($data as $row) {
+    // Ambil data dari parameter
+    $id = htmlspecialchars($data['id']);
+    $tipeKamar = htmlspecialchars($data['tipe-kamar']);
+    $jumlahKamar = htmlspecialchars($data['jumlah-kamar']);
+    $tglPemesanan = htmlspecialchars($data['tgl-pemesanan']);
+
+    // Cek data kamar berdasarkan tanggal pemesanan
+    $dataKamar = query("SELECT * FROM kamar WHERE tgl_pemesanan = '$tglPemesanan'");
+    if (!$dataKamar || count($dataKamar) === 0) {
+        return "Tidak ada kamar yang ditemukan untuk tanggal pemesanan ini.";
+    }
+
+    // Update status kamar menjadi tersedia
+    foreach ($dataKamar as $row) {
         $nomorKamar = $row['no_kamar'];
         mysqli_query($koneksi, "UPDATE kamar SET status = 'tersedia', tgl_pemesanan = NULL, tgl_check_out = NULL WHERE no_kamar = '$nomorKamar'");
     }
 
+    // Update stok kamar
+    mysqli_query($koneksi, "UPDATE stok_kamar SET stok = stok + $jumlahKamar WHERE tipe = '$tipeKamar'");
+
+    // Update status pemesanan
+    mysqli_query($koneksi, "UPDATE pemesanan SET status = 'batal' WHERE id = '$id'");
+
+    // Kembalikan jumlah baris yang terpengaruh
     return mysqli_affected_rows($koneksi);
 }
+
 
 // ============ checkout
 function checkoutPesanan($data)

@@ -74,10 +74,7 @@ $hotel = query("SELECT * FROM identitas")[0];
         <div class="m-auto rounded-3">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-10 card">
-                    <img src="img/fasilitas/<?= $gambar ? "$gambar" : "hotel.jpg" ?>" class="d-block m-auto mt-3 img-thumbnail">
-
-
-
+                    <img src="img/fasilitas/<?= $gambar ? "$gambar" : "hotel.jpg" ?>"  class="d-block m-auto mt-3 img-thumbnail img-fluid" style="max-width: 350px;">
                     <form action="detail-pemesanan.php" method="post" autocomplete="off">
                         <div class="container">
                             <div class="row mt-5 justify-content-center">

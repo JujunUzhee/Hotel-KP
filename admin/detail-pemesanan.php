@@ -130,7 +130,7 @@ if (isset($_POST['cekout'])) {
                                         <span class="d-block mb-3"><?= $pemesanan['jumlah_kamar'] ?></span>
                                         <span class="d-block mb-3"><?= $pemesanan['durasi_menginap'] ?> Malam</span>
                                         <span class="d-block mb-3">Rp.<?= $pemesanan['harga_permalam'] ?></span>
-                                        <span class="d-block mb-3">Rp.<?= $pemesanan['total_biaya'] ?></span>
+                                        <span class="d-block mb-3">Rp.<?= rupiah($pemesanan['total_biaya']) ?></span>
                                         <span class="d-block mb-3"><?= ucfirst($pemesanan['status']) ?></span>
                                         <?php if ($pemesanan['status'] == "belum bayar") : ?>
                                             <span class="d-block mb-3"><?= $pemesanan['batas_pembayaran'] ?></span>

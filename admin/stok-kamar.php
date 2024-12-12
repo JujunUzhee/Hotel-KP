@@ -56,7 +56,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                 <div class="container-fluid p-5">
 
                     <button class="btn fs-4 text-center d-block m-auto position-relative">
-                        Superior
+                        Standard
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-primary">
                             <?= count($dataKamarSuperior) ?>
                         </span>
@@ -118,10 +118,10 @@ $hotel = query("SELECT * FROM identitas")[0];
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="#">Dimas Candra</a>.</strong>
+            <strong>Copyright &copy; 2014-2021 <a href="#">Hotel Rahayu</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.1.0
+                <b>Version</b> 5.1.0
             </div>
         </footer>
 

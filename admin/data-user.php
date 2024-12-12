@@ -60,7 +60,7 @@ if ($data['role'] == "resepsionis") {
             <section class="content">
                 <div class="container-fluid">
 
-                    <h5 class="text-center">Petugas</h5>
+                    <h5 class="text-center">Resepsionis</h5>
 
 
 
@@ -97,7 +97,7 @@ if ($data['role'] == "resepsionis") {
                         <?php endforeach; ?>
                     </div>
 
-                    <h5 class="text-center mt-5">Pelanggan</h5>
+                    <h5 class="text-center mt-5">User</h5>
                     <div class="row mt-3">
                         <?php foreach ($dataPelanggan as $pelanggan) : ?>
                             <div class="col-md-6">
@@ -145,10 +145,10 @@ if ($data['role'] == "resepsionis") {
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="#">Dimas Candra</a>.</strong>
+            <strong>Copyright &copy; 2014-2021 <a href="#">Hotel Rahayu</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.1.0
+                <b>Version</b> 5.1.0
             </div>
         </footer>
 
