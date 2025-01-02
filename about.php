@@ -26,7 +26,7 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center w-100">
                 <div class="card shadow border-0 mt-5">
-                    <div  style="background-image: url('https://picsum.photos/1200/400'); height: 400px; background-size: cover; background-position: center; border-radius: 0.5rem;"></div>
+                    <div  style="background-image: url('./img/dua.jpg'); height: 400px; background-size: cover; background-position: center; border-radius: 0.5rem;"></div>
                 </div>
             </div>
         </div>
@@ -35,15 +35,34 @@ $sosialMedia = query("SELECT * FROM sosial_media")[0];
 <div class="container py-5">
     <div class="row justify-content-center ">
         <div class="col-lg-10 text-center ">
-            <h1 class="fw-bold mb-4 text-uppercase">Tentang Kami</h1>
+            <h2 class="fw-bold mb-4 text-uppercase typing">Tentang Kami</h2>
             <p class="lead text-center" style="font-size: 18px; line-height: 1.8;"><?= $hotel['nama_hotel'] ?> <?= $hotel['tentang'] ?></p>
         </div>
     </div>
 
+    <!-- Visi dan Misi -->
+<div class="container py-5 mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-5 mx-3">
+            <h2 class="fw-bold text-uppercase text-center">Visi</h2>
+            <p class="lead text-center" style="font-size: 18px; line-height: 1.8;">
+            Memberikan pelayanan yang terbaik kepada para tamu. Visi ini menjadi pedoman dalam setiap aspek operasional dan pelayanan yang ditawarkan.
+            </p>
+        </div>
+        <div class="col-lg-5 mx-3">
+            <h2 class="fw-bold text-uppercase text-center ">Misi</h2>
+            <ul class="list-unstyled text-center" style="font-size: 18px; line-height: 1.8;">
+               <p class="lead text-center" style="font-size: 18px; line-height: 1.8;">memprioritaskan kenyamanan setiap tamu yang menginap. Dengan fokus pada kenyamanan, Hotel Rahayu berkomitmen untuk menyediakan fasilitas yang memadai dan pelayanan yang ramah serta profesional.</p>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
 
 <!-- Struktur Organisasi -->
-<div class="container mt-5">
-    <h3 class="text-center fw-bold mb-4 text-uppercase">Struktur Hotel Rahayu</h3>
+<div class="container mt-5 text-center">
+    <h2 class=" fw-bold mb-4 text-uppercase typing">Struktur Hotel Rahayu</h2>
     <div class="d-flex justify-content-center mt-5">
         <img src="./img/Stuktur.png" alt="Struktur Hotel Rahayu" class="img-fluid  custom-responsive">
     </div>

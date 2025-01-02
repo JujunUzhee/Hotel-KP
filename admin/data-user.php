@@ -97,7 +97,7 @@ if ($data['role'] == "resepsionis") {
                         <?php endforeach; ?>
                     </div>
 
-                    <h5 class="text-center mt-5">User</h5>
+                    <h5 class="text-center mt-5">Tamu</h5>
                     <div class="row mt-3">
                         <?php foreach ($dataPelanggan as $pelanggan) : ?>
                             <div class="col-md-6">
@@ -145,7 +145,7 @@ if ($data['role'] == "resepsionis") {
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="#">Hotel Rahayu</a>.</strong>
+            <strong>Copyright &copy; 2024 <a href="#">Hotel Rahayu</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 5.1.0

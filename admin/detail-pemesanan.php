@@ -15,8 +15,21 @@ include "../logic/functions.php";
 $id = $_SESSION['id'];
 $data = query("SELECT * FROM pegawai WHERE id = '$id'")[0];
 
-$pemesanan = query("SELECT * FROM pemesanan WHERE id = '$idPemesanan'")[0];
+$pemesanan = query("SELECT * FROM pemesanan WHERE id = '$idPemesanan'");
+if (!$pemesanan || count($pemesanan) == 0) {
+    echo "<script>
+        alert('Data pemesanan tidak ditemukan!');
+        document.location.href = 'index.php?page=data-pesanan';
+    </script>";
+    exit;
+}
+$pemesanan = $pemesanan[0];
+
 $bukti = query("SELECT bukti FROM pembayaran WHERE id_pemesanan = '$idPemesanan'");
+if (!$bukti || count($bukti) == 0) {
+    $bukti = [];
+}
+
 $i = 1;
 $hotel = query("SELECT * FROM identitas")[0];
 
@@ -41,7 +54,7 @@ if (isset($_POST['konfir'])) {
     if ($result > 0) {
         echo "<script>
         alert('Pesanan Berhasil Diterima');
-        document.location.href = './';
+          window.location.href = window.location.href; 
         </script>";
     }
 }
@@ -50,7 +63,7 @@ if (isset($_POST['cekout'])) {
     if (checkoutPesanan($_POST) > 0) {
         echo "<script>
             alert('Checkout Berhasil');
-            document.location.href = './';
+             window.location.href = window.location.href; 
         </script>";
     } else {
         echo "<script>
@@ -121,7 +134,7 @@ if (isset($_POST['cekout'])) {
                                         <?php endif; ?>
                                     </div>
                                     <div class="col-md-5 mt-3">
-                                        <span class="d-block mb-3"><?= $pemesanan['nama_pemesan'] ?></span>
+                                    <span class="d-block mb-3"><?= isset($pemesanan['nama_pemesan']) ? $pemesanan['nama_pemesan'] : 'Data tidak tersedia' ?></span>
                                         <span class="d-block mb-3"><?= $pemesanan['alamat'] ?></span>
                                         <span class="d-block mb-3"><?= tanggal_indonesia(substr($pemesanan['tgl_pemesanan'], 0, 10)) ?></span>
                                         <span class="d-block mb-3"><?= tanggal_indonesia($pemesanan['tgl_cek_in']) ?></span>
@@ -138,11 +151,12 @@ if (isset($_POST['cekout'])) {
                                     </div>
                                     <form action="" method="POST">
                                         <input type="hidden" name="id" value="<?= $pemesanan['id'] ?>">
-                                        <input type="hidden" name="tipe-kamar" value="<?= $pemesanan['tipe_kamar'] ?>">
-                                        <input type="hidden" name="jumlah-kamar" value="<?= $pemesanan['jumlah_kamar'] ?>">
-                                        <input type="hidden" name="tgl-pemesanan" value="<?= $pemesanan['tgl_pemesanan'] ?>">
+                                        <input type="hidden" name="tipe_kamar" value="<?= $pemesanan['tipe_kamar'] ?>">
+                                        <input type="hidden" name="jumlah_kamar" value="<?= $pemesanan['jumlah_kamar'] ?>">
+                                        <input type="hidden" name="tgl_pemesanan" value="<?= $pemesanan['tgl_pemesanan'] ?>">
 
-                                        <?php if ($pemesanan['status'] == "belum dibayar" || $pemesanan['status'] == 'pending') : ?>
+                                        <?php if (isset($pemesanan['status']) && ($pemesanan['status'] == "belum dibayar" || $pemesanan['status'] == 'pending')) : ?>
+
                                             <div class="row">
                                                 <div class="col-md-6 mt-3">
                                                     <button type="submit" name="batal" class="btn btn-danger btn-block">Batalkan</button>
@@ -186,10 +200,10 @@ if (isset($_POST['cekout'])) {
         </div>
         <!-- /.content-wrapper -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="#">Dimas Candra</a>.</strong>
+            <strong>Copyright &copy; 2024 <a href="#">Hotel Rahayu</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.1.0
+                <b>Version</b> 5.1.0
             </div>
         </footer>
 

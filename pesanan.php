@@ -34,14 +34,15 @@ if (isset($_POST['checkout'])) {
     if (checkoutPesanan($_POST) > 0) {
         echo "<script>
             alert('Checkout Berhasil');
-            document.location.href = './';
+            window.location.href = window.location.href; 
         </script>";
     } else {
         echo "<script>
-        alert('Checkout Gagal');
+            alert('Checkout Gagal');
         </script>";
     }
 }
+
 
 if (isset($_POST['hapus'])) {
     if (hapusPesanan($_POST) > 0) {
@@ -74,9 +75,26 @@ $hotel = query("SELECT * FROM identitas")[0];
                 <div class="col-lg-3 mb-5">
                     <div class="card" style="width: 98%; margin: auto;">
                         <div class="card-header">
-                            <?php if ($pesanan['status'] == "check out" || $pesanan['status'] == "batal") : ?>
-                                <a onclick="return konfirmasi()" href="javascript:void(0)"><i class="fas fa-trash position-absolute text-secondary" style="right: 1rem; top: 1rem;"></i></a>
+                            <?php if ($pesanan['status'] == "check out") : ?>
+                                <!-- Icon Trash -->
+                                <a onclick="return konfirmasi('<?= $pesanan['id']; ?>')" href="javascript:void(0)">
+                                    <i class="fas fa-trash position-absolute text-secondary" style="right: 1rem; top: 1rem;"></i>
+                                </a>
+                                <!-- Icon Message for Review -->
+                                <?php if (!hasReviewForOrder($koneksi, $pesanan['id'])): ?>
+                                    <a href="form_ulasan.php?order_id=<?= $pesanan['id']; ?>">
+                                        <i class="fas fa-envelope position-absolute text-secondary" style="right: 3rem; top: 1rem;"></i>
+                                    </a>
+                                <?php endif; ?>
+
+
+                            <?php elseif ($pesanan['status'] == "batal") : ?>
+                                <!-- Icon Trash for Canceled Orders -->
+                                <a onclick="return konfirmasi('<?= $pesanan['id']; ?>')" href="javascript:void(0)">
+                                    <i class="fas fa-trash position-absolute text-secondary" style="right: 1rem; top: 1rem;"></i>
+                                </a>
                             <?php endif; ?>
+
                             <h5 class="text-center" style="font-size: 12pt;"><?= $pesanan['tipe_kamar'] ?></h5>
                             <div class="d-block text-center" style="margin-top: -.7rem;">
                                 <span class="text-muted text-center" style="font-size:8pt"><?= tanggal_indonesia(substr($pesanan['tgl_pemesanan'], 0, 10)) ?></span>
@@ -85,9 +103,9 @@ $hotel = query("SELECT * FROM identitas")[0];
                         </div>
                         <form action="" method="POST" autocomplete="off">
                             <input type="hidden" name="id" id="id" value="<?= $pesanan['id'] ?>">
-                            <input type="hidden" name="jumlah-kamar" id="jumlah-kamar" value="<?= $pesanan['jumlah_kamar']; ?>">
-                            <input type="hidden" name="tgl-pemesanan" value="<?= $pesanan['tgl_pemesanan']; ?>">
-                            <input type="hidden" name="tipe-kamar" id="tipe-kamar" value="<?= $pesanan['tipe_kamar']; ?>">
+                            <input type="hidden" name="jumlah_kamar" id="jumlah_kamar" value="<?= $pesanan['jumlah_kamar']; ?>">
+                            <input type="hidden" name="tgl_pemesanan" value="<?= $pesanan['tgl_pemesanan']; ?>">
+                            <input type="hidden" name="tipe_kamar" id="tipe_kamar" value="<?= $pesanan['tipe_kamar']; ?>">
                             <div class="card-body" style="font-size: 9pt;">
                                 <div class="row justify-content-center g-1">
                                     <div class="col-5 text-lg-end">
@@ -124,7 +142,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                         Total:
                                     </div>
                                     <div class="col-6 offset-lg-1">
-                                    Rp. <?= rupiah($pesanan['total_biaya']); ?>
+                                        Rp. <?= rupiah($pesanan['total_biaya']); ?>
                                     </div>
                                     <div class="col-12 text-center mt-3"><?= Ucfirst($pesanan['status']) ?><?= $pesanan['status'] == 'pending' ? '...' : '' ?></div>
                                 </div>
@@ -217,22 +235,22 @@ $hotel = query("SELECT * FROM identitas")[0];
                         </form>
                     </div>
                 </div>
-           
+
             <?php endforeach; ?>
         </div>
-        
+
     <?php else : ?>
         <div class="my-5">
             <h5 class="text-muted text-center">Anda belum memesan kamar</h5>
             <h5 class="text-muted text-center" style="font-size: 9pt; margin-bottom: 30rem;">*Silahkan pesan terlebih dahulu</h5>
         </div>
     <?php endif; ?>
-   
+
     </div>
-  
+
     </div>
     <?php include "layout/footer.php" ?>
-    
+
 
     <?php if (isset($_GET['pesan'])) : ?>
         <?php if ($_GET['pesan'] == "berhasil-dibatalkan") : ?>
@@ -258,34 +276,34 @@ $hotel = query("SELECT * FROM identitas")[0];
             </div>
         <?php endif; ?>
     <?php endif; ?>
- 
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         var delayInMilliseconds = 1000; //1 second
 
-        function konfirmasi() {
+        function konfirmasi(id) {
             Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: 'Apa kamu yakin?',
+                text: "Anda tidak akan dapat mengembalikannya!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Ya, Hapus!',
-                cancelButtonText: 'Batal!'
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Batal'
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire(
                         'Terhapus!',
                         'Pesanan berhasil dihapus.',
                         'success'
-                    )
+                    );
                     setTimeout(function() {
-                        document.location.href = "hapus-pesanan.php?id=<?= $pesanan['id']; ?>";
-                    }, delayInMilliseconds);
+                        document.location.href = "hapus-pesanan.php?id=" + id;
+                    }, 1000);
                 }
-            })
+            });
         }
     </script>
 </body>

@@ -77,7 +77,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label for="confirm-password">Password</label>
+                                        <label for="confirm-password">Konfirmasi Password</label>
                                         <div class="input-group" id="show_hide_password_2">
                                             <input type="password" style="background-color: #e8f0fe;" name='confirm-password'
                                                 class="form-control" value="<?= @$_SESSION['confirm-password'] ?>" required
@@ -201,6 +201,8 @@ $hotel = query("SELECT * FROM identitas")[0];
             }
         });
     });
+
+    
     </script>
 </body>
 

@@ -32,7 +32,7 @@ $hotel = query("SELECT * FROM identitas")[0];
 
     <div class="container-fluid my-5">
         <div class="row justify-content-center mt-5">
-            <div class="col-12 text-center">
+            <div class="col-12 text-center mt-5">
                 <h3>Profil</h3>
 
                 <div class="row ms-3">
@@ -107,7 +107,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                     <hr class="mb-5">
                                     <div class="row mb-5">
                                         <div class="col-12 text-center">
-                                            <a href="logic/proses-hapus-akun.php?id=<?= $dataPelanggan['id'] ?>" style="background-color: #174578;" class="btn text-white">Hapus Akun</a>
+                                            <a href="logic/proses-hapus-akun.php?id=<?= $dataPelanggan['id'] ?>" style="background-color: #FF6500;" class="btn text-white">Hapus Akun</a>
                                         </div>
                                     </div>
                                 </div>
@@ -165,10 +165,10 @@ $hotel = query("SELECT * FROM identitas")[0];
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <button style="background-color: #174578;" class="btn text-white w-100 d-block mt-4" type="submit" name="ubah">Ubah</button>
+                                                <button style="background-color: #FF6500;" class="btn text-white w-100 d-block mt-4" type="submit" name="ubah">Ubah</button>
                                             </div>
                                             <div class="col-6">
-                                                <a href="ubah-password.php" style="background-color: #174578;" class="btn text-white d-block mt-4">Ubah Password</a>
+                                                <a href="ubah-password.php" style="background-color: #FF6500;" class="btn text-white d-block mt-4">Ubah Password</a>
                                             </div>
                                         </div>
                                         <div class="row mt-3">

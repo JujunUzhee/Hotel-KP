@@ -32,7 +32,7 @@ $hotel = query("SELECT * FROM identitas")[0];
 
     <div class="container-fluid my-5">
         <div class="row justify-content-center mt-5">
-            <div class="col-12 text-center">
+            <div class="col-12 text-center mt-5">
                 <h3>Profil</h3>
 
                 <div class="row ms-3">
@@ -150,7 +150,7 @@ $hotel = query("SELECT * FROM identitas")[0];
 
                                         <div class="row">
                                             <div class="col-6">
-                                                <button type="submit" name="ubah" style="background-color: #174578" class="btn text-white d-block mt-4">Ubah Password</button>
+                                                <button type="submit" name="ubah" style="background-color: #FF6500" class="btn text-white d-block mt-4">Ubah Password</button>
                                             </div>
                                         </div>
                                         <div class="row mt-3">
@@ -194,7 +194,10 @@ $hotel = query("SELECT * FROM identitas")[0];
     <?php endif; ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
     <script>
         $(document).ready(function() {
             $("#show_hide_password a").on('click', function(event) {

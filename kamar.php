@@ -69,12 +69,14 @@ $hotel = query("SELECT * FROM identitas")[0];
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-
-        <h3 class="mt-5 text-center fw-bold">TIPE KAMAR</h3>
+        <div class="text-center mt-5">
+        <h2 class="fw-bold typing">TIPE KAMAR</h2>
         <p class="lead text-center mx-5 my-4" style="font-size: 16px; line-height: 1.8;">
             Pilihan kamar dengan fasilitas terbaik untuk kenyamanan Anda.
             Tersedia tipe Deluxe dan Standard, masing-masing memberikan pengalaman menginap yang nyaman.
         </p>
+        </div>
+        
         <div class="row  mb-5 g-5">
             <?php foreach ($data as $kamar) : ?>
                 <div class="col-12 col-lg-6">

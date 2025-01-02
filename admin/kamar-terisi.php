@@ -13,7 +13,7 @@ include "../logic/functions.php";
 
 $id = $_SESSION['id'];
 $data = query("SELECT * FROM pegawai WHERE id = '$id'")[0];
-$dataKamar = query("SELECT * FROM kamar WHERE status = 'terisi'");
+$dataKamar = query("SELECT * FROM kamar WHERE status = 'dipesan'");
 $hotel = query("SELECT * FROM identitas")[0];
 ?>
 

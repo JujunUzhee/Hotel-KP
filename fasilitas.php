@@ -60,7 +60,10 @@ $hotel = query("SELECT * FROM identitas")[0];
         </div>
 
         <!-- Fasilitas -->
-        <h1 class="mt-5 text-center fw-bold">FASILITAS</h1>
+         <div class="my-4 text-center">
+         <h1 class=" fw-bold typing">FASILITAS</h1>
+         </div>
+        
         <div class="card card-primary card-outline card-outline-tabs mb-5">
             <div class="card-header p-0 border-bottom-0 d-flex justify-content-center">
                 <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">

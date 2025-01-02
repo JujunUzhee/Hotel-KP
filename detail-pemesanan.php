@@ -98,7 +98,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-6 text-end fw-light">Harga / Malam : </div>
-                                <div class="col-6 fw-light">Rp.<?= $_POST['malam'] ?></div>
+                                <div class="col-6 fw-light">Rp.<?= $_POST['harga'] ?></div>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-6 text-end fw-light">Jumlah Kamar : </div>

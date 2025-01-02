@@ -445,38 +445,22 @@ function batalkanPesanan($data)
 {
     global $koneksi;
 
-    // Validasi input data
-    if (!isset($data['id'], $data['tipe-kamar'], $data['jumlah-kamar'], $data['tgl-pemesanan'])) {
-        return "Data pembatalan tidak lengkap.";
-    }
-
-    // Ambil data dari parameter
     $id = htmlspecialchars($data['id']);
-    $tipeKamar = htmlspecialchars($data['tipe-kamar']);
-    $jumlahKamar = htmlspecialchars($data['jumlah-kamar']);
-    $tglPemesanan = htmlspecialchars($data['tgl-pemesanan']);
+    $tipeKamar = htmlspecialchars($data['tipe_kamar']);
+    $jumlahKamar = htmlspecialchars($data['jumlah_kamar']);
+    $tglPemesanan = htmlspecialchars($data['tgl_pemesanan']);
+    $data = query("SELECT * FROM kamar WHERE tgl_pemesanan = '$tglPemesanan'");
 
-    // Cek data kamar berdasarkan tanggal pemesanan
-    $dataKamar = query("SELECT * FROM kamar WHERE tgl_pemesanan = '$tglPemesanan'");
-    if (!$dataKamar || count($dataKamar) === 0) {
-        return "Tidak ada kamar yang ditemukan untuk tanggal pemesanan ini.";
-    }
+    mysqli_query($koneksi, "UPDATE stok_kamar SET stok = stok+$jumlahKamar WHERE tipe = '$tipeKamar'");
+    mysqli_query($koneksi, "UPDATE pemesanan SET status = 'batal' WHERE id = '$id'");
 
-    // Update status kamar menjadi tersedia
-    foreach ($dataKamar as $row) {
+    foreach ($data as $row) {
         $nomorKamar = $row['no_kamar'];
         mysqli_query($koneksi, "UPDATE kamar SET status = 'tersedia', tgl_pemesanan = NULL, tgl_check_out = NULL WHERE no_kamar = '$nomorKamar'");
     }
-
-    // Update stok kamar
-    mysqli_query($koneksi, "UPDATE stok_kamar SET stok = stok + $jumlahKamar WHERE tipe = '$tipeKamar'");
-
-    // Update status pemesanan
-    mysqli_query($koneksi, "UPDATE pemesanan SET status = 'batal' WHERE id = '$id'");
-
-    // Kembalikan jumlah baris yang terpengaruh
     return mysqli_affected_rows($koneksi);
 }
+
 
 
 // ============ checkout
@@ -485,9 +469,9 @@ function checkoutPesanan($data)
     global $koneksi;
 
     $id = htmlspecialchars($data['id']);
-    $jumlahKamar = htmlspecialchars($data['jumlah-kamar']);
-    $tipeKamar = htmlspecialchars($data['tipe-kamar']);
-    $tglPemesanan = htmlspecialchars($data['tgl-pemesanan']);
+    $jumlahKamar = htmlspecialchars($data['jumlah_kamar']);
+    $tipeKamar = htmlspecialchars($data['tipe_kamar']);
+    $tglPemesanan = htmlspecialchars($data['tgl_pemesanan']);
     $data = query("SELECT * FROM kamar WHERE tgl_pemesanan = '$tglPemesanan'");
 
     foreach ($data as $row) {
@@ -502,14 +486,27 @@ function checkoutPesanan($data)
 }
 
 // ============ hapus
-function hapusPesanan($id)
-{
-    $id = $_GET['id'];
-
+function hapusPesanan($id) {
     global $koneksi;
-    mysqli_query($koneksi, "DELETE FROM pemesanan WHERE id = $id") or die(mysqli_error($koneksi));
-    return mysqli_affected_rows($koneksi);
+
+    // Validasi input ID
+    $id = intval($id); // Konversi ke integer
+    if ($id <= 0) {
+        die("ID pesanan tidak valid."); // Hentikan jika ID tidak valid
+    }
+
+    // Query hapus data
+    $query = "DELETE FROM pemesanan WHERE id = $id";
+    $result = mysqli_query($koneksi, $query);
+
+    // Cek jika query gagal
+    if (!$result) {
+        die("Query gagal: " . mysqli_error($koneksi));
+    }
+
+    return mysqli_affected_rows($koneksi); // Mengembalikan jumlah baris yang terpengaruh
 }
+
 
 
 // ========================== Akhir FUNCTION Pemesanan ==========================================================================================================
@@ -871,3 +868,49 @@ function hapusFasilitas($id)
 }
 
 // =========================== Akhir Function Data Fasilitas ============================================
+
+// ===========================  Function Ulasan Pelanggan ============================================
+
+// Fungsi untuk menyimpan ulasan pelanggan ke database
+function saveReview($koneksi, $nama, $email, $rating, $ulasan, $order_id) {
+    $nama = htmlspecialchars(trim($nama));
+    $email = htmlspecialchars(trim($email));
+    $rating = intval($rating);
+    $ulasan = htmlspecialchars(trim($ulasan));
+
+    // Validasi input
+    if (empty($nama) || empty($email) || empty($rating) || empty($ulasan)) {
+        return "Semua field harus diisi.";
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        return "Email tidak valid.";
+    }
+
+    if ($rating < 1 || $rating > 5) {
+        return "Rating harus antara 1 hingga 5.";
+    }
+
+    // Query untuk menyimpan ulasan
+    $query = "INSERT INTO reviews (order_id, customer_name, email, rating, review_text, created_at) 
+              VALUES ('$order_id', '$nama', '$email', $rating, '$ulasan', NOW())";
+
+    if (mysqli_query($koneksi, $query)) {
+        return true;
+    } else {
+        return "Gagal menyimpan ulasan: " . mysqli_error($koneksi);
+    }
+}
+
+// Fungsi untuk memeriksa apakah ulasan sudah ada untuk pesanan ini
+function hasReviewForOrder($koneksi, $order_id) {
+    $query = "SELECT COUNT(*) as count FROM reviews WHERE order_id = '$order_id'";
+    $result = mysqli_query($koneksi, $query);
+
+    if ($result && $row = mysqli_fetch_assoc($result)) {
+        return $row['count'] > 0; // Kembalikan `true` jika ulasan sudah ada
+    }
+    return false; // Kembalikan `false` jika belum ada ulasan
+}
+
+// =========================== Akhir Function Ulasan Pelanggan ============================================

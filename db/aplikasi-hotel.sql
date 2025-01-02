@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 09 Nov 2024 pada 07.26
--- Versi server: 10.4.27-MariaDB
--- Versi PHP: 8.0.25
+-- Host: localhost:3307
+-- Waktu pembuatan: 02 Jan 2025 pada 17.24
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,29 +41,20 @@ CREATE TABLE `fasilitas` (
 --
 
 INSERT INTO `fasilitas` (`id`, `tipe_kamar`, `fasilitas`, `gambar`, `deskripsi`, `harga`) VALUES
-(1, 'Standard', 'Kamar berukuran luas 32m²', '', 'Tipe kamar Superior berukuran 32m persegi.', '410000'),
-(2, 'Standard', 'Kamar mandi shower', 'kamar-mandi-shower.jpg', 'Kamar mandi tipe kamar Superior sudah menggunakan shower.', '410000'),
-(3, 'Standard', 'Saluran TV Premium', 'tv-premium.jpg', 'Jika Anda bingung ingin melakukan apa di hotel, Anda dapat menonton televisi sembari menikmati empuknya kasur yang disediakan.', '410000'),
-(4, 'Standard', 'Coffe maker', 'tea-coffee-maker.jpg', 'Kamar tipe Superior juga sudah dilengkapi dengan fasilitas Coffe Maker.', '410000'),
-(5, 'Standard', 'AC', 'ac.png', 'Tersedia AC.', '410000'),
-(6, 'Standard', 'LED TV 32 inch', 'tv-32inch.jpg', 'Sudah tersedia TV LED 32 inch.', '410000'),
-(7, 'Standard', 'Internet 4G', 'internet.jpg', 'Tersedia Wi-Fi kualitas 4G.', '410000'),
-(8, 'Standard', 'Kolam Renang 70m²', 'kolam-renang.jpg', 'kolam renang yang disediakan di hotel juga dirancang untuk menghabiskan waktu bersama keluarga.', '410000'),
-(9, 'Standard', 'Fasilitas Hotel Spa', 'spa.jpg', 'Memilih hotel dengan fasilitas spa adalah pilihan terbaik jika kamu ingin memanjakan badanmu.', '410000'),
-(10, 'Standard', 'Pusat Kebugaran', 'gym.jpg', 'Fasilitas gym yang ada di dalam Hotel Hebat dibangun khusus untuk tamu yang menginap di hotel.', '410000'),
-(11, 'Standard', 'Area Dilarang Merokok', 'no-smoking.jpg', 'Hotel menerapkan kontrak anti rokok sebagai saat check in yang akan membebankan denda besar jika pengunjung ketahuan merokok di dalam kamar.', '410000'),
-(12, 'deluxe', 'Kamar berukuran luas 45m²', 'Deluxe.jpg', 'Tipe kamar Superior berukuran 45m persegi.', '450000'),
-(13, 'deluxe', 'Kamar mandi shower dan bathtub', 'kamar-mandi-bathtub.jpg', 'Kamar mandi tipe kamar Superior sudah menggunakan shower dan juga sudah termasuk bathtub.', '450000'),
-(14, 'deluxe', 'Saluran TV Premium', 'tv-premium.jpg', 'Jika Anda bingung ingin melakukan apa di hotel, Anda dapat menonton televisi sembari menikmati empuknya kasur yang disediakan.', '450000'),
-(15, 'deluxe', 'Coffe maker', 'tea-coffee-maker.jpg', 'Kamar tipe Deluxe juga sudah dilengkapi dengan fasilitas Coffe Maker.', '450000'),
-(16, 'deluxe', 'AC', 'ac.jpg', 'Tersedia AC.', '450000'),
-(17, 'deluxe', 'LED TV 40 inch', 'tv-40inch.jpg', 'Sudah tersedia TV LED 40 inch.', '450000'),
-(18, 'deluxe', 'Internet 5G', 'internet.jpg', 'Tersedia Wi-Fi kualitas 5G.', '450000'),
-(19, 'deluxe', 'Sauna', 'sauna.jpg', 'Fasilitas yang digemari orang Jepang ini merupakan sebuah ruangan dengan suhu tinggi yang digunakan untuk membuat penggunanya berkeringat.', '450000'),
-(20, 'deluxe', 'Kolam Renang 100m²', 'kolam-renang.jpg', 'kolam renang yang disediakan di hotel juga dirancang untuk menghabiskan waktu bersama keluarga.', '450000'),
-(21, 'deluxe', 'Fasilitas Hotel Spa', 'spa.jpg', 'Memilih hotel dengan fasilitas spa adalah pilihan terbaik jika kamu ingin memanjakan badanmu.', '450000'),
-(22, 'deluxe', 'Pusat Kebugaran', 'gym.jpg', 'Fasilitas gym yang ada di dalam Hotel Hebat dibangun khusus untuk tamu yang menginap di hotel.', '450000'),
-(23, 'deluxe', 'Area Khusus Bebas Merokok', 'no-smoking.jpg', 'Hotel menerapkan kontrak anti rokok sebagai saat check in yang akan membebankan denda besar jika pengunjung ketahuan merokok di dalam kamar.', '450000');
+(12, 'deluxe', 'Kamar', 'Deluxe.jpg', 'Kamar nyaman dengan fasilitas AC,Wifi, TV, Shower dan kamar mandi air dingin &amp; air panas alami, ideal untuk penginapan praktis dan terjangkau.', '200000'),
+(13, 'deluxe', 'Kamar mandi ', '67716854e3560.jpeg', 'Dilengkapi perlengkapan mandi lengkap untuk kenyamanan Anda, termasuk handuk, sabun, sampo, dan kebutuhan lainnya.', '450000'),
+(14, 'deluxe', 'TV LCD', '67716b8ec5fc0.jpg', 'Nikmati hiburan berkualitas dengan fasilitas TV LCD yang menawarkan tampilan jernih dan berbagai saluran pilihan.', '450000'),
+(15, 'deluxe', 'AC', '677168cca2a97.jpg', 'Fasilitas AC yang sejuk dan nyaman, memastikan suasana ruangan tetap segar sepanjang hari.', '450000'),
+(21, 'deluxe', 'Wifi', '6771699a59dff.jpg', 'Akses WiFi gratis dengan koneksi cepat untuk kebutuhan browsing, streaming, dan tetap terhubung.', '450000'),
+(22, 'deluxe', 'Air DIngin &amp; Air Panas Alami', '677169ccafe26.jpg', 'Nikmati sensasi alami dengan fasilitas air dingin dan air panas langsung dari sumber alam, menyegarkan dan menenangkan.', '450000'),
+(23, 'deluxe', 'Mini Bar', '67716a7927079.jpeg', 'Fasilitas mini bar dengan tempat duduk yang nyaman, ideal untuk bersantai sambil menikmati waktu Anda di kamar.', '450000'),
+(36, 'Standard', 'Kamar', '6739f97e246a5.jpeg', 'Kamar nyaman dengan fasilitas Wifi, TV, Kipas dinding dan kamar mandi air dingin &amp; air panas alami, ideal untuk penginapan praktis dan terjangkau.', '150000'),
+(38, 'Standard', 'Air Dingin &amp; Air Panas Alami', '6771655950592.jpg', 'Nikmati sensasi alami dengan fasilitas air dingin dan air panas langsung dari sumber alam, menyegarkan dan menenangkan.', '150000'),
+(39, 'Standard', 'Kipas Dinding', '6771659bb7914.jpg', 'Fasilitas kipas dinding yang efisien untuk memberikan kenyamanan dengan sirkulasi udara yang sejuk di dalam ruangan.', '150000'),
+(40, 'Standard', 'TV LCD', '67716647707f5.jpg', 'Nikmati hiburan berkualitas dengan fasilitas TV LCD yang menawarkan tampilan jernih dan berbagai saluran pilihan.', '150000'),
+(41, 'Standard', 'Kamar Mandi', '677166c910716.jpeg', 'Dilengkapi perlengkapan mandi lengkap untuk kenyamanan Anda, termasuk handuk, sabun, sampo, dan kebutuhan lainnya.', '150000'),
+(42, 'Standard', 'Wifi', '6771696a8f670.jpg', 'Akses WiFi gratis dengan koneksi cepat untuk kebutuhan browsing, streaming, dan tetap terhubung.', '150000'),
+(43, 'deluxe', 'Shower', '67716acc03f90.jpeg', 'Nikmati kenyamanan mandi dengan fasilitas shower modern yang memberikan kesegaran maksimal di kamar mandi.', '200000');
 
 -- --------------------------------------------------------
 
@@ -88,7 +79,7 @@ CREATE TABLE `identitas` (
 --
 
 INSERT INTO `identitas` (`id`, `logo_primary`, `logo_secondary`, `nama_hotel`, `tentang`, `no_rekening`, `alamat`, `telp`, `email`) VALUES
-(2, 'logo-primary.png', 'logo-white.png', 'Hotel Rahayu', 'dikelilingi oleh keindahan pegunungan yang indah, danau dan sawah menghijau. Nikmati                     sore yang hangat dengan berenang di kolam renang dengan pemandangan matahari terbenam yang memukau; Kid\'s Club yang luas                     - menawarkan beragam fasilitas dan kegiatan anak-anak yang akan melengkapi kenyamanan keluarga. Convention Center kami,                     dilengkapi pelayanan lengkap dengan ruang konvensi terbesar di Bandung, mampu mengakomodasi hingga 3.000 delegasi.                     Manfaatkan ruang penyelenggaraan konvensi M.I.C.E ataupun mewujudkan acara pernikahan adat yang mewah', '666-666-666-666', 'Jl. Panawuan-Sangkanurip No.121, Panawuan, Kec. Cigandamekar, Kabupaten Kuningan, Jawa Barat 45556', '083809192185', 'admin@smkn1kadipaten.sch.id');
+(2, '672f1279a5961.png', '672f1279a5c9d.png', 'Hotel Rahayu', 'Hotel Rahayu adalah sebuah usaha keluarga yang didirikan oleh Ibu Tatin Surtini pada tahun 1976 dengan nama awal “Losmen Saleh.” Usaha ini awalnya berfokus pada menyediakan penginapan sederhana bagi wisatawan dan pengunjung yang datang ke wilayah Kuningan, Jawa Barat. Berlokasi di Jl. Panawuan-Sangkanurip No.121, Panawuan, Kecamatan Cigandamekar, Kabupaten Kuningan, lokasi penginapan ini sangat strategis karena dekat dengan kawasan wisata populer dan pemandian air panas Sangkanurip.', '666-666-666-666', 'Jl. Panawuan-Sangkanurip No.121, Panawuan, Kec. Cigandamekar, Kabupaten Kuningan, Jawa Barat 45556', '083809192185', 'HotelRahayu021@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -113,12 +104,11 @@ CREATE TABLE `kamar` (
 --
 
 INSERT INTO `kamar` (`id`, `id_stok_kamar`, `jenis_kamar`, `gambar`, `no_kamar`, `status`, `tgl_pemesanan`, `tgl_check_out`, `tarif`) VALUES
-(1, 1, 'Standard', 'hotel1.png', '12', 'tersedia', NULL, NULL, '120000'),
-(3, 2, 'deluxe', 'hotel2.png', '15', 'dipesan', '2024-11-06 11:51:00', '2024-11-09', '150000'),
-(36, 2, 'deluxe', 'hotel2.png', '8', 'dipesan', '2024-11-06 11:51:00', '2024-11-09', '150000'),
-(38, 2, 'deluxe', 'hotel2.png', '14', 'terisi', '2024-10-15 12:07:00', '2024-10-17', '150000'),
-(39, 1, 'Standard', 'hotel1.png', '21', 'tersedia', NULL, NULL, '120000'),
-(40, 2, 'deluxe', 'hotel2.png', '23', 'tersedia', NULL, NULL, '150000');
+(36, 2, 'deluxe', 'deluxe.png', '8', 'tersedia', NULL, NULL, '200000'),
+(40, 2, 'deluxe', 'deluxe.png', '23', 'tersedia', NULL, NULL, '200000'),
+(41, 1, 'Standard', 'superior.png', '27', 'tersedia', NULL, NULL, '150000'),
+(42, 1, 'Standard', 'superior.png', '28', 'tersedia', NULL, NULL, '150000'),
+(43, 1, 'Standard', 'superior.png', '29', 'tersedia', NULL, NULL, '150000');
 
 -- --------------------------------------------------------
 
@@ -143,7 +133,6 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id`, `foto`, `nama`, `email`, `jenis_kelamin`, `username`, `password`, `telp`, `role`) VALUES
-(8, 'default-laki-laki.png', 'jujun', 'jujun@gmail.com', 'laki-laki', 'bgjujun', '525347a7921ea6ff2bf29a38e54f5e187a4861a77e6fa12dd817346c4429a962', '21313123', 'admin'),
 (10, 'default-laki-laki.png', 'Hotel Rahayu', 'HotelRahayu021@gmail.com', 'laki-laki', 'HotelRahayu', '00793dfbf0127fa4af57be5b001eff8be8e0961594e26d54cce9f7984eb7284c', '+6285794300733', 'admin');
 
 -- --------------------------------------------------------
@@ -170,8 +159,21 @@ CREATE TABLE `pelanggan` (
 --
 
 INSERT INTO `pelanggan` (`id`, `nama`, `jenis_kelamin`, `telp`, `alamat`, `email`, `status`, `username`, `password`, `foto`) VALUES
-(14, 'Tiyas Frahesta', 'laki-laki', '97009098', 'Desa Kadipaten', 'tiiyas@gmail.com', '', 'tiiyas', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'default-laki-laki.png'),
-(19, 'jujun', 'laki-laki', '0859843434', 'jawa', 'Jujun@gmail.com', '', 'jujunz', '525347a7921ea6ff2bf29a38e54f5e187a4861a77e6fa12dd817346c4429a962', 'default-laki-laki.png');
+(19, 'jujun', 'laki-laki', '0859843434', 'Kuningan', 'Jujun@gmail.com', '', 'jujunz', '4c58362862a25c963eeb672b27eeb9bf3477b9e401fb35230b36b95d191b7072', '67711b4aa778b.jpg'),
+(20, 'Asda', 'laki-laki', '08575219880', 'Kuningan', 'asda123@gmail.com', '', 'asda12', '7c3fa52b0d1b7056a7d50568a710d5983eeb30c516c97aa7adbfaf28d832ca5d', 'default-laki-laki.png'),
+(23, 'Riski Saputra', 'laki-laki', '08756865886', 'Jln Pramuka Kuningan', 'Riski12@gmail.com', '', 'riski07', '65fc6b0632aac67e77d9c1e0b21e1f5397fc0e34f5ddceb3d123ec8a720c280c', '6776bc8154653.jpg');
+
+--
+-- Trigger `pelanggan`
+--
+DELIMITER $$
+CREATE TRIGGER `update_review_foto` AFTER UPDATE ON `pelanggan` FOR EACH ROW BEGIN
+    UPDATE reviews 
+    SET foto = NEW.foto
+    WHERE customer_name = NEW.nama;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -196,12 +198,11 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`id`, `id_pemesanan`, `tgl_pembayaran`, `nama_pembayar`, `bank`, `no_rekening`, `nama_pemilik_kartu`, `total_akhir`, `bukti`) VALUES
-(38, 116, '23 Februari 2022', 'Tiyas Frahesta', 'Mandiri', '34567243', 'asdgfsdf', '4.050.000,00', '62153a4f24e8b.jpg'),
-(39, 115, '23 Februari 2022', 'Tiyas Frahesta', 'Mandiri', '2312345435', 'asdfghbvnhfghtf', '1.800.000,00', '62153a700b795.jpg'),
-(40, 117, '23 Februari 2022', 'Tiyas Frahesta', 'Mandiri', '12321', 'terdfgsdvfs', '820.000,00', '62153a8551664.jpg'),
-(41, 119, '23 Februari 2022', 'Tiyas Frahesta', 'Mandiri', '5434234', 'fgdhesrnj', '410.000,00', '62153af4e289a.jpg'),
-(42, 123, '15 Oktober 2024', 'jujun', 'Mandiri', '4123123', 'rinal', '450.000,00', '670dfa49968ae.png'),
-(43, 124, '15 Oktober 2024', 'jujun', 'BRI', '231313', 'hhthtfr', '410.000,00', '670dfb125ba50.png');
+(46, 132, '12 Desember 2024', 'jujun', 'BCA', '123222222', 'saef', '200.000', '675adcdd8fb56.png'),
+(48, 140, '14 Desember 2024', 'jujun', 'BCA', '213332', 'sadd', '150.000', '675d59595ff31.png'),
+(49, 141, '14 Desember 2024', 'jujun', 'BCA', '21323', 'zxxz', '200.000', '675d59abda5bc.png'),
+(75, 174, '02 Januari 2025', 'Riski Saputra', 'BCA', '23123123', 'sadasdas', '200.000', '6776bb2874542.png'),
+(76, 175, '02 Januari 2025', 'Riski Saputra', 'BRI', '32131', 'asdasd', '300.000', '6776bd6fa2516.png');
 
 -- --------------------------------------------------------
 
@@ -232,17 +233,38 @@ CREATE TABLE `pemesanan` (
 --
 
 INSERT INTO `pemesanan` (`id`, `id_pelanggan`, `tgl_pemesanan`, `tgl_cek_in`, `tgl_cek_out`, `tipe_kamar`, `harga_permalam`, `jumlah_kamar`, `nama_pemesan`, `alamat`, `telp`, `durasi_menginap`, `total_biaya`, `status`, `batas_pembayaran`) VALUES
-(113, 14, '2022-02-23 02:27:00', '2022-02-24', '2022-02-28', 'Deluxe', '450.000,00', '3', 'Tiyas Frahesta', 'Desa Kadipaten', '97009098', '4', '5.400.000,00', 'belum dibayar', '2022-02-24 12:00:00'),
-(114, 14, '2022-02-23 02:28:00', '2022-02-24', '2022-02-25', 'Deluxe', '450.000,00', '4', 'Tiyas Frahesta', 'Desa Kadipaten', '97009098', '1', '1.800.000,00', 'berhasil', '2022-02-24 12:00:00'),
-(115, 14, '2022-02-23 02:28:00', '2022-02-24', '2022-02-26', 'Deluxe', '450.000,00', '2', 'Tiyas Frahesta', 'Desa Kadipaten', '97009098', '2', '1.800.000,00', 'pending', '2022-02-24 12:00:00'),
-(116, 14, '2022-02-23 02:29:00', '2022-02-24', '2022-02-27', 'Deluxe', '450.000,00', '3', 'Tiyas Frahesta', 'Desa Kadipaten', '97009098', '3', '4.050.000,00', 'pending', '2022-02-24 12:00:00'),
-(117, 14, '2022-02-23 02:29:00', '2022-02-24', '2022-02-25', 'Standard', '410.000,00', '2', 'Tiyas Frahesta', 'Desa Kadipaten', '97009098', '1', '820.000,00', 'pending', '2022-02-24 12:00:00'),
-(118, 14, '2022-02-23 02:30:00', '2022-02-24', '2022-02-28', 'Standard', '410.000,00', '3', 'Tiyas Frahesta', 'Desa Kadipaten', '97009098', '4', '4.920.000,00', 'batal', '2022-02-24 12:00:00'),
-(119, 14, '2022-02-23 02:34:00', '2022-02-24', '2022-02-25', 'Standard', '410.000,00', '1', 'Tiyas Frahesta', 'Desa Kadipaten', '97009098', '1', '410.000,00', 'pending', '2022-02-24 12:00:00'),
-(122, 19, '2024-10-13 20:25:00', '2024-10-16', '2024-10-18', 'Standard', '820.000', '1', 'jujun', 'jawa', '0859843434', '2', '820.000,00', 'batal', '2024-10-14 12:00:00'),
-(123, 19, '2024-10-15 12:07:00', '2024-10-16', '2024-10-17', 'Deluxe', '450.000', '1', 'jujun', 'oleced bagian timur', '0859843434', '1', '450.000,00', 'batal', '2024-10-16 12:00:00'),
-(124, 19, '2024-10-15 12:17:00', '2024-10-16', '2024-10-17', 'Standard', '410.000', '1', 'jujun', 'jawa', '0859843434', '1', '410.000,00', 'check out', '2024-10-16 12:00:00'),
-(125, 19, '2024-11-06 11:51:00', '2024-11-07', '2024-11-09', 'Deluxe', '1.800.000', '2', 'jujun', 'jawa', '0859843434', '2', '1.800.000,00', 'belum dibayar', '2024-11-07 12:00:00');
+(158, 20, '2024-12-24 22:24:00', '2024-12-25', '2024-12-26', 'Deluxe', '200.000', '1', 'Asda', 'Kuningan', '08575219880', '1', '200.000,00', 'check out', '2024-12-25 12:00:00'),
+(173, 19, '2025-01-02 22:46:00', '2025-01-03', '2025-01-04', 'Standard', '300.000', '2', 'jujun', 'Kuningan', '0859843434', '1', '300.000,00', 'batal', '2025-01-03 12:00:00'),
+(174, 23, '2025-01-02 23:13:00', '2025-01-03', '2025-01-04', 'Deluxe', '200.000', '1', 'Riski Saputra', 'Jln Pramuka Kuningan', '08756865886', '1', '200.000,00', 'check out', '2025-01-03 12:00:00'),
+(175, 23, '2025-01-02 23:22:00', '2025-01-03', '2025-01-04', 'Standard', '300.000', '2', 'Riski Saputra', 'Jln Pramuka Kuningan', '08756865886', '1', '300.000,00', 'check out', '2025-01-03 12:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `review_id` int(11) NOT NULL,
+  `customer_name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `rating` int(11) NOT NULL CHECK (`rating` between 1 and 5),
+  `review_text` text NOT NULL,
+  `created_at` datetime DEFAULT current_timestamp(),
+  `order_id` int(11) NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `foto` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `reviews`
+--
+
+INSERT INTO `reviews` (`review_id`, `customer_name`, `email`, `rating`, `review_text`, `created_at`, `order_id`, `customer_id`, `foto`) VALUES
+(12, 'jujun', 'Jujun@gmail.com', 5, 'Nyaman Sekali Hotelnya', '2024-12-24 22:13:45', 157, 19, '67711b4aa778b.jpg'),
+(13, 'Asda', 'asda123@gmail.com', 5, 'Fasiltas Sangat Memadai', '2024-12-24 22:26:29', 158, 20, 'default-laki-laki.png'),
+(14, 'jujun', 'Jujun@gmail.com', 5, 'Tempat tidur yang nyaman', '2024-12-29 22:37:54', 161, 19, '67711b4aa778b.jpg'),
+(15, 'Riski Saputra', 'Riski12@gmail.com', 5, 'Sangat Nyaman Sekali', '2025-01-02 23:14:36', 174, NULL, '6776bc8154653.jpg');
 
 -- --------------------------------------------------------
 
@@ -284,8 +306,8 @@ CREATE TABLE `stok_kamar` (
 --
 
 INSERT INTO `stok_kamar` (`id_stok_kamar`, `tipe`, `gambar`, `jumlah_kamar`, `stok`) VALUES
-(1, 'Standard', 'superior.png', '11', '3'),
-(2, 'Deluxe', 'deluxe.png', '16', '1');
+(1, 'Standard', 'superior.png', '14', '3'),
+(2, 'Deluxe', 'deluxe.png', '16', '2');
 
 --
 -- Indexes for dumped tables
@@ -337,6 +359,13 @@ ALTER TABLE `pemesanan`
   ADD KEY `id_pelanggan` (`id_pelanggan`);
 
 --
+-- Indeks untuk tabel `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`review_id`),
+  ADD KEY `customer_id` (`customer_id`);
+
+--
 -- Indeks untuk tabel `sosial_media`
 --
 ALTER TABLE `sosial_media`
@@ -356,7 +385,7 @@ ALTER TABLE `stok_kamar`
 -- AUTO_INCREMENT untuk tabel `fasilitas`
 --
 ALTER TABLE `fasilitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT untuk tabel `identitas`
@@ -368,7 +397,7 @@ ALTER TABLE `identitas`
 -- AUTO_INCREMENT untuk tabel `kamar`
 --
 ALTER TABLE `kamar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT untuk tabel `pegawai`
@@ -380,19 +409,25 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+
+--
+-- AUTO_INCREMENT untuk tabel `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT untuk tabel `sosial_media`
@@ -421,6 +456,12 @@ ALTER TABLE `kamar`
 --
 ALTER TABLE `pemesanan`
   ADD CONSTRAINT `pemesanan_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id`);
+
+--
+-- Ketidakleluasaan untuk tabel `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `pelanggan` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

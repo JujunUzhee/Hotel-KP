@@ -106,7 +106,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                     </div>
                                     <div class="row p-3">
                                         <div class="col-6 text-center">
-                                            <a href="../logic/ubah-fasilitas.php?id=<?= $deluxe['id'] ?>" class="btn w-100 btn-success">Ubah</a>
+                                            <a href="ubah-fasilitas.php?id=<?= $deluxe['id'] ?>" class="btn w-100 btn-success">Ubah</a>
                                         </div>
                                         <div class="col-6 text-center">
                                             <a href="../logic/proses-hapus-fasilitas.php?id=<?= $deluxe['id'] ?>" class="btn w-100 btn-danger">Hapus</a>

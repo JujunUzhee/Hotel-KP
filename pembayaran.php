@@ -73,6 +73,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                 <option value="BCA">BCA</option>
                                 <option value="BRI">BRI</option>
                                 <option value="BNI">BNI</option>
+                                <option value="BNI">Lainnya</option>
                             </select>
                         </div>
                     </div>

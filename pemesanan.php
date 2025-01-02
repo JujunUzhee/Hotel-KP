@@ -74,7 +74,7 @@ $hotel = query("SELECT * FROM identitas")[0];
         <div class="m-auto rounded-3">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-10 card">
-                    <img src="img/fasilitas/<?= $gambar ? "$gambar" : "hotel.jpg" ?>"  class="d-block m-auto mt-3 img-thumbnail img-fluid" style="max-width: 350px;">
+                    <img src="img/fasilitas/<?= $gambar ? "$gambar" : "hotel.jpg" ?>" class="d-block m-auto mt-3 img-thumbnail img-fluid" style="max-width: 350px;">
                     <form action="detail-pemesanan.php" method="post" autocomplete="off">
                         <div class="container">
                             <div class="row mt-5 justify-content-center">
@@ -89,7 +89,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                     <div class="row justify-content-center mb-4">
                                         <div class="col-lg-9">
                                             <label for="nomor-kamar-<?= $i; ?>" class="form-label">Kamar Nomor</label>
-                                            <select name="nomor-kamar-<?= $i; ?>" id="nomor-kamar-<?= $i; ?>" class="form-select" required>
+                                            <select name="nomor-kamar-<?= $i; ?>" id="nomor-kamar-<?= $i; ?>" class="form-select kamar-select" required>
                                                 <option value="" selected disabled>Pilih Nomor Kamar</option>
                                                 <?php foreach ($nomorKamar as $noKamar) : ?>
                                                     <option value="<?= $noKamar['no_kamar'] ?>"><?= $noKamar['no_kamar'] ?></option>
@@ -106,7 +106,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                         <label for="harga" class="form-label">Harga / Malam</label>
                                         <div class="input-group">
                                             <span class="input-group-text">Rp</span>
-                                            <input required readonly name="malam" type="text" class="form-control" id="harga" placeholder="Harga Kamar perhari" onfocus="sum();" value="<?= rupiah($hargaAwal) ?>">
+                                            <input required readonly name="harga" type="text" class="form-control" id="harga" placeholder="Harga Kamar perhari" onfocus="sum();" value="<?= rupiah($hargaAwal) ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                 <div class="row justify-content-center mb-4">
                                     <div class="col-lg-9">
                                         <label for="telp" class="form-label">No. Telepon</label>
-                                        <input required name="telp" type="tel" class="form-control" id="telp" placeholder="No Telepon" value="<?= $dataPelanggan['telp']; ?>">
+                                        <input required name="telp" type="tel" class="form-control" id="telp" placeholder="No Telepon" value="<?= $dataPelanggan['telp']; ?>" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                                     </div>
                                 </div>
                                 <!-- Check-In -->
@@ -185,57 +185,69 @@ $hotel = query("SELECT * FROM identitas")[0];
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
         function rubah(angka) {
-            var reverse = angka.toString().split('').reverse().join(''),
-                ribuan = reverse.match(/\d{1,3}/g);
+            var reverse = angka.toString().split('').reverse().join('');
+            var ribuan = reverse.match(/\d{1,3}/g);
             ribuan = ribuan.join('.').split('').reverse().join('');
             return ribuan;
         }
 
         $(function() {
-            $("#cekin").datepicker({
+            $("#cekin, #cekout").datepicker({
                 dateFormat: 'yy-mm-dd'
             });
-        });
 
-        $(function() {
-            $("#cekout").datepicker({
-                dateFormat: 'yy-mm-dd'
-            });
-        });
-
-        window.onload = function() {
             $('#cekout').on('change', function() {
+                var start = $('#cekin').datepicker('getDate');
+                var end = $('#cekout').datepicker('getDate');
 
-                $(function() {
-                    $("#cekin").datepicker({
-                        dateFormat: 'dd-mm-yy'
-                    });
-                    $("#cekout").datepicker({
-                        dateFormat: 'dd-mm-yy'
-                    });
+                if (start && end) {
+                    var days = (end - start) / (1000 * 60 * 60 * 24);
+                    $('#total').val(days > 0 ? days : 0);
 
-                    var start = $('#cekin').datepicker('getDate');
-                    var end = $('#cekout').datepicker('getDate');
-                    var days = (end - start) / 1000 / 60 / 60 / 24;
-                    $('#total').val(days);
-
-                    var malam = $('#total').val();
-
+                    var malam = parseInt($('#total').val()) || 0;
                     var hargaPermalam = $('#harga').val();
-                    var harga1 = hargaPermalam.substring(0, 3);
-                    var harga2 = hargaPermalam.substring(4, 7);
+                    var jumlahKamar = parseInt($('#jumlah-kamar').val()) || 0;
 
-                    var akhirHarga = harga1 + harga2;
 
-                    var jumlahKamar = $('#jumlah-kamar').val();
+                    hargaPermalam = hargaPermalam.replace(/\./g, '');
+                    var akhirHarga = parseInt(hargaPermalam) || 0;
 
                     var total = jumlahKamar * akhirHarga * malam;
+
                     $('#hasil').val(rubah(total));
+                }
+            });
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+        const kamarSelects = document.querySelectorAll('.kamar-select');
+
+        kamarSelects.forEach(select => {
+            select.addEventListener('change', function () {
+                updateOptions();
+            });
+        });
+
+        function updateOptions() {
+            // Ambil semua nomor kamar yang sudah dipilih
+            const selectedValues = Array.from(kamarSelects).map(select => select.value);
+
+            // Update opsi di setiap select
+            kamarSelects.forEach(select => {
+                const options = select.querySelectorAll('option');
+                options.forEach(option => {
+                    if (selectedValues.includes(option.value) && option.value !== select.value) {
+                        option.disabled = true; // Nonaktifkan opsi yang sudah dipilih
+                    } else {
+                        option.disabled = false; // Aktifkan opsi lainnya
+                    }
                 });
             });
         }
-        // alert(akhirHarga * jumlahKamar);
+    });
     </script>
+
 </body>
 
 </html>

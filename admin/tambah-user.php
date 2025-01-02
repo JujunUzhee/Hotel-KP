@@ -94,7 +94,7 @@ if (isset($_POST['tambah'])) {
                                 <div class="col-lg-6">
                                     <input required style="background-color: #e8f0fe;" type="email" class="form-control"
                                         value="<?= @$_SESSION['email'] ?>" name="email" id="email"
-                                        placeholder="cth: dimasbomz13@gmail.com">
+                                        placeholder="cth: HotelRahayu1@gmail.com">
                                 </div>
                             </div>
 
