@@ -150,6 +150,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                             <?php if ($pesanan['status'] == 'belum dibayar') : ?>
                                 <div class="row justify-content-center text-center" style="font-size: 10pt;">
                                     <div class="col-12">Tranfer Ke Rekening: <?= $hotel['no_rekening'] ?></div>
+                                    <div class="col-12">UWAISY AL QORNI | Mandiri</div>
                                 </div>
 
                                 <div class="row my-2 mt-3" style="font-size: 10pt;">
