@@ -14,10 +14,13 @@ include "../logic/functions.php";
 $id = $_SESSION['id'];
 $data = query("SELECT * FROM pegawai WHERE id = '$id'")[0];
 
-$dataKamar = query("SELECT * FROM kamar ORDER BY no_kamar ASC");
+$dataKamar = query("SELECT * FROM kamar ORDER BY tarif ASC");
 $hotel = query("SELECT * FROM identitas")[0];
 $i = 1;
 ?>
+
+
+
 
 <?php include 'layout/atas.php' ?>
 
@@ -59,6 +62,9 @@ $i = 1;
                         <div class="card-header">
                             <h3 class="card-title">Data Kamar</h3>
                         </div>
+                        <?php if (isset($_GET['pesan']) && $_GET['pesan'] === 'berhasil'): ?>
+                            <div class="alert alert-success">Status kamar berhasil diperbarui!</div>
+                        <?php endif; ?>
                         <?php if (count($dataKamar) > 0) : ?>
                             <div class="card-body">
                                 <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
@@ -79,9 +85,15 @@ $i = 1;
                                                         <tr class="text-center bg-white">
                                                             <td><?= $i++; ?></td>
                                                             <td><?= ucfirst($kamar['jenis_kamar']) ?></td>
-                                                            <td><?= intval($kamar['no_kamar']) ?></td>
+                                                            <td><?= $kamar['no_kamar'] ?></td>
                                                             <td><?= $kamar['status'] ?></td>
                                                             <td><?= $kamar['tarif'] ?></td>
+                                                            <td>
+                                                                <a href="edit-status.php?id=<?= $kamar['id'] ?>" class="btn btn-primary btn-sm text-white">
+                                                                    <i class="fas fa-pencil-alt"></i>
+                                                                </a>
+
+                                                            </td>
                                                         </tr>
                                                     <?php endforeach; ?>
                                                 </tbody>

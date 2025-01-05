@@ -215,7 +215,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                             <?php if ($pesanan['status'] == "berhasil") : ?>
                                 <div class="row my-2">
                                     <h5 class="text-muted text-center" style="font-size: 10pt;">Kamar berhasil dipesan</h5>
-                                    <h5 class="text-muted text-center" style="font-size: 7pt;">*Kami tunggu kedatangannya pada <?= tanggal_indonesia($pesanan['tgl_cek_in']) ?> Jam 12.00 Siang </h5>
+                                    <h5 class="text-muted text-center" style="font-size: 7pt;">*Kami tunggu kedatangannya pada tanggal <?= tanggal_indonesia($pesanan['tgl_cek_in']) ?> *</h5>
                                     <form action="" method="POST">
                                         <input type="hidden" name="id" value="<?= $pesanan['id']; ?>">
                                         <input type="hidden" name="jumlah-kamar" value="<?= $pesanan['jumlah_kamar']; ?>">

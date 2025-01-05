@@ -13,7 +13,7 @@ include "layout/cookie.php";
 $id = $_SESSION['id'];
 $stokKamar = query("SELECT * FROM stok_kamar WHERE tipe = '$tipeKamar'")[0]['stok'];
 $idKamar = query("SELECT * FROM kamar WHERE jenis_kamar = '$tipeKamar'");
-$nomorKamar = query("SELECT no_kamar FROM kamar WHERE jenis_kamar = '$tipeKamar' AND status = 'tersedia'");
+$nomorKamar = query("SELECT no_kamar, tarif FROM kamar WHERE jenis_kamar = '$tipeKamar' AND status = 'tersedia'");
 $dataPelanggan = query("SELECT * FROM pelanggan WHERE id = '$id'")[0];
 $jumlahKamar = $_POST['jumlah-kamar'];
 $hotel = query("SELECT * FROM identitas")[0];
@@ -84,21 +84,29 @@ $hotel = query("SELECT * FROM identitas")[0];
                                         <input required readonly name="tipe-kamar" type="text" class="form-control" placeholder="Tipe Kamar" value="<?= $tipeKamar; ?>">
                                     </div>
                                 </div>
-                                <!-- Nomor Kamar -->
-                                <?php for ($i = 1; $i <= intval($jumlahKamar); $i++) : ?>
-                                    <div class="row justify-content-center mb-4">
-                                        <div class="col-lg-9">
-                                            <label for="nomor-kamar-<?= $i; ?>" class="form-label">Kamar Nomor</label>
-                                            <select name="nomor-kamar-<?= $i; ?>" id="nomor-kamar-<?= $i; ?>" class="form-select kamar-select" required>
-                                                <option value="" selected disabled>Pilih Nomor Kamar</option>
-                                                <?php foreach ($nomorKamar as $noKamar) : ?>
-                                                    <option value="<?= $noKamar['no_kamar'] ?>"><?= $noKamar['no_kamar'] ?></option>
-                                                <?php endforeach; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                <?php endfor; ?>
 
+                                <!-- Nomor Kamar -->
+                                <?php
+                                $jumlahKamar = intval($_POST['jumlah-kamar']); 
+                                ?>
+                                <div id="nomor-kamar-container">
+                                    <?php for ($i = 1; $i <= $jumlahKamar; $i++) : ?>
+                                        <!-- Nomor Kamar -->
+                                        <div class="row justify-content-center mb-4">
+                                            <div class="col-lg-9">
+                                                <label for="nomor-kamar-<?= $i; ?>" class="form-label">No Kamar <?= $i; ?></label>
+                                                <select name="nomor-kamar[]" id="nomor-kamar-<?= $i; ?>" class="form-select kamar-select" required>
+                                                    <option value="" selected disabled>Pilih Nomor Kamar</option>
+                                                    <?php foreach ($nomorKamar as $noKamar) : ?>
+                                                        <option value="<?= htmlspecialchars($noKamar['no_kamar']); ?>" data-harga="<?= htmlspecialchars($noKamar['tarif']); ?>">
+                                                            <?= htmlspecialchars($noKamar['no_kamar']); ?>
+                                                        </option>
+                                                    <?php endforeach; ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    <?php endfor; ?>
+                                </div>
 
                                 <!-- Harga / Malam -->
                                 <div class="row justify-content-center mb-4">
@@ -106,11 +114,10 @@ $hotel = query("SELECT * FROM identitas")[0];
                                         <label for="harga" class="form-label">Harga / Malam</label>
                                         <div class="input-group">
                                             <span class="input-group-text">Rp</span>
-                                            <input required readonly name="harga" type="text" class="form-control" id="harga" placeholder="Harga Kamar perhari" onfocus="sum();" value="<?= rupiah($hargaAwal) ?>">
+                                            <input required readonly name="harga" type="text" class="form-control" id="harga" placeholder="Harga Kamar per malam">
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- Jumlah Kamar -->
                                 <div class="row justify-content-center mb-4">
                                     <div class="col-lg-9">
@@ -184,59 +191,62 @@ $hotel = query("SELECT * FROM identitas")[0];
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script>
-        function rubah(angka) {
-            var reverse = angka.toString().split('').reverse().join('');
-            var ribuan = reverse.match(/\d{1,3}/g);
-            ribuan = ribuan.join('.').split('').reverse().join('');
-            return ribuan;
-        }
+    function rubah(angka) {
+        var reverse = angka.toString().split('').reverse().join('');
+        var ribuan = reverse.match(/\d{1,3}/g);
+        ribuan = ribuan.join('.').split('').reverse().join('');
+        return ribuan;
+    }
 
-        $(function() {
-            $("#cekin, #cekout").datepicker({
-                dateFormat: 'yy-mm-dd'
-            });
+    $(function() {
+        // Inisialisasi datepicker
+        $("#cekin, #cekout").datepicker({
+            dateFormat: 'yy-mm-dd',
+            minDate: 0 // Tanggal tidak boleh sebelum hari ini
+        });
 
-            $('#cekout').on('change', function() {
-                var start = $('#cekin').datepicker('getDate');
-                var end = $('#cekout').datepicker('getDate');
+        // Fungsi untuk memperbarui harga per malam
+        function updateHargaPerMalam() {
+            let totalHarga = 0;
 
-                if (start && end) {
-                    var days = (end - start) / (1000 * 60 * 60 * 24);
-                    $('#total').val(days > 0 ? days : 0);
-
-                    var malam = parseInt($('#total').val()) || 0;
-                    var hargaPermalam = $('#harga').val();
-                    var jumlahKamar = parseInt($('#jumlah-kamar').val()) || 0;
-
-
-                    hargaPermalam = hargaPermalam.replace(/\./g, '');
-                    var akhirHarga = parseInt(hargaPermalam) || 0;
-
-                    var total = jumlahKamar * akhirHarga * malam;
-
-                    $('#hasil').val(rubah(total));
+            // Ambil semua dropdown nomor kamar
+            document.querySelectorAll('.kamar-select').forEach(select => {
+                const selectedOption = select.options[select.selectedIndex];
+                const harga = selectedOption.getAttribute('data-harga'); // Ambil harga dari data-harga
+                if (harga) {
+                    totalHarga += parseInt(harga, 10); // Tambahkan harga ke total
                 }
             });
-        });
 
+            // Update input harga per malam
+            const inputHarga = document.getElementById('harga');
+            inputHarga.value = rubah(totalHarga); // Format ke ribuan
+        }
 
-        document.addEventListener('DOMContentLoaded', function () {
-        const kamarSelects = document.querySelectorAll('.kamar-select');
+        // Fungsi untuk memperbarui total harga
+        function updateTotalHarga() {
+            const start = $('#cekin').datepicker('getDate');
+            const end = $('#cekout').datepicker('getDate');
 
-        kamarSelects.forEach(select => {
-            select.addEventListener('change', function () {
-                updateOptions();
-            });
-        });
+            if (start && end) {
+                const days = (end - start) / (1000 * 60 * 60 * 24); // Hitung jumlah malam
+                $('#total').val(days > 0 ? days : 0);
 
+                // Ambil harga per malam
+                const hargaPerMalam = parseInt(document.getElementById('harga').value.replace(/\./g, '') || 0, 10);
+                const totalHarga = hargaPerMalam * (days > 0 ? days : 0);
+
+                // Update input total harga
+                $('#hasil').val(rubah(totalHarga)); // Format ke ribuan
+            }
+        }
+
+        // Fungsi untuk memperbarui opsi di dropdown kamar
         function updateOptions() {
-            // Ambil semua nomor kamar yang sudah dipilih
-            const selectedValues = Array.from(kamarSelects).map(select => select.value);
+            const selectedValues = Array.from(document.querySelectorAll('.kamar-select')).map(select => select.value);
 
-            // Update opsi di setiap select
-            kamarSelects.forEach(select => {
-                const options = select.querySelectorAll('option');
-                options.forEach(option => {
+            document.querySelectorAll('.kamar-select').forEach(select => {
+                Array.from(select.options).forEach(option => {
                     if (selectedValues.includes(option.value) && option.value !== select.value) {
                         option.disabled = true; // Nonaktifkan opsi yang sudah dipilih
                     } else {
@@ -245,8 +255,29 @@ $hotel = query("SELECT * FROM identitas")[0];
                 });
             });
         }
+
+        // Event listener untuk perubahan nomor kamar
+        document.querySelectorAll('.kamar-select').forEach(select => {
+            select.addEventListener('change', function() {
+                updateHargaPerMalam(); // Perbarui harga per malam
+                updateTotalHarga(); // Perbarui total harga (jika tanggal sudah dipilih)
+                updateOptions(); // Perbarui opsi di dropdown
+            });
+        });
+
+        // Event listener untuk perubahan tanggal
+        $('#cekin, #cekout').on('change', function() {
+            updateTotalHarga(); // Perbarui total harga saat tanggal berubah
+        });
+
+        // Perbarui harga per malam dan opsi saat halaman dimuat
+        updateHargaPerMalam();
+        updateOptions();
     });
-    </script>
+</script>
+
+
+
 
 </body>
 

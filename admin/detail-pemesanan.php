@@ -126,7 +126,6 @@ if (isset($_POST['cekout'])) {
                                         <span class="d-block mb-3">Tipe Kamar:</span>
                                         <span class="d-block mb-3">Jumlah Kamar:</span>
                                         <span class="d-block mb-3">Durasi Menginap:</span>
-                                        <span class="d-block mb-3">Harga Permalam:</span>
                                         <span class="d-block mb-3">Total Biaya:</span>
                                         <span class="d-block mb-3">Status:</span>
                                         <?php if ($pemesanan['status'] == "belum bayar") : ?>
@@ -134,7 +133,7 @@ if (isset($_POST['cekout'])) {
                                         <?php endif; ?>
                                     </div>
                                     <div class="col-md-5 mt-3">
-                                    <span class="d-block mb-3"><?= isset($pemesanan['nama_pemesan']) ? $pemesanan['nama_pemesan'] : 'Data tidak tersedia' ?></span>
+                                        <span class="d-block mb-3"><?= isset($pemesanan['nama_pemesan']) ? $pemesanan['nama_pemesan'] : 'Data tidak tersedia' ?></span>
                                         <span class="d-block mb-3"><?= $pemesanan['alamat'] ?></span>
                                         <span class="d-block mb-3"><?= tanggal_indonesia(substr($pemesanan['tgl_pemesanan'], 0, 10)) ?></span>
                                         <span class="d-block mb-3"><?= tanggal_indonesia($pemesanan['tgl_cek_in']) ?></span>
@@ -142,7 +141,6 @@ if (isset($_POST['cekout'])) {
                                         <span class="d-block mb-3"><?= $pemesanan['tipe_kamar'] ?></span>
                                         <span class="d-block mb-3"><?= $pemesanan['jumlah_kamar'] ?></span>
                                         <span class="d-block mb-3"><?= $pemesanan['durasi_menginap'] ?> Malam</span>
-                                        <span class="d-block mb-3">Rp.<?= $pemesanan['harga_permalam'] ?></span>
                                         <span class="d-block mb-3">Rp.<?= rupiah($pemesanan['total_biaya']) ?></span>
                                         <span class="d-block mb-3"><?= ucfirst($pemesanan['status']) ?></span>
                                         <?php if ($pemesanan['status'] == "belum bayar") : ?>
@@ -156,16 +154,18 @@ if (isset($_POST['cekout'])) {
                                         <input type="hidden" name="tgl_pemesanan" value="<?= $pemesanan['tgl_pemesanan'] ?>">
 
                                         <?php if (isset($pemesanan['status']) && ($pemesanan['status'] == "belum dibayar" || $pemesanan['status'] == 'pending')) : ?>
-
                                             <div class="row">
                                                 <div class="col-md-6 mt-3">
                                                     <button type="submit" name="batal" class="btn btn-danger btn-block">Batalkan</button>
                                                 </div>
-                                                <div class="col-md-6 mt-3">
-                                                    <button type="submit" name="konfir" class="btn btn-success btn-block">Konfirmasi</button>
-                                                </div>
+                                                <?php if (count($bukti) > 0) : ?>
+                                                    <div class="col-md-6 mt-3">
+                                                        <button type="submit" name="konfir" class="btn btn-success btn-block">Konfirmasi</button>
+                                                    </div>
+                                                <?php endif; ?>
                                             </div>
                                         <?php endif; ?>
+
                                         <?php if ($pemesanan['status'] == "berhasil") : ?>
                                             <div class="row">
                                                 <div class="col-md-12 mt-3">

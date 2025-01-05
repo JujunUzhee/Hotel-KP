@@ -122,7 +122,7 @@ if ($data['role'] == "resepsionis") {
                                     <label for="tarif" class="form-label">Tarif Kamar</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input readonly type="number" class="form-control" name="tarif" value="<?= $tarif; ?>" id="tarif">
+                                    <input type="number" class="form-control" name="tarif" value="<?= $tarif; ?>" id="tarif">
                                 </div>
                             </div>
 
@@ -140,7 +140,7 @@ if ($data['role'] == "resepsionis") {
                                     <label for="no-kamar" class="form-label">Nomor Kamar</label>
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="number" class="form-control" name="no-kamar" min="<?= $nomorKamar; ?>" value="<?= $nomorKamar; ?>" id="no-kamar">
+                                    <input type="text" class="form-control" name="no-kamar" value="<?= $nomorKamar; ?>" id="no-kamar">
                                 </div>
                             </div>
 

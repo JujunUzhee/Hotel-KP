@@ -103,7 +103,7 @@ $ulasan = query("SELECT * FROM reviews ORDER BY rating DESC, created_at DESC LIM
                 <h4 class="fw-bold ">Informasi</h4>
                 <div class="mt-4">
                     <h5>Check-In</h5>
-                    <p>Jam Check-In Standar: 12.00 WIB</p>
+                    <p>Check-In tersedia 24 jam pada hari check-in</p>
                     <p class="text-muted" style="margin-top: -1.3rem;">*Waktu Check-In dari plan mempunyai prioritas lebih besar</p>
                     <h5 class="mt-4">Check-Out</h5>
                     <p>Jam Check-Out Standar: 12.00 WIB</p>

@@ -111,24 +111,28 @@ if ($data['role'] == "resepsionis") {
                                                 <div class="mb-3" style="margin-top: -.5rem;">
                                                     <h5 class="text-center pb-2" style="border-bottom: 1px solid #ccc;"><?= $pelanggan['nama'] ?></h5>
                                                 </div>
-                                                <div class="row row-cols-2 mb-1">
-                                                    <span class="card-text fw-bold">Username</span>
+                                                <div class="row row-cols-1 mb-1 ">
+                                                    <span class="card-text fw-bold">NIK : </span>
+                                                    <span class="card-text"><?= $pelanggan['nik'] ?></span>
+                                                </div>
+                                                <div class="row row-cols-1 mb-1">
+                                                    <span class="card-text fw-bold">Username : </span>
                                                     <span class="card-text"><?= $pelanggan['username'] ?></span>
                                                 </div>
-                                                <div class="row row-cols-2 mb-1">
-                                                    <span class="card-text fw-bold">Jenis Kelamin</span>
+                                                <div class="row row-cols-1 mb-1">
+                                                    <span class="card-text fw-bold">Jenis Kelamin : </span>
                                                     <span class="card-text"><?= ucfirst($pelanggan['jenis_kelamin']) ?></span>
                                                 </div>
-                                                <div class="row row-cols-2 mb-1">
-                                                    <span class="card-text fw-bold">No Handphone</span>
+                                                <div class="row row-cols-1 mb-1">
+                                                    <span class="card-text fw-bold">No Handphone : </span>
                                                     <span class="card-text"><?= $pelanggan['telp'] ?></span>
                                                 </div>
-                                                <div class="row row-cols-1 mb-1 mt-3">
-                                                    <span class="card-text fw-bold">Alamat</span>
+                                                <div class="row row-cols-1 mb-1">
+                                                    <span class="card-text fw-bold">Alamat : </span>
                                                     <span class="card-text"><?= $pelanggan['alamat'] ?></span>
                                                 </div>
                                                 <div class="row row-cols-1 mb-1">
-                                                    <span class="card-text fw-bold">Email:</span>
+                                                    <span class="card-text fw-bold">Email : </span>
                                                     <span class="card-text"><?= $pelanggan['email'] ?></span>
                                                 </div>
                                             </div>

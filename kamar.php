@@ -171,7 +171,6 @@ $hotel = query("SELECT * FROM identitas")[0];
                         icon: 'error',
                         title: 'Pesanan gagal!',
                         text: 'Tanggal Checkin tidak boleh lebih kecil dari tanggal sekarang!',
-                        footer: 'atau lebih dari jam 12 siang'
                     })
                 </script>
             </div>

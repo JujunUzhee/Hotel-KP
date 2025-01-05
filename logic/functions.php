@@ -229,16 +229,26 @@ function daftarAkun($data)
     $telp = htmlspecialchars($data['telp']);
     $alamat = htmlspecialchars($data['alamat']);
     $email = htmlspecialchars($data['email']);
+    $nik = htmlspecialchars($data['nik']); // Tambahkan NIK
     $username = strtolower(stripslashes(htmlspecialchars($data['username'])));
     $password = hash('sha256', mysqli_real_escape_string($koneksi, htmlspecialchars($data['password'])));
     $konfirmasiPassword = hash('sha256', mysqli_real_escape_string($koneksi, htmlspecialchars($data['confirm-password'])));
 
     // cek username sudah ada atau belum
     $result = mysqli_query($koneksi, "SELECT username FROM pelanggan WHERE username = '$username'");
-
     if (mysqli_fetch_assoc($result)) {
         echo "<script>
             document.location.href = './register.php?pesan=username-invalid';
+            </script>";
+        $_SESSION = $_POST;
+        return false;
+    }
+
+    // cek apakah NIK sudah ada atau belum
+    $resultNik = mysqli_query($koneksi, "SELECT nik FROM pelanggan WHERE nik = '$nik'");
+    if (mysqli_fetch_assoc($resultNik)) {
+        echo "<script>
+            document.location.href = './register.php?pesan=nik-invalid';
             </script>";
         $_SESSION = $_POST;
         return false;
@@ -253,11 +263,14 @@ function daftarAkun($data)
     }
 
     $foto = "default-" . $data['jenis-kelamin'] . ".png";
-    $query = "INSERT INTO pelanggan VALUES ('', '$nama', '$jenisKelamin', '$telp', '$alamat', '$email', '', '$username', '$password','$foto')";
+    $query = "INSERT INTO pelanggan (id, nama, nik, jenis_kelamin, telp, alamat, email, status, username, password, foto)
+    VALUES ('', '$nama', '$nik', '$jenisKelamin', '$telp', '$alamat', '$email', 'aktif', '$username', '$password', '$foto')";
+
     mysqli_query($koneksi, $query);
 
     return mysqli_affected_rows($koneksi);
 }
+
 
 // ========= ubah
 function ubahAkun($data)
@@ -395,14 +408,40 @@ function uploadProfil()
 function hapusAkun($id)
 {
     global $koneksi;
-    //menghapus gambar difolder
+
+    // Mengambil data pelanggan berdasarkan ID
     $pelanggan = query("SELECT * FROM pelanggan WHERE id = $id");
-    if ($pelanggan['gambar'] != 'default-laki-laki.jpg' && $pelanggan['gambar'] != 'default-perempuan.jpg') {
-        unlink('img/' . $pelanggan['gambar']);
+
+    // Validasi jika data pelanggan ditemukan
+    if (!empty($pelanggan)) {
+        $pelanggan = $pelanggan[0]; // Ambil elemen pertama dari hasil query
+
+        // Periksa apakah gambar bukan default, lalu hapus file gambar
+        if ($pelanggan['gambar'] != 'default-laki-laki.jpg' && $pelanggan['gambar'] != 'default-perempuan.jpg') {
+            if (file_exists('img/' . $pelanggan['gambar'])) {
+                unlink('img/' . $pelanggan['gambar']);
+            } else {
+                echo "Gambar tidak ditemukan di folder.";
+            }
+        }
+
+        // Hapus data terkait di tabel reviews
+        mysqli_query($koneksi, "DELETE FROM reviews WHERE customer_id = $id") or die(mysqli_error($koneksi));
+
+        // Hapus data terkait di tabel pemesanan
+        mysqli_query($koneksi, "DELETE FROM pemesanan WHERE id_pelanggan = $id") or die(mysqli_error($koneksi));
+
+        // Hapus data pelanggan dari database
+        mysqli_query($koneksi, "DELETE FROM pelanggan WHERE id = $id") or die(mysqli_error($koneksi));
+    } else {
+        echo "Data pelanggan tidak ditemukan.";
+        return 0; // Keluar dari fungsi
     }
-    mysqli_query($koneksi, "DELETE FROM pelanggan WHERE id = $id") or die(mysqli_error($koneksi));
+
     return mysqli_affected_rows($koneksi);
 }
+
+
 // ========================== Akhir FUNCTION Profil Pelanggan ======================================================================================================
 
 // ========================== FUNCTION Pemesanan ======================================================================================================================
@@ -914,3 +953,38 @@ function hasReviewForOrder($koneksi, $order_id) {
 }
 
 // =========================== Akhir Function Ulasan Pelanggan ============================================
+function updateStatusKamar($id, $statusBaru) {
+    global $koneksi; // Pastikan variabel koneksi global digunakan
+
+    // Ambil data kamar berdasarkan ID
+    $kamar = query("SELECT id_stok_kamar, status FROM kamar WHERE id = $id")[0];
+
+    // Ambil tipe kamar untuk stok_kamar
+    $id_stok_kamar = $kamar['id_stok_kamar'];
+    $statusLama = $kamar['status'];
+
+    // Update status kamar
+    $query = "UPDATE kamar SET status = '$statusBaru' WHERE id = $id";
+    mysqli_query($koneksi, $query);
+
+    // Update stok berdasarkan perubahan status
+    if ($statusLama !== 'tersedia' && $statusBaru === 'tersedia') {
+        // Jika kamar berubah menjadi tersedia, tambahkan stok
+        $stokQuery = "UPDATE stok_kamar SET stok = stok + 1 WHERE id_stok_kamar = $id_stok_kamar";
+    } elseif ($statusLama === 'tersedia' && ($statusBaru === 'dipesan' || $statusBaru === 'terisi')) {
+        // Jika kamar berubah dari tersedia ke dipesan atau terisi, kurangi stok
+        $stokQuery = "UPDATE stok_kamar SET stok = stok - 1 WHERE id_stok_kamar = $id_stok_kamar";
+    } else {
+        // Tidak ada perubahan stok jika status tetap atau berubah antara "dipesan" dan "terisi"
+        $stokQuery = null;
+    }
+
+    // Eksekusi query stok jika ada
+    if ($stokQuery !== null) {
+        mysqli_query($koneksi, $stokQuery);
+    }
+
+    // Kembalikan jumlah baris yang terpengaruh
+    return mysqli_affected_rows($koneksi);
+}
+

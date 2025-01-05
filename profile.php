@@ -53,6 +53,17 @@ $hotel = query("SELECT * FROM identitas")[0];
                                     <div class="row">
                                         <div class="col-12 text-center">
                                             <h5 style="font-size: 11pt;" class="fw-bold">
+                                                NIK
+                                            </h5>
+                                        </div>
+                                        <div class="col-12">
+                                            <span><?= $dataPelanggan['nik']; ?></span>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-12 text-center">
+                                            <h5 style="font-size: 11pt;" class="fw-bold">
                                                 Username
                                             </h5>
                                         </div>

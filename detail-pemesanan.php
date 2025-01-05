@@ -3,7 +3,7 @@ session_start();
 include "data-cekin.php";
 include "layout/cookie.php";
 
-$cekin = $_POST['cekin'] . " " . date("12:00:00");
+$cekin = $_POST['cekin'] . " " . date("23:59:00");
 $cekout = $_POST['cekout'];
 $hariIni = date("Y-m-d H:i:s");
 
@@ -83,7 +83,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-5">
                         <div class="card p-4">
-                            <img src="img/fasilitas/<?= $gambar ?>" class="card-img-top img-fluid" alt="<?= $gambar ?>"  style="max-height: 250px; object-fit: cover;">
+                            <img src="img/fasilitas/<?= $gambar ?>" class="card-img-top img-fluid" alt="<?= $gambar ?>" style="max-height: 250px; object-fit: cover;">
                             <div class="row justify-content-center mt-3">
                                 <div class="col-6 text-end fw-light">Tipe Kamar : </div>
                                 <div class="col-6 fw-light"><?= $_POST['tipe-kamar'] ?></div>
@@ -91,9 +91,14 @@ $hotel = query("SELECT * FROM identitas")[0];
                             <div class="row justify-content-center">
                                 <div class="col-6 text-end fw-light">Nomor Kamar : </div>
                                 <div class="col-6 fw-light">
-                                    <?php for ($i = 1; $i <= $_POST['jumlah-kamar']; $i++) : ?>
-                                        (<?= $_POST["nomor-kamar-$i"] ?>)
-                                    <?php endfor; ?>
+                                    <?php if (!empty($_POST['nomor-kamar']) && is_array($_POST['nomor-kamar'])) : ?>
+                                        <?php foreach ($_POST['nomor-kamar'] as $nomorKamar) : ?>
+                                            (<?= htmlspecialchars($nomorKamar) ?>)
+                                        <?php endforeach; ?>
+                                    <?php else : ?>
+                                        <p>Tidak ada nomor kamar yang dipilih.</p>
+                                    <?php endif; ?>
+
                                 </div>
                             </div>
                             <div class="row justify-content-center">
@@ -139,7 +144,12 @@ $hotel = query("SELECT * FROM identitas")[0];
                             <input name="id" type="hidden" value="<?= $dataPelanggan['id'] ?>">
                             <input name="tipe-kamar" type="hidden" value="<?= $_POST['tipe-kamar']; ?>">
                             <input name="tipe-kamar" type="hidden" value="<?= $_POST['tipe-kamar']; ?>">
-                            <input name="nomor-kamar-<?= $j; ?>" type="hidden" value="<?= $_POST["nomor-kamar-$j"]; ?>">
+                            <?php if (!empty($_POST['nomor-kamar']) && is_array($_POST['nomor-kamar'])) : ?>
+                                <?php foreach ($_POST['nomor-kamar'] as $index => $nomorKamar) : ?>
+                                    <input name="nomor-kamar-<?= $index + 1; ?>" type="hidden" value="<?= htmlspecialchars($nomorKamar); ?>">
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+
                             <input name="harga" type="hidden" value="<?= $_POST['harga']; ?>">
                             <input name="jumlah-kamar" type="hidden" value="<?= $_POST['jumlah-kamar'] ?>">
                             <input name="nama" type="hidden" value="<?= $_POST['nama'] ?>">
