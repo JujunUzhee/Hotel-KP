@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Waktu pembuatan: 02 Jan 2025 pada 17.24
+-- Waktu pembuatan: 05 Jan 2025 pada 13.00
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -79,7 +79,7 @@ CREATE TABLE `identitas` (
 --
 
 INSERT INTO `identitas` (`id`, `logo_primary`, `logo_secondary`, `nama_hotel`, `tentang`, `no_rekening`, `alamat`, `telp`, `email`) VALUES
-(2, '672f1279a5961.png', '672f1279a5c9d.png', 'Hotel Rahayu', 'Hotel Rahayu adalah sebuah usaha keluarga yang didirikan oleh Ibu Tatin Surtini pada tahun 1976 dengan nama awal “Losmen Saleh.” Usaha ini awalnya berfokus pada menyediakan penginapan sederhana bagi wisatawan dan pengunjung yang datang ke wilayah Kuningan, Jawa Barat. Berlokasi di Jl. Panawuan-Sangkanurip No.121, Panawuan, Kecamatan Cigandamekar, Kabupaten Kuningan, lokasi penginapan ini sangat strategis karena dekat dengan kawasan wisata populer dan pemandian air panas Sangkanurip.', '666-666-666-666', 'Jl. Panawuan-Sangkanurip No.121, Panawuan, Kec. Cigandamekar, Kabupaten Kuningan, Jawa Barat 45556', '083809192185', 'HotelRahayu021@gmail.com');
+(2, '672f1279a5961.png', '672f1279a5c9d.png', 'Hotel Rahayu', 'Hotel Rahayu adalah sebuah usaha keluarga yang didirikan oleh Ibu Tatin Surtini pada tahun 1976 dengan nama awal “Losmen Saleh.” Usaha ini awalnya berfokus pada menyediakan penginapan sederhana bagi wisatawan dan pengunjung yang datang ke wilayah Kuningan, Jawa Barat. Berlokasi di Jl. Panawuan-Sangkanurip No.121, Panawuan, Kecamatan Cigandamekar, Kabupaten Kuningan, lokasi penginapan ini sangat strategis karena dekat dengan kawasan wisata populer dan pemandian air panas Sangkanurip.', '1340021648554', 'Jl. Panawuan-Sangkanurip No.121, Panawuan, Kec. Cigandamekar, Kabupaten Kuningan, Jawa Barat 45556', '087739757599', 'rahayuhotel23@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -104,11 +104,36 @@ CREATE TABLE `kamar` (
 --
 
 INSERT INTO `kamar` (`id`, `id_stok_kamar`, `jenis_kamar`, `gambar`, `no_kamar`, `status`, `tgl_pemesanan`, `tgl_check_out`, `tarif`) VALUES
-(36, 2, 'deluxe', 'deluxe.png', '8', 'tersedia', NULL, NULL, '200000'),
-(40, 2, 'deluxe', 'deluxe.png', '23', 'tersedia', NULL, NULL, '200000'),
-(41, 1, 'Standard', 'superior.png', '27', 'tersedia', NULL, NULL, '150000'),
-(42, 1, 'Standard', 'superior.png', '28', 'tersedia', NULL, NULL, '150000'),
-(43, 1, 'Standard', 'superior.png', '29', 'tersedia', NULL, NULL, '150000');
+(36, 2, 'deluxe', 'deluxe.png', '19', 'tersedia', NULL, NULL, '200000'),
+(40, 2, 'deluxe', 'deluxe.png', '20', 'tersedia', NULL, NULL, '200000'),
+(41, 1, 'Standard', 'superior.png', '6', 'tersedia', NULL, NULL, '125000'),
+(45, 1, 'Standard', 'superior.png', '7', 'tersedia', NULL, NULL, '125000'),
+(46, 2, 'deluxe', 'deluxe.png', '21', 'tersedia', NULL, NULL, '200000'),
+(47, 2, 'deluxe', 'deluxe.png', '22', 'tersedia', NULL, NULL, '200000'),
+(48, 2, 'deluxe', 'deluxe.png', '23', 'tersedia', NULL, NULL, '200000'),
+(49, 2, 'deluxe', 'deluxe.png', '24', 'tersedia', NULL, NULL, '200000'),
+(50, 2, 'deluxe', 'deluxe.png', '25', 'tersedia', NULL, NULL, '200000'),
+(51, 2, 'deluxe', 'deluxe.png', '26', 'tersedia', NULL, NULL, '200000'),
+(52, 2, 'deluxe', 'deluxe.png', '27', 'tersedia', NULL, NULL, '200000'),
+(53, 2, 'deluxe', 'deluxe.png', '28', 'tersedia', NULL, NULL, '200000'),
+(54, 2, 'deluxe', 'deluxe.png', '29', 'tersedia', NULL, NULL, '200000'),
+(55, 2, 'deluxe', 'deluxe.png', '30', 'tersedia', NULL, NULL, '200000'),
+(56, 2, 'deluxe', 'deluxe.png', '31', 'tersedia', NULL, NULL, '200000'),
+(57, 2, 'deluxe', 'deluxe.png', '32', 'tersedia', NULL, NULL, '200000'),
+(58, 1, 'Standard', 'superior.png', '8', 'tersedia', NULL, NULL, '125000'),
+(59, 1, 'Standard', 'superior.png', '10', 'tersedia', NULL, NULL, '125000'),
+(60, 1, 'Standard', 'superior.png', '1', 'tersedia', NULL, NULL, '150000'),
+(61, 1, 'Standard', 'superior.png', '2', 'tersedia', NULL, NULL, '150000'),
+(62, 1, 'Standard', 'superior.png', '3', 'tersedia', NULL, NULL, '150000'),
+(63, 1, 'Standard', 'superior.png', '4', 'tersedia', NULL, NULL, '150000'),
+(64, 1, 'Standard', 'superior.png', '5', 'tersedia', NULL, NULL, '150000'),
+(65, 1, 'Standard', 'superior.png', '1A', 'tersedia', NULL, NULL, '150000'),
+(66, 1, 'Standard', 'superior.png', '2A', 'tersedia', NULL, NULL, '150000'),
+(67, 1, 'Standard', 'superior.png', '3A', 'tersedia', NULL, NULL, '150000'),
+(68, 1, 'Standard', 'superior.png', '4A', 'tersedia', NULL, NULL, '150000'),
+(69, 1, 'Standard', 'superior.png', '5A', 'tersedia', NULL, NULL, '150000'),
+(70, 1, 'Standard', 'superior.png', '6A', 'tersedia', NULL, NULL, '150000'),
+(71, 1, 'Standard', 'superior.png', '12', 'tersedia', NULL, NULL, '150000');
 
 -- --------------------------------------------------------
 
@@ -133,7 +158,7 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id`, `foto`, `nama`, `email`, `jenis_kelamin`, `username`, `password`, `telp`, `role`) VALUES
-(10, 'default-laki-laki.png', 'Hotel Rahayu', 'HotelRahayu021@gmail.com', 'laki-laki', 'HotelRahayu', '00793dfbf0127fa4af57be5b001eff8be8e0961594e26d54cce9f7984eb7284c', '+6285794300733', 'admin');
+(10, 'default-laki-laki.png', 'Hotel Rahayu', 'HotelRahayu021@gmail.com', 'laki-laki', 'HotelRahayu', '00793dfbf0127fa4af57be5b001eff8be8e0961594e26d54cce9f7984eb7284c', '+6285794300712', 'admin');
 
 -- --------------------------------------------------------
 
@@ -144,6 +169,7 @@ INSERT INTO `pegawai` (`id`, `foto`, `nama`, `email`, `jenis_kelamin`, `username
 CREATE TABLE `pelanggan` (
   `id` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
+  `nik` varchar(16) NOT NULL,
   `jenis_kelamin` enum('laki-laki','perempuan') NOT NULL,
   `telp` varchar(14) NOT NULL,
   `alamat` varchar(200) NOT NULL,
@@ -153,15 +179,6 @@ CREATE TABLE `pelanggan` (
   `password` varchar(255) NOT NULL,
   `foto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `pelanggan`
---
-
-INSERT INTO `pelanggan` (`id`, `nama`, `jenis_kelamin`, `telp`, `alamat`, `email`, `status`, `username`, `password`, `foto`) VALUES
-(19, 'jujun', 'laki-laki', '0859843434', 'Kuningan', 'Jujun@gmail.com', '', 'jujunz', '4c58362862a25c963eeb672b27eeb9bf3477b9e401fb35230b36b95d191b7072', '67711b4aa778b.jpg'),
-(20, 'Asda', 'laki-laki', '08575219880', 'Kuningan', 'asda123@gmail.com', '', 'asda12', '7c3fa52b0d1b7056a7d50568a710d5983eeb30c516c97aa7adbfaf28d832ca5d', 'default-laki-laki.png'),
-(23, 'Riski Saputra', 'laki-laki', '08756865886', 'Jln Pramuka Kuningan', 'Riski12@gmail.com', '', 'riski07', '65fc6b0632aac67e77d9c1e0b21e1f5397fc0e34f5ddceb3d123ec8a720c280c', '6776bc8154653.jpg');
 
 --
 -- Trigger `pelanggan`
@@ -193,17 +210,6 @@ CREATE TABLE `pembayaran` (
   `bukti` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `pembayaran`
---
-
-INSERT INTO `pembayaran` (`id`, `id_pemesanan`, `tgl_pembayaran`, `nama_pembayar`, `bank`, `no_rekening`, `nama_pemilik_kartu`, `total_akhir`, `bukti`) VALUES
-(46, 132, '12 Desember 2024', 'jujun', 'BCA', '123222222', 'saef', '200.000', '675adcdd8fb56.png'),
-(48, 140, '14 Desember 2024', 'jujun', 'BCA', '213332', 'sadd', '150.000', '675d59595ff31.png'),
-(49, 141, '14 Desember 2024', 'jujun', 'BCA', '21323', 'zxxz', '200.000', '675d59abda5bc.png'),
-(75, 174, '02 Januari 2025', 'Riski Saputra', 'BCA', '23123123', 'sadasdas', '200.000', '6776bb2874542.png'),
-(76, 175, '02 Januari 2025', 'Riski Saputra', 'BRI', '32131', 'asdasd', '300.000', '6776bd6fa2516.png');
-
 -- --------------------------------------------------------
 
 --
@@ -228,16 +234,6 @@ CREATE TABLE `pemesanan` (
   `batas_pembayaran` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `pemesanan`
---
-
-INSERT INTO `pemesanan` (`id`, `id_pelanggan`, `tgl_pemesanan`, `tgl_cek_in`, `tgl_cek_out`, `tipe_kamar`, `harga_permalam`, `jumlah_kamar`, `nama_pemesan`, `alamat`, `telp`, `durasi_menginap`, `total_biaya`, `status`, `batas_pembayaran`) VALUES
-(158, 20, '2024-12-24 22:24:00', '2024-12-25', '2024-12-26', 'Deluxe', '200.000', '1', 'Asda', 'Kuningan', '08575219880', '1', '200.000,00', 'check out', '2024-12-25 12:00:00'),
-(173, 19, '2025-01-02 22:46:00', '2025-01-03', '2025-01-04', 'Standard', '300.000', '2', 'jujun', 'Kuningan', '0859843434', '1', '300.000,00', 'batal', '2025-01-03 12:00:00'),
-(174, 23, '2025-01-02 23:13:00', '2025-01-03', '2025-01-04', 'Deluxe', '200.000', '1', 'Riski Saputra', 'Jln Pramuka Kuningan', '08756865886', '1', '200.000,00', 'check out', '2025-01-03 12:00:00'),
-(175, 23, '2025-01-02 23:22:00', '2025-01-03', '2025-01-04', 'Standard', '300.000', '2', 'Riski Saputra', 'Jln Pramuka Kuningan', '08756865886', '1', '300.000,00', 'check out', '2025-01-03 12:00:00');
-
 -- --------------------------------------------------------
 
 --
@@ -261,9 +257,6 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`review_id`, `customer_name`, `email`, `rating`, `review_text`, `created_at`, `order_id`, `customer_id`, `foto`) VALUES
-(12, 'jujun', 'Jujun@gmail.com', 5, 'Nyaman Sekali Hotelnya', '2024-12-24 22:13:45', 157, 19, '67711b4aa778b.jpg'),
-(13, 'Asda', 'asda123@gmail.com', 5, 'Fasiltas Sangat Memadai', '2024-12-24 22:26:29', 158, 20, 'default-laki-laki.png'),
-(14, 'jujun', 'Jujun@gmail.com', 5, 'Tempat tidur yang nyaman', '2024-12-29 22:37:54', 161, 19, '67711b4aa778b.jpg'),
 (15, 'Riski Saputra', 'Riski12@gmail.com', 5, 'Sangat Nyaman Sekali', '2025-01-02 23:14:36', 174, NULL, '6776bc8154653.jpg');
 
 -- --------------------------------------------------------
@@ -285,7 +278,7 @@ CREATE TABLE `sosial_media` (
 --
 
 INSERT INTO `sosial_media` (`id`, `whatsapp`, `instagram`, `facebook`, `twitter`) VALUES
-(1, '6283809192165', 'dmscndraa', 'dmscndraaaa', 'dmscndraa');
+(1, '6287739757599', 'rahayu.hotel', 'RahayuHotel', 'rahayu.hotel');
 
 -- --------------------------------------------------------
 
@@ -306,8 +299,8 @@ CREATE TABLE `stok_kamar` (
 --
 
 INSERT INTO `stok_kamar` (`id_stok_kamar`, `tipe`, `gambar`, `jumlah_kamar`, `stok`) VALUES
-(1, 'Standard', 'superior.png', '14', '3'),
-(2, 'Deluxe', 'deluxe.png', '16', '2');
+(1, 'Standard', 'superior.png', '29', '16'),
+(2, 'Deluxe', 'deluxe.png', '28', '14');
 
 --
 -- Indexes for dumped tables
@@ -397,7 +390,7 @@ ALTER TABLE `identitas`
 -- AUTO_INCREMENT untuk tabel `kamar`
 --
 ALTER TABLE `kamar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT untuk tabel `pegawai`
@@ -409,19 +402,19 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=176;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
 
 --
 -- AUTO_INCREMENT untuk tabel `reviews`
