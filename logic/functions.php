@@ -8,6 +8,9 @@ function query($query)
 {
     global $koneksi;
     $hasil = mysqli_query($koneksi, $query);
+    if (!$hasil) {
+        die("Query error: " . mysqli_error($koneksi));
+    }
     $rows = [];
     while ($row = mysqli_fetch_assoc($hasil)) {
         $rows[] = $row;
@@ -452,7 +455,7 @@ function tambahPesanan($data)
 
     $idPelanggan = $data['id'];
     $tipeKamar = htmlspecialchars($data['tipe-kamar']);
-    $hargaPermalam = htmlspecialchars($data['harga']);
+    $hargaPermalam = htmlspecialchars($data['harga_per_malam']);
     $jumlahKamar = htmlspecialchars($data['jumlah-kamar']);
     $namaPemesan = htmlspecialchars($data['nama']);
     $alamat = htmlspecialchars($data['alamat']);
@@ -463,21 +466,134 @@ function tambahPesanan($data)
     $totalBiaya = htmlspecialchars($data['total-biaya']);
     $batasBayar = date('Y-m-d 12:00', strtotime('1 day'));
     $bayar = date('Y-m-d H:i');
+    $isDeleted = 0;
 
-
-    $query = "INSERT INTO `pemesanan` VALUES ('', '$idPelanggan', '$bayar', '$checkIn', '$checkOut', '$tipeKamar', '$hargaPermalam', '$jumlahKamar', '$namaPemesan', '$alamat', '$noTelp', '$durasiMenginap', '$totalBiaya', 'belum dibayar', '$batasBayar')";
-
+    // Ambil id kamar berdasarkan nomor kamar
+    $nomorKamarList = [];
     for ($i = 1; $i <= $jumlahKamar; $i++) {
-        $nomorKamar = htmlspecialchars($data["nomor-kamar-$i"]);
-        mysqli_query($koneksi, "UPDATE kamar SET status = 'dipesan' WHERE no_kamar = '$nomorKamar'");
-        mysqli_query($koneksi, "UPDATE kamar SET tgl_pemesanan = '$bayar' WHERE no_kamar = '$nomorKamar'");
-        mysqli_query($koneksi, "UPDATE kamar SET tgl_check_out = '$checkOut' WHERE no_kamar = '$nomorKamar'");
+        if (!isset($data["nomor-kamar-$i"])) {
+            die("Error: Nomor kamar ke-$i tidak ditemukan.");
+        }
+        $nomorKamarList[] = htmlspecialchars($data["nomor-kamar-$i"]);
     }
-    mysqli_query($koneksi, $query);
-    mysqli_query($koneksi, "UPDATE stok_kamar SET stok = stok-$jumlahKamar WHERE tipe = '$tipeKamar'");
+    $nomorKamarSql = implode("','", $nomorKamarList);
+
+    // Query untuk mendapatkan ID kamar
+    $result = mysqli_query($koneksi, "SELECT id FROM kamar WHERE no_kamar IN ('$nomorKamarSql')");
+    if (!$result) {
+        die("Query Error (SELECT id kamar): " . mysqli_error($koneksi));
+    }
+
+    // Gabungkan ID kamar menjadi string
+    $idKamarList = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $idKamarList[] = $row['id'];
+    }
+
+    // Cek apakah semua nomor kamar ditemukan
+    if (count($idKamarList) !== count($nomorKamarList)) {
+        die("Error: Tidak semua nomor kamar valid atau ditemukan.");
+    }
+
+    $idKamarStr = implode(',', $idKamarList); // Gabungkan ID kamar
+
+    // Masukkan data pemesanan
+    $query = "INSERT INTO `pemesanan` 
+              (id_pelanggan, tgl_pemesanan, tgl_cek_in, tgl_cek_out, tipe_kamar, harga_permalam, jumlah_kamar, 
+              id_kamar, nama_pemesan, alamat, telp, durasi_menginap, total_biaya, status, batas_pembayaran, is_deleted) 
+              VALUES 
+              ('$idPelanggan', '$bayar', '$checkIn', '$checkOut', '$tipeKamar', '$hargaPermalam', '$jumlahKamar', 
+              '$idKamarStr', '$namaPemesan', '$alamat', '$noTelp', '$durasiMenginap', '$totalBiaya', 
+              'belum dibayar', '$batasBayar', '$isDeleted')";
+    if (!mysqli_query($koneksi, $query)) {
+        die("Query Error (INSERT pemesanan): " . mysqli_error($koneksi));
+    }
+
+    // Perbarui status kamar
+    $updateKamarQuery = "UPDATE kamar 
+                         SET status = 'dipesan', tgl_pemesanan = '$bayar', tgl_check_out = '$checkOut' 
+                         WHERE no_kamar IN ('$nomorKamarSql')";
+    if (!mysqli_query($koneksi, $updateKamarQuery)) {
+        die("Query Error (UPDATE kamar): " . mysqli_error($koneksi));
+    }
+
+    // Perbarui stok kamar
+    $updateStokQuery = "UPDATE stok_kamar SET stok = stok-$jumlahKamar WHERE tipe = '$tipeKamar'";
+    if (!mysqli_query($koneksi, $updateStokQuery)) {
+        die("Query Error (UPDATE stok_kamar): " . mysqli_error($koneksi));
+    }
 
     return mysqli_affected_rows($koneksi);
 }
+
+
+function tambahPesananAdmin($data)
+{
+    global $koneksi;
+
+    // Mengambil data dari $data dan memprosesnya
+    $tipeKamar = htmlspecialchars($data['tipe_kamar']);
+    $hargaPermalam = htmlspecialchars($data['harga_per_malam']);
+    $jumlahKamar = htmlspecialchars($data['jumlah_kamar']);
+    $namaPemesan = htmlspecialchars($data['nama']);
+    $alamat = htmlspecialchars($data['alamat']);
+    $noTelp = htmlspecialchars($data['telp']);
+    $checkIn = htmlspecialchars($data['cekin']);
+    $checkOut = htmlspecialchars($data['cekout']);
+    $durasiMenginap = htmlspecialchars($data['durasi']);
+    $totalBiaya = htmlspecialchars($data['total_biaya']);
+    $tglPemesanan = htmlspecialchars($data['tgl_pemesanan']);
+    $status = htmlspecialchars($data['status']);
+
+    // Membuat list nomor kamar
+    $nomorKamarList = [];
+    for ($i = 1; $i <= $jumlahKamar; $i++) {
+        $nomorKamarList[] = htmlspecialchars($data["no_kamar"]);
+    }
+    $nomorKamarStr = implode("','", $nomorKamarList);
+
+    // Perbarui status kamar dalam satu query
+    $updateQuery = "UPDATE kamar 
+                    SET status = 'dipesan', tgl_pemesanan = '$tglPemesanan', tgl_check_out = '$checkOut' 
+                    WHERE no_kamar IN ('$nomorKamarStr')";
+    if (!mysqli_query($koneksi, $updateQuery)) {
+        die("Query Error (UPDATE kamar): " . mysqli_error($koneksi));
+    }
+
+    // Masukkan data pesanan
+    foreach ($nomorKamarList as $nomorKamar) {
+        $result = mysqli_query($koneksi, "SELECT id FROM kamar WHERE no_kamar = '$nomorKamar'");
+        if (!$result) {
+            die("Query Error (SELECT id): " . mysqli_error($koneksi));
+        }
+        $row = mysqli_fetch_assoc($result);
+        if (!$row) {
+            die("Error: Kamar dengan nomor '$nomorKamar' tidak ditemukan.");
+        }
+        $idKamar = $row['id'];
+
+        // Query INSERT tanpa is_deleted
+        $query = "INSERT INTO `pemesanan` 
+                  (id_kamar, tgl_pemesanan, tgl_cek_in, tgl_cek_out, tipe_kamar, harga_permalam, 
+                  jumlah_kamar, nama_pemesan, alamat, telp, durasi_menginap, total_biaya, status) 
+                  VALUES 
+                  ('$idKamar', '$tglPemesanan', '$checkIn', '$checkOut', '$tipeKamar', '$hargaPermalam', 1, 
+                  '$namaPemesan', '$alamat', '$noTelp', '$durasiMenginap', '$totalBiaya', '$status')";
+        if (!mysqli_query($koneksi, $query)) {
+            die("Query Error (INSERT): " . mysqli_error($koneksi));
+        }
+    }
+
+    // Perbarui stok kamar
+    $stokUpdateQuery = "UPDATE stok_kamar SET stok = stok - $jumlahKamar WHERE tipe = '$tipeKamar'";
+    if (!mysqli_query($koneksi, $stokUpdateQuery)) {
+        die("Query Error (UPDATE stok_kamar): " . mysqli_error($koneksi));
+    }
+
+    return mysqli_affected_rows($koneksi);
+}
+
+
 
 // ============ batal 
 function batalkanPesanan($data)
@@ -534,7 +650,28 @@ function hapusPesanan($id) {
         die("ID pesanan tidak valid."); // Hentikan jika ID tidak valid
     }
 
-    // Query hapus data
+    // Query update flag is_deleted
+    $query = "UPDATE pemesanan SET is_deleted = 1 WHERE id = $id";
+    $result = mysqli_query($koneksi, $query);
+
+    // Cek jika query gagal
+    if (!$result) {
+        die("Query gagal: " . mysqli_error($koneksi));
+    }
+
+    return mysqli_affected_rows($koneksi); // Mengembalikan jumlah baris yang terpengaruh
+}
+
+function hapusPesananAdmin($id) {
+    global $koneksi;
+
+    // Validasi input ID
+    $id = intval($id); // Konversi ke integer
+    if ($id <= 0) {
+        die("ID pesanan tidak valid."); // Hentikan jika ID tidak valid
+    }
+
+    // Query delete
     $query = "DELETE FROM pemesanan WHERE id = $id";
     $result = mysqli_query($koneksi, $query);
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3307
--- Waktu pembuatan: 05 Jan 2025 pada 13.00
+-- Waktu pembuatan: 14 Jan 2025 pada 03.51
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -118,18 +118,18 @@ INSERT INTO `kamar` (`id`, `id_stok_kamar`, `jenis_kamar`, `gambar`, `no_kamar`,
 (53, 2, 'deluxe', 'deluxe.png', '28', 'tersedia', NULL, NULL, '200000'),
 (54, 2, 'deluxe', 'deluxe.png', '29', 'tersedia', NULL, NULL, '200000'),
 (55, 2, 'deluxe', 'deluxe.png', '30', 'tersedia', NULL, NULL, '200000'),
-(56, 2, 'deluxe', 'deluxe.png', '31', 'tersedia', NULL, NULL, '200000'),
+(56, 2, 'deluxe', 'deluxe.png', '31', 'tersedia', '2025-01-09 00:00:00', '2025-01-11', '200000'),
 (57, 2, 'deluxe', 'deluxe.png', '32', 'tersedia', NULL, NULL, '200000'),
 (58, 1, 'Standard', 'superior.png', '8', 'tersedia', NULL, NULL, '125000'),
 (59, 1, 'Standard', 'superior.png', '10', 'tersedia', NULL, NULL, '125000'),
 (60, 1, 'Standard', 'superior.png', '1', 'tersedia', NULL, NULL, '150000'),
 (61, 1, 'Standard', 'superior.png', '2', 'tersedia', NULL, NULL, '150000'),
-(62, 1, 'Standard', 'superior.png', '3', 'tersedia', NULL, NULL, '150000'),
+(62, 1, 'Standard', 'superior.png', '3', 'tersedia', '2025-01-10 23:03:00', '2025-01-12', '150000'),
 (63, 1, 'Standard', 'superior.png', '4', 'tersedia', NULL, NULL, '150000'),
 (64, 1, 'Standard', 'superior.png', '5', 'tersedia', NULL, NULL, '150000'),
-(65, 1, 'Standard', 'superior.png', '1A', 'tersedia', NULL, NULL, '150000'),
+(65, 1, 'Standard', 'superior.png', '1A', 'dipesan', '2025-01-11 13:12:00', '2025-01-13', '150000'),
 (66, 1, 'Standard', 'superior.png', '2A', 'tersedia', NULL, NULL, '150000'),
-(67, 1, 'Standard', 'superior.png', '3A', 'tersedia', NULL, NULL, '150000'),
+(67, 1, 'Standard', 'superior.png', '3A', 'tersedia', '2025-01-10 23:55:00', '2025-01-12', '150000'),
 (68, 1, 'Standard', 'superior.png', '4A', 'tersedia', NULL, NULL, '150000'),
 (69, 1, 'Standard', 'superior.png', '5A', 'tersedia', NULL, NULL, '150000'),
 (70, 1, 'Standard', 'superior.png', '6A', 'tersedia', NULL, NULL, '150000'),
@@ -181,6 +181,16 @@ CREATE TABLE `pelanggan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Dumping data untuk tabel `pelanggan`
+--
+
+INSERT INTO `pelanggan` (`id`, `nama`, `nik`, `jenis_kelamin`, `telp`, `alamat`, `email`, `status`, `username`, `password`, `foto`) VALUES
+(25, 'jujunz', '1213212112222212', 'laki-laki', '08579430011', 'kuningan', 'jujun@gmail.com', 'aktif', 'jujunz', 'f18eee64b2b4f025d68ec50ac6b2b10dd67a08174dc7a66e172b3b5dbf09c6db', 'default-laki-laki.png'),
+(26, 'Muhammad Rinaldi', '', 'laki-laki', '+6285794300733', 'DUSUN III Rt16 Rw03', '', NULL, '', '', ''),
+(27, 'Muhammad Rinaldi', '', 'laki-laki', '+6285794300733', 'DUSUN III Rt16 Rw03', '', NULL, '', '', ''),
+(28, 'rinal', '1234567891211221', 'laki-laki', '085798080832', 'Oleced', 'rinal12@gmail.com', 'aktif', 'rinal', '4bd31f14db2aabe06eba0947639114a67405c7bf0ae2c390d657f8f2c176456d', 'default-laki-laki.png');
+
+--
 -- Trigger `pelanggan`
 --
 DELIMITER $$
@@ -210,6 +220,13 @@ CREATE TABLE `pembayaran` (
   `bukti` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data untuk tabel `pembayaran`
+--
+
+INSERT INTO `pembayaran` (`id`, `id_pemesanan`, `tgl_pembayaran`, `nama_pembayar`, `bank`, `no_rekening`, `nama_pemilik_kartu`, `total_akhir`, `bukti`) VALUES
+(105, 256, '11 Januari 2025', 'jujunz', 'BCA', '123242121', 'Jujun Junaedi', '300.000', '67820bd6457a0.png');
+
 -- --------------------------------------------------------
 
 --
@@ -218,7 +235,8 @@ CREATE TABLE `pembayaran` (
 
 CREATE TABLE `pemesanan` (
   `id` int(11) NOT NULL,
-  `id_pelanggan` int(11) NOT NULL,
+  `id_pelanggan` int(11) DEFAULT NULL,
+  `id_kamar` int(11) DEFAULT NULL,
   `tgl_pemesanan` datetime NOT NULL,
   `tgl_cek_in` date NOT NULL,
   `tgl_cek_out` date NOT NULL,
@@ -231,8 +249,16 @@ CREATE TABLE `pemesanan` (
   `durasi_menginap` varchar(10) NOT NULL,
   `total_biaya` varchar(25) NOT NULL,
   `status` enum('belum dibayar','batal','check out','pending','berhasil') NOT NULL,
-  `batas_pembayaran` datetime NOT NULL
+  `batas_pembayaran` datetime NOT NULL,
+  `is_deleted` tinyint(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `pemesanan`
+--
+
+INSERT INTO `pemesanan` (`id`, `id_pelanggan`, `id_kamar`, `tgl_pemesanan`, `tgl_cek_in`, `tgl_cek_out`, `tipe_kamar`, `harga_permalam`, `jumlah_kamar`, `nama_pemesan`, `alamat`, `telp`, `durasi_menginap`, `total_biaya`, `status`, `batas_pembayaran`, `is_deleted`) VALUES
+(256, 25, 65, '2025-01-11 13:12:00', '2025-01-11', '2025-01-13', 'Standard', '150.000', '1', 'jujunz', 'kuningan', '08579430011', '2', '300000', 'berhasil', '2025-01-12 12:00:00', 0);
 
 -- --------------------------------------------------------
 
@@ -257,7 +283,9 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`review_id`, `customer_name`, `email`, `rating`, `review_text`, `created_at`, `order_id`, `customer_id`, `foto`) VALUES
-(15, 'Riski Saputra', 'Riski12@gmail.com', 5, 'Sangat Nyaman Sekali', '2025-01-02 23:14:36', 174, NULL, '6776bc8154653.jpg');
+(15, 'Riski Saputra', 'Riski12@gmail.com', 5, 'Sangat Nyaman Sekali', '2025-01-02 23:14:36', 174, NULL, '6776bc8154653.jpg'),
+(16, 'jujunz', 'jujun@gmail.com', 5, 'Nyaman Sekali', '2025-01-11 12:14:21', 247, NULL, NULL),
+(17, 'rinal', 'rinal12@gmail.com', 5, 'suasana yang nyaman sekali', '2025-01-11 12:19:45', 249, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -299,7 +327,7 @@ CREATE TABLE `stok_kamar` (
 --
 
 INSERT INTO `stok_kamar` (`id_stok_kamar`, `tipe`, `gambar`, `jumlah_kamar`, `stok`) VALUES
-(1, 'Standard', 'superior.png', '29', '16'),
+(1, 'Standard', 'superior.png', '29', '15'),
 (2, 'Deluxe', 'deluxe.png', '28', '14');
 
 --
@@ -349,7 +377,9 @@ ALTER TABLE `pembayaran`
 --
 ALTER TABLE `pemesanan`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `id_pelanggan` (`id_pelanggan`);
+  ADD KEY `id_pelanggan` (`id_pelanggan`),
+  ADD KEY `id_kamar` (`id_kamar`),
+  ADD KEY `id_kamar_2` (`id_kamar`);
 
 --
 -- Indeks untuk tabel `reviews`
@@ -402,25 +432,25 @@ ALTER TABLE `pegawai`
 -- AUTO_INCREMENT untuk tabel `pelanggan`
 --
 ALTER TABLE `pelanggan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=257;
 
 --
 -- AUTO_INCREMENT untuk tabel `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT untuk tabel `sosial_media`
@@ -448,6 +478,7 @@ ALTER TABLE `kamar`
 -- Ketidakleluasaan untuk tabel `pemesanan`
 --
 ALTER TABLE `pemesanan`
+  ADD CONSTRAINT `fk_pemesanan_kamar` FOREIGN KEY (`id_kamar`) REFERENCES `kamar` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `pemesanan_ibfk_1` FOREIGN KEY (`id_pelanggan`) REFERENCES `pelanggan` (`id`);
 
 --

@@ -99,7 +99,7 @@ $ulasan = query("SELECT * FROM reviews ORDER BY rating DESC, created_at DESC LIM
                 <h2 class="fw-bold typing">HUBUNGI KAMI & INFORMASI</h2>
                 <p class="text-muted">Kami siap membantu Anda! Hubungi kami untuk informasi lebih lanjut atau pertanyaan seputar layanan dan fasilitas di Hotel Rahayu.</p>
             </div>
-            <div class="col-lg-5 bg-white p-4 text-center rounded shadow-sm me-4">
+            <div class="col-lg-5 col-12 bg-white p-4 text-center rounded shadow-sm me-lg-4 mb-4 mb-lg-0">
                 <h4 class="fw-bold ">Informasi</h4>
                 <div class="mt-4">
                     <h5>Check-In</h5>
@@ -110,7 +110,7 @@ $ulasan = query("SELECT * FROM reviews ORDER BY rating DESC, created_at DESC LIM
                     <p class="text-muted" style="margin-top: -1.3rem;">*Waktu Check-Out dari plan mempunyai prioritas lebih besar</p>
                 </div>
             </div>
-            <div class="col-lg-5 bg-white p-4 text-center rounded shadow-sm">
+            <div class="col-lg-5 col-12 bg-white p-4 text-center rounded shadow-sm">
                 <h4 class="fw-bold ">Hubungi Kami</h4>
                 <p class="text-muted mt-5"><?= $hotel['alamat'] ?></p>
                 <div class="d-flex justify-content-center mt-4">

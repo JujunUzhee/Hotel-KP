@@ -24,6 +24,19 @@ if (isset($_POST['batal'])) {
            </script>";
     }
 }
+if (isset($_POST['hapus'])) {
+    $id = $_POST['id']; // Pastikan ID pesanan dikirim melalui POST
+    if (hapusPesananAdmin($id) > 0) {
+        echo "<script>
+            alert('Pesanan Berhasil Dihapus');
+            document.location.href = '?page=data-pesanan';
+        </script>";
+    } else {
+        echo "<script>
+            alert('Pesanan Gagal Dihapus');
+        </script>";
+    }
+}
 
 $id = $_SESSION['id'];
 $data = query("SELECT * FROM pegawai WHERE id = '$id'")[0];
@@ -54,12 +67,10 @@ $hotel = query("SELECT * FROM identitas")[0];
                         <div class="col-sm-6">
                             <h1 class="m-0">Data Pesanan</h1>
                         </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                <li class="breadcrumb-item active">Data Pesanan </li>
-                            </ol>
-                        </div><!-- /.col -->
+                    
+                        <div class="col-sm-6 text-right">
+                            <a href="tambah-pesanan.php" class="btn btn-success">Tambah Pesanan</a>
+                        </div>
                     </div><!-- /.row -->
                 </div><!-- /.container-fluid -->
             </div>
@@ -68,6 +79,7 @@ $hotel = query("SELECT * FROM identitas")[0];
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+                    
                     <?php if (count($dataPemesanan) > 0) : ?>
                         <table id="table" class="table table-striped hover" style="width:100%">
                             <thead class="text-center bg-primary">
@@ -92,6 +104,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                         <td><?= ucfirst($pemesanan['status']) ?></td>
                                         <td>
                                             <a href="detail-pemesanan.php?id=<?= $pemesanan['id']; ?>" class="btn btn-primary mx-2">Detail</a>
+                                            <button type="button" class="btn btn-danger mx-2" onclick="confirmDelete(<?= $pemesanan['id']; ?>)">Hapus</button>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -127,6 +140,26 @@ $hotel = query("SELECT * FROM identitas")[0];
         $(document).ready(function() {
             $('#table').DataTable();
         });
+
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Apakah Anda yakin?',
+                text: "Anda tidak akan dapat mengembalikan ini!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, hapus!',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $('<form>', {
+                        "method": "POST",
+                        "html": '<input type="hidden" name="id" value="' + id + '"><input type="hidden" name="hapus" value="true">'
+                    }).appendTo(document.body).submit();
+                }
+            })
+        }
     </script>
 </body>
 

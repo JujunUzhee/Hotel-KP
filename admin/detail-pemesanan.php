@@ -126,6 +126,7 @@ if (isset($_POST['cekout'])) {
                                         <span class="d-block mb-3">Tipe Kamar:</span>
                                         <span class="d-block mb-3">Jumlah Kamar:</span>
                                         <span class="d-block mb-3">Durasi Menginap:</span>
+                                        <span class="d-block mb-3">Harga per Malam:</span>
                                         <span class="d-block mb-3">Total Biaya:</span>
                                         <span class="d-block mb-3">Status:</span>
                                         <?php if ($pemesanan['status'] == "belum bayar") : ?>
@@ -141,6 +142,7 @@ if (isset($_POST['cekout'])) {
                                         <span class="d-block mb-3"><?= $pemesanan['tipe_kamar'] ?></span>
                                         <span class="d-block mb-3"><?= $pemesanan['jumlah_kamar'] ?></span>
                                         <span class="d-block mb-3"><?= $pemesanan['durasi_menginap'] ?> Malam</span>
+                                        <span class="d-block mb-3">Rp.<?= rupiah($pemesanan['harga_permalam']) ?></span>
                                         <span class="d-block mb-3">Rp.<?= rupiah($pemesanan['total_biaya']) ?></span>
                                         <span class="d-block mb-3"><?= ucfirst($pemesanan['status']) ?></span>
                                         <?php if ($pemesanan['status'] == "belum bayar") : ?>

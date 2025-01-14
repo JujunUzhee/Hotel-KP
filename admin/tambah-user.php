@@ -150,7 +150,7 @@ if (isset($_POST['tambah'])) {
                                 <div class="col-lg-6">
                                     <input required style="background-color: #e8f0fe;" type="telp" class="form-control"
                                         value="<?= @$_SESSION['telp'] ?>" name="telp" id="telp"
-                                        placeholder="cth: +6283809192165">
+                                        placeholder="cth: +628123456789">
                                 </div>
                             </div>
 

@@ -3,7 +3,7 @@ session_start();
 include "data-cekin.php";
 include "layout/cookie.php";
 
-$cekin = $_POST['cekin'] . " " . date("23:59:00");
+$cekin = $_POST['cekin'] . " 23:59:00"; 
 $cekout = $_POST['cekout'];
 $hariIni = date("Y-m-d H:i:s");
 
@@ -19,10 +19,16 @@ if (!$cekValidasi) {
         </script>";
 }
 
-
 $tipeKamar = $_POST["tipe-kamar"];
 $gambar = query("SELECT gambar FROM fasilitas WHERE tipe_kamar = '$tipeKamar'")[0]['gambar'];
 $hotel = query("SELECT * FROM identitas")[0];
+
+// Calculate duration
+$durasi = (strtotime($_POST['cekout']) - strtotime($_POST['cekin'])) / (60 * 60 * 24);
+
+// Get total cost from the input
+$totalBiaya = isset($_POST['total_harga']) ? str_replace('.', '', $_POST['total_harga']) : 0; // Remove dots from formatted number
+
 ?>
 
 <!doctype html>
@@ -73,7 +79,6 @@ $hotel = query("SELECT * FROM identitas")[0];
                 </div>
             </div>
         </div>
-        </div>
     </nav>
 
     <div class="container pt-5">
@@ -103,7 +108,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-6 text-end fw-light">Harga / Malam : </div>
-                                <div class="col-6 fw-light">Rp.<?= $_POST['harga'] ?></div>
+                                <div class="col-6 fw-light">Rp.<?= $_POST['harga_per_malam'] ?></div>
                             </div>
                             <div class="row justify-content-center">
                                 <div class="col-6 text-end fw-light">Jumlah Kamar : </div>
@@ -140,26 +145,22 @@ $hotel = query("SELECT * FROM identitas")[0];
                         </div>
                     </div>
                     <form action="" method="post" autocomplete="off">
-                        <?php for ($j = 1; $j <= $_POST['jumlah-kamar']; $j++) : ?>
-                            <input name="id" type="hidden" value="<?= $dataPelanggan['id'] ?>">
-                            <input name="tipe-kamar" type="hidden" value="<?= $_POST['tipe-kamar']; ?>">
-                            <input name="tipe-kamar" type="hidden" value="<?= $_POST['tipe-kamar']; ?>">
-                            <?php if (!empty($_POST['nomor-kamar']) && is_array($_POST['nomor-kamar'])) : ?>
-                                <?php foreach ($_POST['nomor-kamar'] as $index => $nomorKamar) : ?>
-                                    <input name="nomor-kamar-<?= $index + 1; ?>" type="hidden" value="<?= htmlspecialchars($nomorKamar); ?>">
-                                <?php endforeach; ?>
-                            <?php endif; ?>
-
-                            <input name="harga" type="hidden" value="<?= $_POST['harga']; ?>">
-                            <input name="jumlah-kamar" type="hidden" value="<?= $_POST['jumlah-kamar'] ?>">
-                            <input name="nama" type="hidden" value="<?= $_POST['nama'] ?>">
-                            <input name="alamat" type="hidden" value="<?= $_POST['alamat'] ?>">
-                            <input name="telp" type="hidden" value="<?= $_POST['telp'] ?>">
-                            <input name="cekin" type="hidden" value="<?= $_POST['cekin'] ?>">
-                            <input name="cekout" type="hidden" value="<?= $_POST['cekout'] ?>">
-                            <input name="durasi" type="hidden" value="<?= $durasi; ?>">
-                            <input name="total-biaya" type="hidden" value="<?= $totalBiaya; ?>">
-                        <?php endfor; ?>
+                        <input name="id" type="hidden" value="<?= $dataPelanggan['id'] ?>">
+                        <input name="tipe-kamar" type="hidden" value="<?= $_POST['tipe-kamar']; ?>">
+                        <?php if (!empty($_POST['nomor-kamar']) && is_array($_POST['nomor-kamar'])) : ?>
+                            <?php foreach ($_POST['nomor-kamar'] as $index => $nomorKamar) : ?>
+                                <input name="nomor-kamar-<?= $index + 1; ?>" type="hidden" value="<?= htmlspecialchars($nomorKamar); ?>">
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                        <input name="harga_per_malam" type="hidden" value="<?= $_POST['harga_per_malam']; ?>">
+                        <input name="jumlah-kamar" type="hidden" value="<?= $_POST['jumlah-kamar'] ?>">
+                        <input name="nama" type="hidden" value="<?= $_POST['nama'] ?>">
+                        <input name="alamat" type="hidden" value="<?= $_POST['alamat'] ?>">
+                        <input name="telp" type="hidden" value="<?= $_POST['telp'] ?>">
+                        <input name="cekin" type="hidden" value="<?= $_POST['cekin'] ?>">
+                        <input name="cekout" type="hidden" value="<?= $_POST['cekout'] ?>">
+                        <input name="durasi" type="hidden" value="<?= $durasi; ?>">
+                        <input name="total-biaya" type="hidden" value="<?= $totalBiaya; ?>">
                         <div class="row justify-content-center mt-3">
                             <button class="w-25 btn text-white btn-lg mb-5" style="background-color: #FF6500" name="pesan" type="submit">Pesan</button>
                         </div>
@@ -187,7 +188,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                     setTimeout(pindahHalaman, 1500);
                 </script>";
         } else {
-            echo "<script>
+            echo "<script></script>
                 alert('Pesanan Gagal');
             </script>";
         }

@@ -114,7 +114,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                         <label for="harga" class="form-label">Harga / Malam</label>
                                         <div class="input-group">
                                             <span class="input-group-text">Rp</span>
-                                            <input required readonly name="harga" type="text" class="form-control" id="harga" placeholder="Harga Kamar per malam">
+                                            <input required readonly name="harga_per_malam" type="text" class="form-control" id="harga" placeholder="Harga Kamar per malam">
                                         </div>
                                     </div>
                                 </div>
@@ -169,7 +169,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                         <label for="hasil" class="form-label">Total Harga</label>
                                         <div class="input-group">
                                             <span class="input-group-text">Rp</span>
-                                            <input required readonly name="harga" type="text" class="form-control" id="hasil" placeholder="Total Harga">
+                                            <input required readonly name="total_harga" type="text" class="form-control" id="hasil" placeholder="Total Harga">
                                         </div>
                                     </div>
                                 </div>

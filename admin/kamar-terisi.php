@@ -13,7 +13,11 @@ include "../logic/functions.php";
 
 $id = $_SESSION['id'];
 $data = query("SELECT * FROM pegawai WHERE id = '$id'")[0];
-$dataKamar = query("SELECT * FROM kamar WHERE status IN ('dipesan', 'terisi')");
+$dataKamar = query("SELECT kamar.*, pemesanan.nama_pemesan 
+                    FROM kamar 
+                    LEFT JOIN pemesanan ON FIND_IN_SET(kamar.id, pemesanan.id_kamar) > 0 
+                    WHERE kamar.status IN ('dipesan', 'terisi')
+                    GROUP BY kamar.id");
 $hotel = query("SELECT * FROM identitas")[0];
 ?>
 
@@ -63,10 +67,10 @@ $hotel = query("SELECT * FROM identitas")[0];
                                     <img src="../img/fasilitas/<?= $kamar['gambar'] ?>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="text-center"><strong><?= ucfirst($kamar['jenis_kamar']) ?></strong></h5>
-
                                         <p class="card-text text-center">Status: <?= ucfirst($kamar['status']) ?></p>
                                         <p style="margin-top: -1rem;" class="card-text text-center">Harga: Rp.<?= rupiah($kamar['tarif']) ?></p>
                                         <p style="margin-top: -1rem;" class="card-text text-center">Nomor Kamar: <?= $kamar['no_kamar'] ?></p>
+                                        <p style="margin-top: -1rem;" class="card-text text-center">Nama Pemesan: <?= $kamar['nama_pemesan'] ?></p>
                                     </div>
                                 </div>
                             </div>
