@@ -128,7 +128,7 @@ $hotel = query("SELECT * FROM identitas")[0];
                                         </select>
                                     </div>
                                     <div class="col-lg-12">
-                                        <label for="alamat" class="form-label">Alamat</label>
+                                        <label for="alamat" class="form-label">Alamat Lengkap</label>
                                         <input style="background-color: #e8f0fe;" type="text" name="alamat" class="form-control"
                                             value="<?= @$_SESSION['alamat'] ?>" id="alamat" placeholder="Alamat" required>
                                     </div>

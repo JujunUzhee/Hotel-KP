@@ -84,11 +84,11 @@ if (isset($_POST['submit'])) {
                                             </div>
                                             <div class="form-group">
                                                 <label for="cekin">Tanggal Check In</label>
-                                                <input type="date" name="cekin" class="form-control" id="cekin" required>
+                                                <input type="date" name="cekin" class="form-control" id="cekin" required onchange="calculateDuration()">
                                             </div>
                                             <div class="form-group">
                                                 <label for="cekout">Tanggal Check Out</label>
-                                                <input type="date" name="cekout" class="form-control" id="cekout" required>
+                                                <input type="date" name="cekout" class="form-control" id="cekout" required onchange="calculateDuration()">
                                             </div>
                                             <div class="form-group">
                                                 <label for="tgl_pemesanan">Tanggal Pemesanan</label>
@@ -98,7 +98,11 @@ if (isset($_POST['submit'])) {
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="tipe-kamar">Tipe Kamar</label>
-                                                <input type="text" name="tipe_kamar" class="form-control" id="tipe-kamar" required>
+                                                <select name="tipe_kamar" class="form-control" id="tipe-kamar" required>
+                                                    <option value="" selected disabled>Pilih Tipe Kamar</option>
+                                                    <option value="Standard">Standard</option>
+                                                    <option value="Deluxe">Deluxe</option>
+                                                </select>
                                             </div>
                                             <div class="form-group">
                                                 <label for="jumlah_kamar">Jumlah Kamar</label>
@@ -114,7 +118,7 @@ if (isset($_POST['submit'])) {
                                             </div>
                                             <div class="form-group">
                                                 <label for="durasi">Durasi Menginap</label>
-                                                <input type="number" name="durasi" class="form-control" id="durasi" required>
+                                                <input type="number" name="durasi" class="form-control" id="durasi" required min="1" readonly>
                                             </div>
                                             <div class="form-group">
                                                 <label for="no-kamar">No Kamar</label>
@@ -165,6 +169,15 @@ if (isset($_POST['submit'])) {
     <!-- ./wrapper -->
 
     <?php include "layout/bawah.php" ?>
+    <script>
+        function calculateDuration() {
+            const checkInDate = new Date(document.getElementById('cekin').value);
+            const checkOutDate = new Date(document.getElementById('cekout').value);
+            const timeDifference = checkOutDate - checkInDate;
+            const daysDifference = timeDifference / (1000 * 3600 * 24);
+            document.getElementById('durasi').value = daysDifference > 0 ? daysDifference : 0;
+        }
+    </script>
 </body>
 
 </html>
